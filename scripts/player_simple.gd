@@ -12,6 +12,16 @@ var inventory = {
 	"GENERIC_ITEM" : 1
 }
 
+var stats = {
+	"STRENGTH" : 1,
+	"PERCEPTION" : 1,
+	"ENDURANCE" : 1,
+	"CHARISMA" : 1,
+	"INTELIGENCE" : 1,
+	"AGILITY" : 1,
+	"LUCK" : 1
+}
+
 func add_item(item_name: String) -> void:
 	if item_name in inventory.keys():
 		inventory[item_name] += 1
@@ -23,6 +33,10 @@ func add_item(item_name: String) -> void:
 func add_coin() -> void:
 	collected_coins += 1
 
+func update_stats(name: String, value: int) -> void:
+	if name in stats.keys():
+		stats[name] += value
+		print("Increasing skill ", name, " by ", value)
 
 func _physics_process(delta: float) -> void:
 	var dir_y := Input.get_axis("UP", "DOWN")

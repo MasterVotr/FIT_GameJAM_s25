@@ -6,6 +6,8 @@ var player_object : Node2D
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	is_opened = false
+	player_in_area = false
 	self.get_child(2).hide()
 	self.get_child(0).show()
 
@@ -29,3 +31,6 @@ func _input(event: InputEvent) -> void:
 	if Input.is_action_pressed("INTERACT") and player_in_area and not is_opened:
 		set_opened()
 		player_object.add_item("Random item")
+
+func reset() -> void:
+	_ready()

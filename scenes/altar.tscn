@@ -1,0 +1,46 @@
+[gd_scene load_steps=8 format=3 uid="uid://d1ik73mf1bgj2"]
+
+[ext_resource type="Texture2D" uid="uid://dq0eubmq6t8k0" path="res://assets/sprites/altar/altar_base_1.png" id="1_7ynsc"]
+[ext_resource type="Script" uid="uid://bs6hntcpse148" path="res://scripts/altar_logic.gd" id="1_agrp7"]
+[ext_resource type="Texture2D" uid="uid://vew04iei1w6h" path="res://assets/sprites/altar/altar_base_2.png" id="2_agrp7"]
+[ext_resource type="Texture2D" uid="uid://ck7dl5fadllmr" path="res://assets/sprites/altar/altar_base_3.png" id="3_00bwv"]
+[ext_resource type="Texture2D" uid="uid://b7bh7u5inylsm" path="res://assets/sprites/altar/altar_base_4.png" id="4_uiuje"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_n0xjl"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_7ynsc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_agrp7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_00bwv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_uiuje")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7ynsc"]
+size = Vector2(29, 29)
+
+[node name="Altar" type="Area2D"]
+collision_mask = 2
+script = ExtResource("1_agrp7")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_n0xjl")
+autoplay = "default"
+frame_progress = 0.971752
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-1.5, 1.5)
+shape = SubResource("RectangleShape2D_7ynsc")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]
