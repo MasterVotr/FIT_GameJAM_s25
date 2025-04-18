@@ -1,0 +1,52 @@
+[gd_scene load_steps=7 format=3 uid="uid://81umrgsn3ha2"]
+
+[ext_resource type="Texture2D" uid="uid://nbk2xcowap1b" path="res://assets/sprites/Weapons_sheet.png" id="1_vt0lb"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nqxus"]
+atlas = ExtResource("1_vt0lb")
+region = Rect2(48, 320, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jb5wq"]
+atlas = ExtResource("1_vt0lb")
+region = Rect2(64, 336, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hwmam"]
+atlas = ExtResource("1_vt0lb")
+region = Rect2(0, 352, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wefea"]
+atlas = ExtResource("1_vt0lb")
+region = Rect2(16, 352, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_xyy1d"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nqxus")
+}],
+"loop": false,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jb5wq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hwmam")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wefea")
+}],
+"loop": false,
+"name": &"shoot",
+"speed": 5.0
+}]
+
+[node name="Bow" type="Node2D"]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_xyy1d")
+animation = &"shoot"
+frame = 2
+frame_progress = 1.0
