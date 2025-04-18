@@ -1,3 +1,16 @@
-[gd_scene format=3 uid="uid://bx6k3ved30148"]
+[gd_scene load_steps=3 format=3 uid="uid://cfd27ofkocfks"]
+
+[ext_resource type="PackedScene" uid="uid://jfbbrqlv1b8x" path="res://scenes/demo_level.tscn" id="1_yqjtg"]
+[ext_resource type="PackedScene" uid="uid://0ubsfvsd4toh" path="res://scenes/player.tscn" id="2_lnu2h"]
 
 [node name="Game" type="Node2D"]
+
+[node name="DemoLevel" parent="." instance=ExtResource("1_yqjtg")]
+
+[node name="CharacterBody2D" parent="." instance=ExtResource("2_lnu2h")]
+position = Vector2(239, 234)
+scale = Vector2(2, 2)
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(239, 234)
+zoom = Vector2(4, 4)
