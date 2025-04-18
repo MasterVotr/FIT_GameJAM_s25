@@ -30,7 +30,7 @@ func signal_level_reset() -> void:
 
 func _input(event: InputEvent) -> void:
 	if Input.is_action_pressed("INTERACT") and player_in_area:
-		print("[DBG] Interacted with altar")
+		#print("[DBG] Interacted with altar")
 		update_player_stats()
 		signal_level_reset()
 
