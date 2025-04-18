@@ -5,6 +5,8 @@ const SPEED = 60.0
 
 var collected_coins = 0
 
+@onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
+
 # TODO: move into separate script when too big
 var inventory = {
 	"coin" : 0,
@@ -39,15 +41,27 @@ func update_stats(name: String, value: int) -> void:
 		print("Increasing skill ", name, " by ", value)
 
 func _physics_process(delta: float) -> void:
-	var dir_y := Input.get_axis("UP", "DOWN")
-	if dir_y:
-		velocity.y = dir_y * SPEED
+	# Get direction from input
+	var direction := Vector2(Input.get_axis("LEFT", "RIGHT"), Input.get_axis("UP", "DOWN"))
+	
+	# Flip the sprite to face the firection
+	if direction.x > 0:
+		animated_sprite.flip_h = false
+	elif direction.x < 0:
+		animated_sprite.flip_h = true
+		
+	if direction.is_equal_approx(Vector2(0.0, 0.0)):
+		animated_sprite.play("idle")
+	else:
+		animated_sprite.play("move")
+	
+	# Apply movement
+	if direction.y:
+		velocity.y = direction.y * SPEED
 	else: 
 		velocity.y = move_toward(velocity.y, 0, SPEED)
-	
-	var dir_x := Input.get_axis("LEFT", "RIGHT")
-	if dir_x:
-		velocity.x = dir_x * SPEED
+	if direction.x:
+		velocity.x = direction.x * SPEED
 	else:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 
