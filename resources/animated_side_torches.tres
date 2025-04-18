@@ -1,0 +1,17 @@
+[gd_resource type="TileSet" load_steps=3 format=3 uid="uid://dfutbcc6to6ts"]
+
+[ext_resource type="Texture2D" uid="uid://bvh1xuqlkw7mw" path="res://assets/2D Pixel Dungeon Asset Pack/items and trap_animation/torch/side_torch_tileset.png" id="1_m68u7"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_1kwfa"]
+texture = ExtResource("1_m68u7")
+0:0/animation_columns = 4
+0:0/animation_speed = 2.0
+0:0/animation_mode = 1
+0:0/animation_frame_0/duration = 1.0
+0:0/animation_frame_1/duration = 1.0
+0:0/animation_frame_2/duration = 1.0
+0:0/animation_frame_3/duration = 1.0
+0:0/0 = 0
+
+[resource]
+sources/0 = SubResource("TileSetAtlasSource_1kwfa")
