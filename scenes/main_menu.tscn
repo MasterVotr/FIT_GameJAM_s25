@@ -1,0 +1,53 @@
+[gd_scene load_steps=4 format=3 uid="uid://b7h6wow1rf5ya"]
+
+[ext_resource type="Texture2D" uid="uid://cyecwbvxm1qp0" path="res://assets/sprites/main_menu/main_menu.png" id="1_bqqt6"]
+[ext_resource type="Script" uid="uid://ccd1ynwdmmi0f" path="res://scripts/start_game.gd" id="1_l6cm7"]
+[ext_resource type="Script" uid="uid://28pj7050gy81" path="res://scenes/exit_btn.gd" id="2_ekxnf"]
+
+[node name="MainMenu" type="Control"]
+layout_mode = 3
+anchor_right = 2.4
+anchor_bottom = 1.797
+offset_right = -0.00012207
+offset_bottom = -0.200073
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 0
+offset_right = 1280.0
+offset_bottom = 800.0
+texture = ExtResource("1_bqqt6")
+expand_mode = 1
+
+[node name="start_button" type="Button" parent="."]
+layout_mode = 0
+offset_left = 440.0
+offset_top = 268.0
+offset_right = 808.0
+offset_bottom = 459.0
+text = "START"
+script = ExtResource("1_l6cm7")
+
+[node name="title_label" type="RichTextLabel" parent="."]
+layout_mode = 0
+offset_left = 1149.0
+offset_top = 277.0
+offset_right = 1421.0
+offset_bottom = 343.0
+text = "Hrad"
+
+[node name="exit_button" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.01
+anchor_bottom = 0.013
+offset_left = 956.0
+offset_top = 524.0
+offset_right = 1109.0
+offset_bottom = 575.2
+text = "EXIT"
+script = ExtResource("2_ekxnf")
+
+[connection signal="pressed" from="start_button" to="start_button" method="_on_pressed"]
+[connection signal="pressed" from="exit_button" to="exit_button" method="_on_pressed"]

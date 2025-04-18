@@ -11,14 +11,14 @@ config_version=5
 [application]
 
 config/name="MyLittleKoncentracek"
-run/main_scene="uid://bx6k3ved30148"
+run/main_scene="uid://b7h6wow1rf5ya"
 config/features=PackedStringArray("4.4", "GL Compatibility")
 config/icon="res://icon.svg"
 
 [display]
 
-window/size/viewport_width=800
-window/size/viewport_height=600
+window/size/viewport_width=1280
+window/size/viewport_height=800
 
 [dotnet]
 
