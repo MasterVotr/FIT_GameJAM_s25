@@ -1,8 +1,10 @@
-[gd_scene load_steps=4 format=3 uid="uid://bx6k3ved30148"]
+[gd_scene load_steps=6 format=3 uid="uid://bx6k3ved30148"]
 
 [ext_resource type="PackedScene" uid="uid://bijylix5t7anv" path="res://scenes/demo_level.tscn" id="1_yqjtg"]
-[ext_resource type="PackedScene" uid="uid://dy41d187i0bnx" path="res://scenes/enemy_skeleton_1.tscn" id="2_lbhrr"]
+[ext_resource type="PackedScene" path="res://scenes/enemy_skeleton_1.tscn" id="2_lbhrr"]
 [ext_resource type="PackedScene" uid="uid://b74f587auj1tb" path="res://scenes/player.tscn" id="2_lnu2h"]
+[ext_resource type="PackedScene" uid="uid://cnjtkbf24o6dy" path="res://scenes/Coin.tscn" id="4_lbhrr"]
+[ext_resource type="PackedScene" uid="uid://3tcvk2kojxw6" path="res://scenes/Chest.tscn" id="5_iywne"]
 
 [node name="Game" type="Node2D"]
 
@@ -12,7 +14,17 @@
 position = Vector2(247, 273)
 
 [node name="Player" parent="." instance=ExtResource("2_lnu2h")]
+z_index = 10
 position = Vector2(229, 272)
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
 zoom = Vector2(5, 5)
+
+[node name="Coin" parent="." instance=ExtResource("4_lbhrr")]
+position = Vector2(240, 178)
+
+[node name="Coin2" parent="." instance=ExtResource("4_lbhrr")]
+position = Vector2(326, 178)
+
+[node name="Chest" parent="." instance=ExtResource("5_iywne")]
+position = Vector2(140, 177)

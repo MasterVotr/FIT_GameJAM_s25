@@ -1,0 +1,26 @@
+[gd_scene load_steps=5 format=3 uid="uid://3tcvk2kojxw6"]
+
+[ext_resource type="Texture2D" uid="uid://ch1xcob8pqmlf" path="res://assets/2D Pixel Dungeon Asset Pack/items and trap_animation/chest/chest_1.png" id="1_cjixx"]
+[ext_resource type="Script" uid="uid://5bm1lql5a4xt" path="res://scripts/chest_logic.gd" id="1_rkgax"]
+[ext_resource type="Texture2D" uid="uid://dsncwurqg05o1" path="res://assets/2D Pixel Dungeon Asset Pack/items and trap_animation/chest/chest_open_3.png" id="2_s2tek"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_s2tek"]
+size = Vector2(12, 10)
+
+[node name="Chest" type="Area2D"]
+collision_mask = 2
+script = ExtResource("1_rkgax")
+
+[node name="SpriteClosed" type="Sprite2D" parent="."]
+texture = ExtResource("1_cjixx")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_s2tek")
+
+[node name="SpriteOpened" type="Sprite2D" parent="."]
+visible = false
+texture = ExtResource("2_s2tek")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]
+[connection signal="input_event" from="." to="." method="_on_input_event"]

@@ -5,6 +5,21 @@ const SPEED = 60.0
 
 var collected_coins = 0
 
+# TODO: move into separate script when too big
+var inventory = {
+	"coin" : 0,
+	"token" : 0,
+	"GENERIC_ITEM" : 1
+}
+
+func add_item(item_name: String) -> void:
+	if item_name in inventory.keys():
+		inventory[item_name] += 1
+		#print("Adding item ", item_name)
+	else:
+		#print("Adding invalid item, ", item_name)
+		pass
+
 func add_coin() -> void:
 	collected_coins += 1
 
