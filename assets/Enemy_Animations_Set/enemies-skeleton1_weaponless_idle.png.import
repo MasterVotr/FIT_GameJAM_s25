@@ -2,7 +2,11 @@
 
 importer="texture"
 type="CompressedTexture2D"
+<<<<<<< HEAD
 uid="uid://bf1uxuigdka5v"
+=======
+uid="uid://cmtdrv330pt6h"
+>>>>>>> 7b17f3a (weaponless_idle.png.import bullshit)
 path="res://.godot/imported/enemies-skeleton1_weaponless_idle.png-274f67b08582da770082052724ad4fa5.ctex"
 metadata={
 "vram_texture": false
