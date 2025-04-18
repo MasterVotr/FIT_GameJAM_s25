@@ -379,16 +379,10 @@ height = 14.0
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(3, -13)
 sprite_frames = SubResource("SpriteFrames_10grn")
-<<<<<<< HEAD
 animation = &"idle_weaponless"
 autoplay = "idle_weaponless"
 frame = 4
 frame_progress = 0.814929
-=======
-animation = &"idle"
-autoplay = "idle"
-frame_progress = 0.632571
->>>>>>> 00f790f (Added weapon assets)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -8)
