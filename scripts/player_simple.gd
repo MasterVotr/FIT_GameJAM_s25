@@ -1,7 +1,7 @@
 extends CharacterBody2D
 
 
-const SPEED = 120.0
+const SPEED = 60.0
 
 var collected_coins = 0
 
