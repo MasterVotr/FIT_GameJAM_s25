@@ -3,6 +3,11 @@ extends CharacterBody2D
 
 const SPEED = 120.0
 
+var collected_coins = 0
+
+func add_coin() -> void:
+	collected_coins += 1
+
 
 func _physics_process(delta: float) -> void:
 	var dir_y := Input.get_axis("UP", "DOWN")
