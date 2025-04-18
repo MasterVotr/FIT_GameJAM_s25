@@ -1,9 +1,10 @@
-[gd_scene load_steps=49 format=3 uid="uid://dy41d187i0bnx"]
+[gd_scene load_steps=56 format=3 uid="uid://dy41d187i0bnx"]
 
 [ext_resource type="Texture2D" uid="uid://b2qeyb3f7slso" path="res://assets/Enemy_Animations_Set/enemies-skeleton1_attack.png" id="1_27aoi"]
 [ext_resource type="Texture2D" uid="uid://c3erxxbhw11bf" path="res://assets/Enemy_Animations_Set/enemies-skeleton1_death.png" id="2_rm7m4"]
 [ext_resource type="Texture2D" uid="uid://d2fbm3uqrngbc" path="res://assets/Enemy_Animations_Set/enemies-skeleton1_movement.png" id="3_n30y7"]
 [ext_resource type="Texture2D" uid="uid://dr18uq0pasya2" path="res://assets/Enemy_Animations_Set/enemies-skeleton1_idle.png" id="3_rm7m4"]
+[ext_resource type="Texture2D" uid="uid://bf1uxuigdka5v" path="res://assets/Enemy_Animations_Set/enemies-skeleton1_weaponless_idle.png" id="4_n30y7"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_dybtr"]
 atlas = ExtResource("1_27aoi")
@@ -131,6 +132,30 @@ region = Rect2(128, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_3dg8u"]
 atlas = ExtResource("3_rm7m4")
+region = Rect2(160, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_10grn"]
+atlas = ExtResource("4_n30y7")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_x7o26"]
+atlas = ExtResource("4_n30y7")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_da37b"]
+atlas = ExtResource("4_n30y7")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1tevo"]
+atlas = ExtResource("4_n30y7")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ung4s"]
+atlas = ExtResource("4_n30y7")
+region = Rect2(128, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_abifg"]
+atlas = ExtResource("4_n30y7")
 region = Rect2(160, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_bk3yn"]
@@ -288,6 +313,29 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_10grn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_x7o26")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_da37b")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1tevo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ung4s")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_abifg")
+}],
+"loop": true,
+"name": &"idle_weaponless",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_bk3yn")
 }, {
 "duration": 1.0,
@@ -331,8 +379,10 @@ height = 14.0
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(3, -13)
 sprite_frames = SubResource("SpriteFrames_10grn")
-animation = &"idle"
-frame_progress = 0.632571
+animation = &"idle_weaponless"
+autoplay = "idle_weaponless"
+frame = 4
+frame_progress = 0.814929
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -8)
