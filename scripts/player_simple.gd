@@ -5,13 +5,13 @@ const SPEED = 120.0
 
 
 func _physics_process(delta: float) -> void:
-	var dir_y := Input.get_axis("ui_up", "ui_down")
+	var dir_y := Input.get_axis("UP", "DOWN")
 	if dir_y:
 		velocity.y = dir_y * SPEED
 	else: 
 		velocity.y = move_toward(velocity.y, 0, SPEED)
 	
-	var dir_x := Input.get_axis("ui_left", "ui_right")
+	var dir_x := Input.get_axis("LEFT", "RIGHT")
 	if dir_x:
 		velocity.x = dir_x * SPEED
 	else:
