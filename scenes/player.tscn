@@ -118,13 +118,6 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_4ni07")
-<<<<<<< Updated upstream
-}],
-"loop": false,
-"name": &"attack",
-"speed": 10.0
-=======
->>>>>>> Stashed changes
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_l71n6")
@@ -171,19 +164,11 @@ collision_layer = 2
 script = ExtResource("1_qlg0r")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-<<<<<<< Updated upstream
-position = Vector2(3, -13)
-sprite_frames = SubResource("SpriteFrames_sc3ue")
-animation = &"idle"
-autoplay = "idle"
-frame_progress = 0.0666376
-=======
 position = Vector2(0, -9)
 sprite_frames = SubResource("SpriteFrames_a8ls1")
 animation = &"death"
 autoplay = "idle"
 frame_progress = 0.726187
->>>>>>> Stashed changes
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -9)
