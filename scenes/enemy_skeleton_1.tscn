@@ -329,11 +329,11 @@ height = 14.0
 [node name="EnemySkeleton1" type="CharacterBody2D"]
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-position = Vector2(0, -13)
+position = Vector2(3, -13)
 sprite_frames = SubResource("SpriteFrames_10grn")
 animation = &"idle"
-frame_progress = 0.502674
+frame_progress = 0.632571
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-3, -8)
+position = Vector2(0, -8)
 shape = SubResource("CapsuleShape2D_rm7m4")
