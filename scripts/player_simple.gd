@@ -59,6 +59,17 @@ func reset_player_on_death() -> void:
 	var scene_root = get_tree().current_scene
 	scene_root.reload_world()
 
+func sacrifice() -> void:
+	update_healthbar(max_health)
+	update_score(0)
+	var banner = gui_struct.find_child("sacrificed_banner")
+	banner.visible = true
+	is_dead = true
+	await get_tree().create_timer(1).timeout
+	banner.visible = false
+	reset_player_on_death()
+	is_dead = false
+
 func get_score_delta() -> int:
 	return score - prev_score
 

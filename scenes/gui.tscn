@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://0e2qyj6vrjqc"]
+[gd_scene load_steps=5 format=3 uid="uid://0e2qyj6vrjqc"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_66xuh"]
 font_size = 24
@@ -14,6 +14,9 @@ corner_radius_bottom_left = 3
 font_size = 72
 font_color = Color(1, 0, 0, 1)
 outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_mfius"]
+font_size = 72
 
 [node name="Gui" type="CanvasLayer"]
 
@@ -114,5 +117,15 @@ offset_right = 1282.0
 offset_bottom = 550.0
 text = "YOU DIED"
 label_settings = SubResource("LabelSettings_efmwq")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="sacrificed_banner" type="Label" parent="."]
+visible = false
+offset_top = 398.0
+offset_right = 1282.0
+offset_bottom = 550.0
+text = "SACRIFICE"
+label_settings = SubResource("LabelSettings_mfius")
 horizontal_alignment = 1
 vertical_alignment = 1
