@@ -30,7 +30,6 @@ var stats = {
 	"LUCK" : 1
 }
 
-<<<<<<< HEAD
 var temp_health = 80.0
 var score = 0
 
@@ -38,6 +37,8 @@ var score = 0
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	load_gui()
+	weapon = SWORD.instantiate()
+	self.add_child(weapon)
 	pass
 
 
@@ -72,17 +73,12 @@ func update_stats(name: String, value: int) -> void:
 	if name in stats.keys():
 		stats[name] += value
 		print("Increasing skill ", name, " by ", value)
-=======
-func _ready() -> void:
-	weapon = SWORD.instantiate()
-	self.add_child(weapon)
 
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
 		var mouse_position = get_global_mouse_position()
 		var attack_dir = (mouse_position - global_position).normalized()
 		attack(attack_dir)
->>>>>>> 8b54b45 (Player: rearanged methods, moved direction to class variable from local, added attack and incomming_attack)
 
 func _physics_process(delta: float) -> void:
 	# Get direction from input
@@ -110,23 +106,6 @@ func _physics_process(delta: float) -> void:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 
 	move_and_slide()
-
-func add_item(item_name: String) -> void:
-	if item_name in inventory.keys():
-		inventory[item_name] += 1
-		#print("Adding item ", item_name)
-	else:
-		#print("Adding invalid item, ", item_name)
-		pass
-
-
-func add_coin() -> void:
-	collected_coins += 1
-
-func update_stats(name: String, value: int) -> void:
-	if name in stats.keys():
-		stats[name] += value
-		print("Increasing skill ", name, " by ", value)
 	
 func attack(attack_dir) -> void:
 	weapon.attack(attack_dir)

@@ -3,7 +3,7 @@ extends Node2D
 var player_in_area = false
 var player_body : Node2D
 var is_picked_up = false
-const AttackDto = preload("res://scripts/attack_dto.gd")
+const AttackDTO = preload("res://scripts/attack_dto.gd")
 
 const PEARCING := false
 const COOLDOWN = 20
@@ -28,7 +28,7 @@ func _on_hitbox_body_entered(body: Node2D) -> void:
 	bodies_in_hitbox.set(body.get_instance_id(),  body)
 	print("Body entered sword area", body.get_instance_id())
 	if body.has_method("incomming_attack"):
-		var attack_dto = AttackDto.new()
+		var attack_dto = AttackDTO.new()
 		attack_dto.damage = DAMAGE
 		attack_dto.knockback = KNOCKBACK
 		body.incomming_attack(attack_dto)

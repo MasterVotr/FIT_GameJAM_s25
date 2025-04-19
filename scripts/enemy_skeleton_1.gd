@@ -3,7 +3,6 @@ extends CharacterBody2D
 
 const Player = preload("res://scripts/player_simple.gd")
 const AttackDTO = preload("res://scripts/attack_dto.gd")
-
 const SPEED = 300.0
 const JUMP_VELOCITY = -400.0
 const DAMAGE = 10
@@ -18,22 +17,26 @@ func incomming_attack(attack_dto: AttackDTO):
 
 func _on_detection_range_body_entered(body: Node2D) -> void:
 	# If player -> start following
+	print("BDG: player entered detection range")
 	pass # Replace with function body.
 
 
 func _on_detection_range_body_exited(body: Node2D) -> void:
 	# If player and following -> stop following
+	print("BDG: player exited detection range")
 	pass # Replace with function body.
 
 
 func _on_attack_range_body_entered(body: Node2D) -> void:
 	# If player -> start attacking
 	# attack(body)
+	print("BDG: player entered attack range")
 	pass # Replace with function body.
 
 
 func _on_attack_range_body_exited(body: Node2D) -> void:
 	# If player -> stop attacking
+	print("BDG: player exited attack range")
 	pass # Replace with function body.
 
 func attack(player: Player):
