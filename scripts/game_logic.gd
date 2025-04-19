@@ -15,7 +15,6 @@ func _ready() -> void:
 
 
 func reload_world() -> void:
-	print("[DBG] Called reload_world()")
 	self.get_child(ROOT_CHILD_ORDER.PLAYER).position = player_start_pos
 	for node in self.get_child(ROOT_CHILD_ORDER.RESETABLE_OBJECTS).get_children():
 		if node.has_method("reset"):

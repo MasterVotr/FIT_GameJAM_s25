@@ -32,8 +32,6 @@ var stats = {
 	"AGILITY" : 1.0
 }
 
-var temp_health = 80.0
-var max_health = 100.0
 var score = 0
 var prev_score = 0
 
@@ -44,7 +42,7 @@ func _ready() -> void:
 	weapon = SWORD.instantiate()
 	weapon.transform = weapon_mount.transform
 	self.add_child(weapon)
-	health_component = HealthComponent.new(max_health)
+	health_component = HealthComponent.new(100)
 	self.add_child(health_component)
 	pass
 	
@@ -62,12 +60,12 @@ func die() -> void:
 func reset_player_on_death() -> void:
 	score = prev_score
 	update_score(0)
-	update_healthbar(max_health)
+	health_component.reset()
 	var scene_root = get_tree().current_scene
 	scene_root.reload_world()
 
 func sacrifice() -> void:
-	update_healthbar(max_health)
+	update_healthbar(health_component.max_health)
 	update_score(0)
 	var banner = gui_struct.find_child("sacrificed_banner")
 	banner.visible = true
@@ -95,10 +93,10 @@ func update_skills_label() -> void:
 	gui_struct.find_child("skills_label").text += "Vitality: " + str(stats["VITALITY"]) + '\n'
 	gui_struct.find_child("skills_label").text += "Agility: " + str(stats["AGILITY"]) + '\n'
 
-func update_healthbar(delta_value: float) -> void:
-	temp_health = min(temp_health + delta_value, max_health)
-	gui_struct.find_child("hp_bar").value = temp_health
-	if temp_health <= 0.1:
+func update_healthbar(delta_value: int) -> void:
+	health_component.take_damage(delta_value)
+	gui_struct.find_child("hp_bar").value = health_component.health
+	if health_component.health <= 0.1 and is_dead == false:
 		die()
 
 func add_item(item_name: String) -> void:
@@ -112,7 +110,7 @@ func add_item(item_name: String) -> void:
 func add_coin() -> void:
 	collected_coins += 1
 	update_score(1)					# TODO: remove, only for testing
-	update_healthbar(-10.0)			# TODO: remove, only for testing
+	update_healthbar(10)			# TODO: remove, only for testing
 
 func update_stats(name: String, value: float) -> void:
 	if name in stats.keys():
@@ -120,8 +118,8 @@ func update_stats(name: String, value: float) -> void:
 		update_skills_label()
 		
 		if name == "VITALITY":
-			max_health = 100.0 * stats[name]
-			gui_struct.find_child("hp_bar").max_value = max_health
+			health_component.max_health = 100.0 * stats[name]
+			gui_struct.find_child("hp_bar").max_value = health_component.max_health
 
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
@@ -132,6 +130,7 @@ func _input(event: InputEvent) -> void:
 func _physics_process(delta: float) -> void:
 	if is_dead:
 		return
+	update_healthbar(0)
 	
 	# Get direction from input
 	direction = Vector2(Input.get_axis("LEFT", "RIGHT"), Input.get_axis("UP", "DOWN")).normalized()

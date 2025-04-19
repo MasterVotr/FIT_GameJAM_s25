@@ -22,3 +22,7 @@ func take_damage(amount: int):
 		health = 0
 		is_dead = true
 		health_depleted.emit()
+		
+func reset() -> void:
+	self.health = self.max_health
+	self.is_dead = false
