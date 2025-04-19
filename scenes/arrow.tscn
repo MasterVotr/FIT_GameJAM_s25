@@ -1,0 +1,40 @@
+[gd_scene load_steps=4 format=3 uid="uid://cijh5ul6c40mp"]
+
+[ext_resource type="Script" uid="uid://c2oyawh1jowgi" path="res://scripts/arrow.gd" id="2_23jat"]
+[ext_resource type="Texture2D" uid="uid://djdj6k4b0fdjk" path="res://assets/2D Pixel Dungeon Asset Pack/items and trap_animation/arrow/Just_arrow.png" id="2_q8ifc"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_23jat"]
+radius = 1.0
+height = 8.0
+
+[node name="Arrow" type="CharacterBody2D"]
+z_index = 6
+z_as_relative = false
+collision_layer = 0
+collision_mask = 13
+motion_mode = 1
+safe_margin = 0.001
+script = ExtResource("2_23jat")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-6, -1)
+rotation = 4.71239
+texture = ExtResource("2_q8ifc")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-6, -0.5)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_23jat")
+
+[node name="hitbox" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 13
+
+[node name="CollisionShape2D" type="CollisionPolygon2D" parent="hitbox"]
+position = Vector2(-2.82843, 2.82843)
+rotation = 0.785398
+scale = Vector2(1, 1)
+polygon = PackedVector2Array(9.53674e-07, -1.17157, 1.43051e-06, -4, -0.707105, -4.70711, -3.53553, -4.70711, -4.94975, -3.29289, -1.41421, 0.24264)
+
+[connection signal="body_entered" from="hitbox" to="." method="_on_hitbox_body_entered"]
+[connection signal="body_exited" from="hitbox" to="." method="_on_hitbox_body_exited"]
