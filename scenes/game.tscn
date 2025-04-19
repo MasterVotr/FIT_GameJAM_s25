@@ -1,12 +1,13 @@
-[gd_scene load_steps=8 format=3 uid="uid://bx6k3ved30148"]
+[gd_scene load_steps=9 format=3 uid="uid://bx6k3ved30148"]
 
-[ext_resource type="Script" path="res://scripts/game_logic.gd" id="1_p57ef"]
+[ext_resource type="Script" uid="uid://dl14t3qbytwn6" path="res://scripts/game_logic.gd" id="1_p57ef"]
 [ext_resource type="PackedScene" uid="uid://bijylix5t7anv" path="res://scenes/demo_level.tscn" id="1_yqjtg"]
 [ext_resource type="PackedScene" uid="uid://dy41d187i0bnx" path="res://scenes/basic_skeleton.tscn" id="2_lbhrr"]
 [ext_resource type="PackedScene" uid="uid://b74f587auj1tb" path="res://scenes/player.tscn" id="2_lnu2h"]
-[ext_resource type="PackedScene" uid="uid://cnjtkbf24o6dy" path="res://scenes/coin.tscn" id="4_lbhrr"]
-[ext_resource type="PackedScene" uid="uid://3tcvk2kojxw6" path="res://scenes/chest.tscn" id="5_iywne"]
+[ext_resource type="PackedScene" uid="uid://cnjtkbf24o6dy" path="res://scenes/Coin.tscn" id="4_lbhrr"]
+[ext_resource type="PackedScene" uid="uid://3tcvk2kojxw6" path="res://scenes/Chest.tscn" id="5_iywne"]
 [ext_resource type="PackedScene" uid="uid://d1ik73mf1bgj2" path="res://scenes/altar.tscn" id="7_u5sy4"]
+[ext_resource type="PackedScene" uid="uid://0e2qyj6vrjqc" path="res://scenes/gui.tscn" id="8_gee14"]
 
 [node name="Game" type="Node2D"]
 script = ExtResource("1_p57ef")
@@ -36,3 +37,5 @@ position = Vector2(140, 177)
 
 [node name="Altar" parent="Resetable_objects" instance=ExtResource("7_u5sy4")]
 position = Vector2(362, 267)
+
+[node name="Gui" parent="." instance=ExtResource("8_gee14")]
