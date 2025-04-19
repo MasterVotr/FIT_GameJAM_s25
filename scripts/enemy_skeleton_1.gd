@@ -50,34 +50,38 @@ func attack(player: Player):
 
 func _on_detection_range_body_entered(body: Node2D) -> void:
 	# If player -> start following
-	print("BDG: player entered detection range")
+	#print("BDG: player entered detection range")
 	# state = STATE.FOLLOWING
+	pass
 
 
 func _on_detection_range_body_exited(body: Node2D) -> void:
 	# If player and following -> stop following
-	print("BDG: player exited detection range")
+	#print("BDG: player exited detection range")
 	# state = STATE.IDLE
+	pass
 
 
 func _on_attack_range_body_entered(body: Node2D) -> void:
 	if body.has_method("incomming_attack"):
-		print("BDG: player entered attack range")
+		#print("BDG: player entered attack range")
+		pass
 
 
 func _on_attack_range_body_exited(body: Node2D) -> void:
 	# If player -> stop attacking
-	print("BDG: player exited attack range")
+	#print("BDG: player exited attack range")
+	pass
 
 
 func _on_health_component_health_depleted() -> void:
-	print("I died")
+	print("Skeleton: I died")
 	state = STATE.DEAD
 	animated_sprite.play("death")
 
 
 func _on_animated_sprite_2d_animation_finished() -> void:
-	print("animation finished: ", animated_sprite.animation)
+	#print("animation finished: ", animated_sprite.animation)
 	match animated_sprite.animation:
 		"death":
 			hide()
