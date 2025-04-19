@@ -19,8 +19,13 @@ func _on_body_exited(body: Node2D) -> void:
 
 
 func update_player_stats() -> void:
-	player_object.update_stats("STRENGTH", 2)
-	player_object.update_stats("AGILITY", 2)
+	var update_coef = 0.1 * player_object.get_score_delta()
+	player_object.prev_score = player_object.score
+	player_object.update_score(0)
+	player_object.update_stats("STRENGTH", update_coef)
+	player_object.update_stats("AGILITY", update_coef)
+	player_object.update_stats("VITALITY", update_coef)
+	player_object.update_healthbar(100.0)
 
 
 func signal_level_reset() -> void:

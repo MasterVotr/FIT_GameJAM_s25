@@ -13,6 +13,8 @@ var weapon
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
 var gui_struct: CanvasLayer
 
+var is_dead = false
+
 # TODO: move into separate script when too big
 var inventory = {
 	"coin" : 0,
@@ -21,17 +23,15 @@ var inventory = {
 }
 
 var stats = {
-	"STRENGTH" : 1,
-	"PERCEPTION" : 1,
-	"ENDURANCE" : 1,
-	"CHARISMA" : 1,
-	"INTELIGENCE" : 1,
-	"AGILITY" : 1,
-	"LUCK" : 1
+	"STRENGTH" : 1.0,
+	"VITALITY" : 1.0,
+	"AGILITY" : 1.0
 }
 
 var temp_health = 80.0
+var max_health = 100.0
 var score = 0
+var prev_score = 0
 
 
 # Called when the node enters the scene tree for the first time.
@@ -40,7 +40,26 @@ func _ready() -> void:
 	weapon = SWORD.instantiate()
 	self.add_child(weapon)
 	pass
+	
+func die() -> void:
+	var banner = gui_struct.find_child("you_died_banner")
+	banner.visible = true
+	is_dead = true
+	await get_tree().create_timer(5).timeout
+	banner.visible = false
+	reset_player_on_death()
+	is_dead = false
+	
 
+func reset_player_on_death() -> void:
+	score = prev_score
+	update_score(0)
+	update_healthbar(max_health)
+	var scene_root = get_tree().current_scene
+	scene_root.reload_world()
+
+func get_score_delta() -> int:
+	return score - prev_score
 
 func load_gui() -> void:
 	gui_struct = get_tree().get_current_scene().find_child("Gui")
@@ -50,11 +69,18 @@ func load_gui() -> void:
 	
 func update_score(delta_value: int) -> void:
 	score += delta_value
-	gui_struct.find_child("score_label").text = str(score)
+	gui_struct.find_child("score_label").text = "score: " + str(prev_score) + " (+" + str(score - prev_score) + ")"
+
+func update_skills_label() -> void:
+	gui_struct.find_child("skills_label").text = "Strength: " + str(stats["STRENGTH"]) + '\n'
+	gui_struct.find_child("skills_label").text += "Vitality: " + str(stats["VITALITY"]) + '\n'
+	gui_struct.find_child("skills_label").text += "Agility: " + str(stats["AGILITY"]) + '\n'
 
 func update_healthbar(delta_value: float) -> void:
-	temp_health+=delta_value
+	temp_health = min(temp_health + delta_value, max_health)
 	gui_struct.find_child("hp_bar").value = temp_health
+	if temp_health <= 0.1:
+		die()
 
 func add_item(item_name: String) -> void:
 	if item_name in inventory.keys():
@@ -69,10 +95,14 @@ func add_coin() -> void:
 	update_score(1)					# TODO: remove, only for testing
 	update_healthbar(-10.0)			# TODO: remove, only for testing
 
-func update_stats(name: String, value: int) -> void:
+func update_stats(name: String, value: float) -> void:
 	if name in stats.keys():
 		stats[name] += value
-		print("Increasing skill ", name, " by ", value)
+		update_skills_label()
+		
+		if name == "VITALITY":
+			max_health = 100.0 * stats[name]
+			gui_struct.find_child("hp_bar").max_value = max_health
 
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
@@ -81,6 +111,9 @@ func _input(event: InputEvent) -> void:
 		attack(attack_dir)
 
 func _physics_process(delta: float) -> void:
+	if is_dead:
+		return
+	
 	# Get direction from input
 	direction = Vector2(Input.get_axis("LEFT", "RIGHT"), Input.get_axis("UP", "DOWN")).normalized()
 	

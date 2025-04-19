@@ -1,7 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://0e2qyj6vrjqc"]
+[gd_scene load_steps=4 format=3 uid="uid://0e2qyj6vrjqc"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_66xuh"]
-font_size = 32
+font_size = 24
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_efmwq"]
 bg_color = Color(0.347817, 0.347817, 0.347817, 1)
@@ -10,6 +10,11 @@ corner_radius_top_right = 3
 corner_radius_bottom_right = 3
 corner_radius_bottom_left = 3
 
+[sub_resource type="LabelSettings" id="LabelSettings_efmwq"]
+font_size = 72
+font_color = Color(1, 0, 0, 1)
+outline_color = Color(0, 0, 0, 1)
+
 [node name="Gui" type="CanvasLayer"]
 
 [node name="score_label" type="Label" parent="."]
@@ -17,7 +22,7 @@ offset_left = 7.0
 offset_top = 10.0
 offset_right = 138.0
 offset_bottom = 55.0
-text = "1441"
+text = "score: 0"
 label_settings = SubResource("LabelSettings_66xuh")
 
 [node name="hp_bar" type="ProgressBar" parent="."]
@@ -90,3 +95,24 @@ offset_bottom = 22.0
 grow_horizontal = 0
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_efmwq")
+
+[node name="skills_label" type="Label" parent="."]
+offset_left = 1074.0
+offset_top = 4.0
+offset_right = 1270.0
+offset_bottom = 156.0
+text = "Strength: 1.0
+Vitality: 1.0
+Agility: 1.0"
+label_settings = SubResource("LabelSettings_66xuh")
+horizontal_alignment = 2
+
+[node name="you_died_banner" type="Label" parent="."]
+visible = false
+offset_top = 318.0
+offset_right = 1282.0
+offset_bottom = 470.0
+text = "YOU DIED"
+label_settings = SubResource("LabelSettings_efmwq")
+horizontal_alignment = 1
+vertical_alignment = 1
