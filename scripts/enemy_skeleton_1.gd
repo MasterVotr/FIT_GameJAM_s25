@@ -86,13 +86,12 @@ func _on_attack_range_body_entered(body: Node2D) -> void:
 	if body.has_method("incomming_attack"):
 		state = STATE.ATTACKING
 		#print("BDG: player entered attack range")
-		pass
 
 
 func _on_attack_range_body_exited(body: Node2D) -> void:
-	# If player -> stop attacking
+	if body.has_method("incomming_attack"):
+		state = STATE.FOLLOWING
 	#print("BDG: player exited attack range")
-	pass
 
 
 func _on_health_component_health_depleted() -> void:

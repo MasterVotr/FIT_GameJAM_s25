@@ -384,7 +384,7 @@ height = 14.0
 radius = 100.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_f3oup"]
-radius = 26.0
+radius = 17.0
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_x7o26"]
 radius = 9.0
@@ -408,6 +408,7 @@ position = Vector2(0, -8)
 shape = SubResource("CapsuleShape2D_rm7m4")
 
 [node name="DetectionRange" type="Area2D" parent="."]
+visible = false
 collision_layer = 0
 collision_mask = 4
 monitorable = false
