@@ -14,7 +14,6 @@ func update_entity_stats() -> void:
 		var attack_dto = AttackDTO.new()
 		attack_dto.damage = TRAP_DAMAGE
 		entity_object.incomming_attack(attack_dto)
-		entity_object.update_healthbar(attack_dto.damage)
 		damage_cooldown.start()
 
 func _on_body_entered(body: Node2D) -> void:
