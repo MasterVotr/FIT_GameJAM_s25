@@ -1,6 +1,6 @@
 [gd_scene load_steps=9 format=3 uid="uid://ra2whys2ygsg"]
 
-[ext_resource type="Script" uid="uid://erm7nnae3uo" path="res://scripts/trap_script.gd" id="1_h1dn0"]
+[ext_resource type="Script" uid="uid://dhyui6v5b3big" path="res://scripts/flamethrower_logic.gd" id="1_plwtx"]
 [ext_resource type="Texture2D" uid="uid://cglpefrxtxp4e" path="res://assets/2D Pixel Dungeon Asset Pack/items and trap_animation/flamethrower/flamethrower_2_tile_set.png.png" id="2_fv2lu"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_h1dn0"]
@@ -36,7 +36,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"shoot",
-"speed": 5.0
+"speed": 2.0
 }]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_0og64"]
@@ -46,7 +46,7 @@ height = 12.0
 [node name="FlameThrower" type="Area2D"]
 collision_layer = 0
 collision_mask = 12
-script = ExtResource("1_h1dn0")
+script = ExtResource("1_plwtx")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_c4prk")
@@ -60,8 +60,12 @@ rotation = 1.5708
 shape = SubResource("CapsuleShape2D_0og64")
 
 [node name="Cooldown" type="Timer" parent="."]
-wait_time = 0.2
+wait_time = 0.5
+
+[node name="DamageCooldown" type="Timer" parent="."]
+wait_time = 2.0
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="body_exited" from="." to="." method="_on_body_exited"]
 [connection signal="timeout" from="Cooldown" to="." method="_on_cooldown_timeout"]
+[connection signal="timeout" from="DamageCooldown" to="." method="_on_damage_cooldown_timeout"]

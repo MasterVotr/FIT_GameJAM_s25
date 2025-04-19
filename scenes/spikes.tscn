@@ -1,6 +1,6 @@
 [gd_scene load_steps=9 format=3 uid="uid://dspe5fo240j64"]
 
-[ext_resource type="Script" uid="uid://erm7nnae3uo" path="res://scripts/trap_script.gd" id="1_xbcdo"]
+[ext_resource type="Script" uid="uid://bnnbigx0tifmo" path="res://scripts/spike_logic.gd" id="1_xbcdo"]
 [ext_resource type="Texture2D" uid="uid://dakpkcd0lx7if" path="res://assets/2D Pixel Dungeon Asset Pack/items and trap_animation/peaks/peaks_animated.png" id="2_xbcdo"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_bflj7"]
@@ -61,6 +61,10 @@ shape = SubResource("RectangleShape2D_xa8pu")
 [node name="Cooldown" type="Timer" parent="."]
 wait_time = 0.2
 
+[node name="DamageCooldown" type="Timer" parent="."]
+wait_time = 0.4
+
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="body_exited" from="." to="." method="_on_body_exited"]
 [connection signal="timeout" from="Cooldown" to="." method="_on_cooldown_timeout"]
+[connection signal="timeout" from="DamageCooldown" to="." method="_on_damage_cooldown_timeout"]

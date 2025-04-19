@@ -3,11 +3,11 @@ extends Area2D
 var entity_in_area = false
 var entity_object : Node2D
 const AttackDTO = preload("res://scripts/attack_dto.gd")
-const TRAP_DAMAGE = 0 #dame trap does per one cicle
+const TRAP_DAMAGE = 5
 
-@onready var timer: Timer = $Cooldown #trap detection delay gives chance to dodge
+@onready var timer: Timer = $Cooldown
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
-@onready var damage_cooldown: Timer = $DamageCooldown # trap atack speed
+@onready var damage_cooldown: Timer = $DamageCooldown
 
 func update_entity_stats() -> void:
 	if entity_in_area and entity_object.has_method("incomming_attack") and damage_cooldown.is_stopped():
@@ -19,12 +19,12 @@ func update_entity_stats() -> void:
 func _on_body_entered(body: Node2D) -> void:
 	entity_in_area = true
 	entity_object = body
-	print("Player entered flame")
+	#print("#DBG: Player entered flame")
 	timer.start()
 
 func _on_body_exited(body: Node2D) -> void:
 	entity_in_area = false
-	print("Player left flame")
+	#print("#DBG: Player left flame")
 	entity_object = null
 	
 func _on_cooldown_timeout() -> void:
