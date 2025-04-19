@@ -5,17 +5,17 @@ var player_body : Node2D
 var is_picked_up = false
 const AttackDTO = preload("res://scripts/attack_dto.gd")
 
+@onready var hitbox: Area2D = $AnimatedSprite2D/Hitbox
+@onready var cooldown_timer: Timer = $Cooldown
+@onready var animation_player: AnimationPlayer = $AnimationPlayer
+
 @export var piercing := false
 @export var damage = 10
 @export var knockback = 10
 
 var on_cooldown := false
-@onready var hitbox: Area2D = $AnimatedSprite2D/Hitbox
-@onready var cooldown_timer: Timer = $Cooldown
-
-
 var bodies_in_hitbox := {}
-@onready var animation_player: AnimationPlayer = $AnimationPlayer
+
 
 func init(player_item := false) -> void:
 	if (player_item):
