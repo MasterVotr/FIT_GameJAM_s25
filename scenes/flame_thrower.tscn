@@ -3,52 +3,53 @@
 [ext_resource type="Script" uid="uid://erm7nnae3uo" path="res://scripts/trap_script.gd" id="1_h1dn0"]
 [ext_resource type="Texture2D" uid="uid://cglpefrxtxp4e" path="res://assets/2D Pixel Dungeon Asset Pack/items and trap_animation/flamethrower/flamethrower_2_tile_set.png.png" id="2_fv2lu"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_1b6hs"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_h1dn0"]
 atlas = ExtResource("2_fv2lu")
 region = Rect2(0, 0, 16, 16)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_rkefd"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_fv2lu"]
 atlas = ExtResource("2_fv2lu")
 region = Rect2(16, 0, 16, 16)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_6at07"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_5uied"]
 atlas = ExtResource("2_fv2lu")
 region = Rect2(32, 0, 16, 16)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_re2ih"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_q4gli"]
 atlas = ExtResource("2_fv2lu")
 region = Rect2(48, 0, 16, 16)
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_uar65"]
+[sub_resource type="SpriteFrames" id="SpriteFrames_c4prk"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_1b6hs")
+"texture": SubResource("AtlasTexture_h1dn0")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_rkefd")
+"texture": SubResource("AtlasTexture_fv2lu")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_6at07")
+"texture": SubResource("AtlasTexture_5uied")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_re2ih")
+"texture": SubResource("AtlasTexture_q4gli")
 }],
 "loop": false,
 "name": &"shoot",
 "speed": 5.0
 }]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_jy1lx"]
-radius = 1.0
-height = 10.0
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_0og64"]
+radius = 2.0
+height = 12.0
 
-[node name="TriggerTrap" type="Area2D"]
-collision_mask = 2
+[node name="FlameThrower" type="Area2D"]
+collision_layer = 0
+collision_mask = 12
 script = ExtResource("1_h1dn0")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-sprite_frames = SubResource("SpriteFrames_uar65")
+sprite_frames = SubResource("SpriteFrames_c4prk")
 animation = &"shoot"
 frame = 3
 frame_progress = 1.0
@@ -56,7 +57,7 @@ frame_progress = 1.0
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-3, -1)
 rotation = 1.5708
-shape = SubResource("CapsuleShape2D_jy1lx")
+shape = SubResource("CapsuleShape2D_0og64")
 
 [node name="Cooldown" type="Timer" parent="."]
 wait_time = 0.2

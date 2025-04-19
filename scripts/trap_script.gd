@@ -5,25 +5,6 @@ var entity_object : Node2D
 
 @onready var timer: Timer = $Cooldown
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
-@onready var collision_shape: CollisionShape2D = $CollisionShape2D
-
-@export var sprite:SpriteFrames:
-	set(value):
-		animated_sprite.sprite_frames = value
-	get():
-		return animated_sprite.sprite_frames
-
-@export var wait_time:float:
-	set(value):
-		timer.wait_time = value
-	get():
-		return timer.wait_time
-
-@export var shape_collision:Shape2D:
-	set(value):
-		collision_shape.shape = value
-	get():
-		return collision_shape.shape
 
 func update_entity_stats() -> void:
 	if entity_in_area:
