@@ -17,6 +17,10 @@ var on_cooldown := false
 var bodies_in_hitbox := {}
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 
+func init(player_item := false) -> void:
+	if (player_item):
+		hitbox.set_collision_mask_value(3, false)
+
 func attack():
 	if not on_cooldown:
 		self.visible = true

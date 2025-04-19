@@ -1,7 +1,7 @@
 extends CharacterBody2D
 
 
-const SWORD = preload("res://scenes/sword.tscn")
+const Sword = preload("res://scenes/sword.tscn")
 const AttackDTO = preload("res://scripts/attack_dto.gd")
 const HealthComponent = preload("res://scripts/health_component.gd")
 
@@ -41,12 +41,12 @@ var prev_score = 0
 func _ready() -> void:
 	load_gui()
 	weapon_mount_defult_pos = weapon_mount.position
-	weapon = SWORD.instantiate()
+	weapon = Sword.instantiate()
 	weapon_mount.add_child(weapon)
+	weapon.init(true)
 	health_component = HealthComponent.new(100)
 	self.add_child(health_component)
-	pass
-	
+
 func die() -> void:
 	var banner = gui_struct.find_child("you_died_banner")
 	banner.visible = true
