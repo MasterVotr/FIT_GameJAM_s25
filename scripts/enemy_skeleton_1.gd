@@ -89,15 +89,12 @@ func _on_detection_range_body_entered(body: Node2D) -> void:
 	state = STATE.FOLLOWING
 	target = body
 	navigation_agent.target_position = body.global_position
-	print(body.global_position)
-	pass
 
 func _on_detection_range_body_exited(body: Node2D) -> void:
 	# If player and following -> stop following
 	#print("BDG: player exited detection range")
 	state = STATE.IDLE
 	player_detected = false
-	pass
 
 
 func _on_hitbox_body_entered(body: Node2D) -> void:
