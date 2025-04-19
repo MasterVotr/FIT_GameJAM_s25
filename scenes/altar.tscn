@@ -30,7 +30,8 @@ animations = [{
 size = Vector2(29, 29)
 
 [node name="Altar" type="Area2D"]
-collision_mask = 2
+collision_layer = 2
+collision_mask = 4
 script = ExtResource("1_agrp7")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
