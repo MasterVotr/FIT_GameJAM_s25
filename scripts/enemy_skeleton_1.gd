@@ -81,6 +81,7 @@ func _on_pathfinding_timer_timeout() -> void:
 	if player_detected:
 		navigation_agent.target_position = target.global_position
 
+
 func _on_detection_range_body_entered(body: Node2D) -> void:
 	# If player -> start following
 	#print("BDG: player entered detection range")
@@ -90,7 +91,6 @@ func _on_detection_range_body_entered(body: Node2D) -> void:
 	navigation_agent.target_position = body.global_position
 	print(body.global_position)
 	pass
-
 
 func _on_detection_range_body_exited(body: Node2D) -> void:
 	# If player and following -> stop following
@@ -104,7 +104,6 @@ func _on_hitbox_body_entered(body: Node2D) -> void:
 	if body.has_method("incomming_attack"):
 		state = STATE.IN_RANGE
 		#print("BDG: player entered attack range")
-
 
 func _on_hitbox_body_exited(body: Node2D) -> void:
 	if body.has_method("incomming_attack"):
