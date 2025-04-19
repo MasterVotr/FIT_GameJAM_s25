@@ -5,32 +5,33 @@ var player_body : Node2D
 var is_picked_up = false
 const AttackDTO = preload("res://scripts/attack_dto.gd")
 
-const PEARCING := false
-const COOLDOWN = 20
-const DAMAGE = 10
-const KNOCKBACK = 10
+@export var piercing := false
+@export var damage = 10
+@export var knockback = 10
 
 var on_cooldown := false
 @onready var hitbox: Area2D = $AnimatedSprite2D/Hitbox
+@onready var cooldown_timer: Timer = $Cooldown
 
 
 var bodies_in_hitbox := {}
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 
-func attack(attack_dir):
-	self.visible = true
-	hitbox.monitoring = true
-	print("Attack in direction", attack_dir)
-	animation_player.play("attack")
-	
+func attack():
+	if not on_cooldown:
+		self.visible = true
+		hitbox.monitoring = true
+		animation_player.play("attack")
+		on_cooldown = true
+		cooldown_timer.start()
 
 func _on_hitbox_body_entered(body: Node2D) -> void:
 	bodies_in_hitbox.set(body.get_instance_id(),  body)
 	# print("Body entered sword area", body.get_instance_id())
 	if body.has_method("incomming_attack"):
 		var attack_dto = AttackDTO.new()
-		attack_dto.damage = DAMAGE
-		attack_dto.knockback = KNOCKBACK
+		attack_dto.damage = self.damage
+		attack_dto.knockback = self.knockback
 		body.incomming_attack(attack_dto)
 
 
@@ -63,3 +64,7 @@ func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 		self.visible = false
 		hitbox.monitoring = false
 		bodies_in_hitbox.clear()
+
+
+func _on_cooldown_timeout() -> void:
+	on_cooldown = false

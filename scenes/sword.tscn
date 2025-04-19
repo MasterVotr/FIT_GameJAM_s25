@@ -5,50 +5,29 @@
 
 [sub_resource type="Animation" id="Animation_s4ec8"]
 length = 0.001
-tracks/0/type = "bezier"
+tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath(".:rotation")
+tracks/0/path = NodePath(".:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"handle_modes": PackedInt32Array(0),
-"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0)
-}
-tracks/1/type = "bezier"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".:position:x")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"handle_modes": PackedInt32Array(0),
-"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0)
-}
-tracks/2/type = "bezier"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath(".:position:y")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"handle_modes": PackedInt32Array(0),
-"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0)
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath(".:position")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(0, 0)]
+"values": [Vector2(5, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.785398]
 }
 
 [sub_resource type="Animation" id="Animation_n355p"]
@@ -57,26 +36,26 @@ length = 0.4
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath(".:rotation")
+tracks/0/path = NodePath(".:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.333333),
-"transitions": PackedFloat32Array(1, 1),
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 0,
-"values": [-0.523599, 2.0944]
+"values": [Vector2(1.47901, -5.45533), Vector2(4.542, -3.468), Vector2(5.684, 0), Vector2(4.556, 3.438), Vector2(1.409, 5.315)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath(".:position")
+tracks/1/path = NodePath(".:rotation")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.0851331, 0.166667, 0.248358, 0.333333),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Vector2(2, -6), Vector2(5.552, -4.101), Vector2(6.8, 0.087), Vector2(5.497, 3.935), Vector2(2, 6)]
+"values": [-0.523599, 2.0944]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_k5whp"]
@@ -105,7 +84,7 @@ radius = 6.36396
 height = 17.9998
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_n355p"]
-size = Vector2(14, 14)
+size = Vector2(17, 17)
 
 [node name="Sword" type="Node2D"]
 visible = false
@@ -120,9 +99,12 @@ libraries = {
 autoplay = "RESET"
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(5, 0)
+rotation = 0.785398
 sprite_frames = SubResource("SpriteFrames_fnw8x")
 
 [node name="Hitbox" type="Area2D" parent="AnimatedSprite2D"]
+visible = false
 collision_layer = 0
 collision_mask = 12
 monitoring = false
@@ -133,14 +115,21 @@ rotation = 0.785398
 shape = SubResource("CapsuleShape2D_cp3m4")
 
 [node name="PickupArea" type="Area2D" parent="."]
+visible = false
 collision_layer = 2
 collision_mask = 4
 
 [node name="pickup_collider" type="CollisionShape2D" parent="PickupArea"]
+position = Vector2(4, -4)
 shape = SubResource("RectangleShape2D_n355p")
+
+[node name="Cooldown" type="Timer" parent="."]
+wait_time = 0.4
+one_shot = true
 
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
 [connection signal="body_entered" from="AnimatedSprite2D/Hitbox" to="." method="_on_hitbox_body_entered"]
 [connection signal="body_exited" from="AnimatedSprite2D/Hitbox" to="." method="_on_hitbox_body_exited"]
 [connection signal="body_entered" from="PickupArea" to="." method="_on_pickup_area_body_entered"]
 [connection signal="body_exited" from="PickupArea" to="." method="_on_pickup_area_body_exited"]
+[connection signal="timeout" from="Cooldown" to="." method="_on_cooldown_timeout"]

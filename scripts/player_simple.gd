@@ -13,6 +13,7 @@ var weapon
 
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var weapon_mount: Node2D = $WeaponMount
+var weapon_mount_defult_pos
 var health_component
 
 var gui_struct: CanvasLayer
@@ -39,9 +40,9 @@ var prev_score = 0
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	load_gui()
+	weapon_mount_defult_pos = weapon_mount.position
 	weapon = SWORD.instantiate()
-	weapon.transform = weapon_mount.transform
-	self.add_child(weapon)
+	weapon_mount.add_child(weapon)
 	health_component = HealthComponent.new(100)
 	self.add_child(health_component)
 	pass
@@ -161,7 +162,10 @@ func _physics_process(delta: float) -> void:
 	
 func attack(attack_dir) -> void:
 	animated_sprite.play("attack")
-	weapon.attack(attack_dir)
+	weapon_mount.rotation = attack_dir.angle()
+	weapon_mount.position = weapon_mount_defult_pos + (attack_dir * 2.0)
+	print("Attacking in angle", attack_dir.angle())
+	weapon.attack()
 	
 func incomming_attack(attack_dto: AttackDTO):
 	print("I got hit for", attack_dto.damage)
