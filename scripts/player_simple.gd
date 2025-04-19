@@ -1,9 +1,14 @@
 extends CharacterBody2D
 
 
-const SPEED = 60.0
+const SWORD = preload("res://scenes/sword.tscn")
+const AttackDTO = preload("res://scripts/attack_dto.gd")
+
+const SPEED = 3000.0
 
 var collected_coins = 0
+var direction := Vector2(0.0, 0.0)
+var weapon
 
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
 var gui_struct: CanvasLayer
@@ -25,6 +30,7 @@ var stats = {
 	"LUCK" : 1
 }
 
+<<<<<<< HEAD
 var temp_health = 80.0
 var score = 0
 
@@ -66,10 +72,21 @@ func update_stats(name: String, value: int) -> void:
 	if name in stats.keys():
 		stats[name] += value
 		print("Increasing skill ", name, " by ", value)
+=======
+func _ready() -> void:
+	weapon = SWORD.instantiate()
+	self.add_child(weapon)
+
+func _input(event: InputEvent) -> void:
+	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
+		var mouse_position = get_global_mouse_position()
+		var attack_dir = (mouse_position - global_position).normalized()
+		attack(attack_dir)
+>>>>>>> 8b54b45 (Player: rearanged methods, moved direction to class variable from local, added attack and incomming_attack)
 
 func _physics_process(delta: float) -> void:
 	# Get direction from input
-	var direction := Vector2(Input.get_axis("LEFT", "RIGHT"), Input.get_axis("UP", "DOWN"))
+	direction = Vector2(Input.get_axis("LEFT", "RIGHT"), Input.get_axis("UP", "DOWN")).normalized()
 	
 	# Flip the sprite to face the firection
 	if direction.x > 0:
@@ -84,12 +101,36 @@ func _physics_process(delta: float) -> void:
 	
 	# Apply movement
 	if direction.y:
-		velocity.y = direction.y * SPEED
+		velocity.y = direction.y * SPEED * delta
 	else: 
 		velocity.y = move_toward(velocity.y, 0, SPEED)
 	if direction.x:
-		velocity.x = direction.x * SPEED
+		velocity.x = direction.x * SPEED * delta
 	else:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 
 	move_and_slide()
+
+func add_item(item_name: String) -> void:
+	if item_name in inventory.keys():
+		inventory[item_name] += 1
+		#print("Adding item ", item_name)
+	else:
+		#print("Adding invalid item, ", item_name)
+		pass
+
+
+func add_coin() -> void:
+	collected_coins += 1
+
+func update_stats(name: String, value: int) -> void:
+	if name in stats.keys():
+		stats[name] += value
+		print("Increasing skill ", name, " by ", value)
+	
+func attack(attack_dir) -> void:
+	weapon.attack(attack_dir)
+	
+func incomming_attack(attack_dto: AttackDTO):
+	print("I got hit for", attack_dto.damage)
+	pass
