@@ -1,0 +1,79 @@
+[gd_scene load_steps=16 format=3 uid="uid://kpiuogaw1aag"]
+
+[ext_resource type="PackedScene" uid="uid://ehep5w0lbys5" path="res://scenes/Map/proc_map_room_06.tscn" id="1_2y5yt"]
+[ext_resource type="PackedScene" uid="uid://b5sb20seho345" path="res://scenes/Map/proc_map_room_05.tscn" id="2_2os1m"]
+[ext_resource type="PackedScene" uid="uid://b66vsa1enh4wb" path="res://scenes/Map/proc_map_room_04.tscn" id="3_go7sj"]
+[ext_resource type="PackedScene" uid="uid://ciu7esdriaytc" path="res://scenes/Map/proc_map_room_03.tscn" id="4_7gny6"]
+[ext_resource type="PackedScene" uid="uid://csbdjrc4i23e0" path="res://scenes/Map/proc_map_room_02.tscn" id="5_2aecg"]
+[ext_resource type="PackedScene" uid="uid://x1llhmd161ql" path="res://scenes/Map/proc_map_room_01.tscn" id="6_6dial"]
+[ext_resource type="PackedScene" uid="uid://cfjoe1ihxxs4q" path="res://scenes/Map/church.tscn" id="7_7nomh"]
+[ext_resource type="PackedScene" uid="uid://pafx22u0d6j6" path="res://scenes/Map/straight_hall_vertical.tscn" id="8_1s4pk"]
+[ext_resource type="PackedScene" uid="uid://bl0frxxkm8edm" path="res://scenes/Map/el_shape_hall.tscn" id="9_x2xxo"]
+[ext_resource type="PackedScene" uid="uid://cxjow56pj5umb" path="res://scenes/Map/t_shape_hall.tscn" id="10_2y5yt"]
+[ext_resource type="PackedScene" uid="uid://bb5he7oqdultl" path="res://scenes/Map/barracks.tscn" id="11_2os1m"]
+[ext_resource type="PackedScene" uid="uid://cq8ry3butwhlh" path="res://scenes/Map/proc_map_room_07.tscn" id="12_go7sj"]
+[ext_resource type="PackedScene" uid="uid://bbk8xlykmp7x5" path="res://scenes/Map/le_shape.tscn" id="13_7gny6"]
+[ext_resource type="PackedScene" uid="uid://b74f587auj1tb" path="res://scenes/player.tscn" id="14_2aecg"]
+[ext_resource type="PackedScene" uid="uid://0e2qyj6vrjqc" path="res://scenes/gui.tscn" id="15_6dial"]
+
+[node name="Level_1" type="Node2D"]
+
+[node name="Map" type="Node2D" parent="."]
+
+[node name="ProcMapRoom06" parent="Map" instance=ExtResource("1_2y5yt")]
+position = Vector2(640, 1280)
+
+[node name="ProcMapRoom05" parent="Map" instance=ExtResource("2_2os1m")]
+position = Vector2(-640, 2560)
+
+[node name="ProcMapRoom09" parent="Map" instance=ExtResource("2_2os1m")]
+position = Vector2(-1280, 3200)
+
+[node name="ProcMapRoom04" parent="Map" instance=ExtResource("3_go7sj")]
+
+[node name="ProcMapRoom11" parent="Map" instance=ExtResource("3_go7sj")]
+position = Vector2(-1920, 1920)
+
+[node name="ProcMapRoom03" parent="Map" instance=ExtResource("4_7gny6")]
+position = Vector2(-640, 1920)
+
+[node name="ProcMapRoom07" parent="Map" instance=ExtResource("4_7gny6")]
+position = Vector2(-1280, 2560)
+
+[node name="ProcMapRoom02" parent="Map" instance=ExtResource("5_2aecg")]
+position = Vector2(640, 1920)
+
+[node name="ProcMapRoom01" parent="Map" instance=ExtResource("6_6dial")]
+position = Vector2(0, 1280)
+
+[node name="Church" parent="Map" instance=ExtResource("7_7nomh")]
+position = Vector2(-1280, 1280)
+
+[node name="StraightHallVertical" parent="Map" instance=ExtResource("8_1s4pk")]
+position = Vector2(0, 640)
+
+[node name="LShapeHall" parent="Map" instance=ExtResource("9_x2xxo")]
+position = Vector2(-640, 1280)
+
+[node name="TShapeHall" parent="Map" instance=ExtResource("10_2y5yt")]
+position = Vector2(-1280, 1920)
+
+[node name="Barracks" parent="Map" instance=ExtResource("11_2os1m")]
+position = Vector2(0, 1920)
+
+[node name="ProcMapRoom08" parent="Map" instance=ExtResource("12_go7sj")]
+position = Vector2(0, 2560)
+
+[node name="ProcMapRoom10" parent="Map" instance=ExtResource("12_go7sj")]
+position = Vector2(-1920, 2560)
+
+[node name="LeShape" parent="Map" instance=ExtResource("13_7gny6")]
+position = Vector2(640, 2560)
+
+[node name="Player" parent="." instance=ExtResource("14_2aecg")]
+position = Vector2(248, 392)
+
+[node name="Camera2D" type="Camera2D" parent="Player"]
+zoom = Vector2(5, 5)
+
+[node name="Gui" parent="." instance=ExtResource("15_6dial")]
