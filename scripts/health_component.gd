@@ -19,5 +19,6 @@ func take_damage(amount: int):
 	if health > max_health:
 		health = max_health
 	if health <= 0:
+		health = 0
 		is_dead = true
 		health_depleted.emit()
