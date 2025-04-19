@@ -6,6 +6,7 @@ const SPEED = 60.0
 var collected_coins = 0
 
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
+var gui_struct: CanvasLayer
 
 # TODO: move into separate script when too big
 var inventory = {
@@ -24,6 +25,30 @@ var stats = {
 	"LUCK" : 1
 }
 
+var temp_health = 80.0
+var score = 0
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+	load_gui()
+	pass
+
+
+func load_gui() -> void:
+	gui_struct = get_tree().get_current_scene().find_child("Gui")
+	if gui_struct == null:
+		print("[ERR] Failed to load GUI control")
+		return
+	
+func update_score(delta_value: int) -> void:
+	score += delta_value
+	gui_struct.find_child("score_label").text = str(score)
+
+func update_healthbar(delta_value: float) -> void:
+	temp_health+=delta_value
+	gui_struct.find_child("hp_bar").value = temp_health
+
 func add_item(item_name: String) -> void:
 	if item_name in inventory.keys():
 		inventory[item_name] += 1
@@ -34,6 +59,8 @@ func add_item(item_name: String) -> void:
 
 func add_coin() -> void:
 	collected_coins += 1
+	update_score(1)					# TODO: remove, only for testing
+	update_healthbar(-10.0)			# TODO: remove, only for testing
 
 func update_stats(name: String, value: int) -> void:
 	if name in stats.keys():

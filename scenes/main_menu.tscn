@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://cyecwbvxm1qp0" path="res://assets/sprites/main_menu/main_menu.png" id="1_bqqt6"]
 [ext_resource type="Script" uid="uid://ccd1ynwdmmi0f" path="res://scripts/start_game.gd" id="1_l6cm7"]
-[ext_resource type="Script" uid="uid://28pj7050gy81" path="res://scenes/exit_btn.gd" id="2_ekxnf"]
+[ext_resource type="Script" uid="uid://28pj7050gy81" path="res://scripts/exit_btn.gd" id="2_ekxnf"]
 
 [node name="MainMenu" type="Control"]
 layout_mode = 3

@@ -1,0 +1,92 @@
+[gd_scene load_steps=3 format=3 uid="uid://0e2qyj6vrjqc"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_66xuh"]
+font_size = 32
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_efmwq"]
+bg_color = Color(0.347817, 0.347817, 0.347817, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+
+[node name="Gui" type="CanvasLayer"]
+
+[node name="score_label" type="Label" parent="."]
+offset_left = 7.0
+offset_top = 10.0
+offset_right = 138.0
+offset_bottom = 55.0
+text = "1441"
+label_settings = SubResource("LabelSettings_66xuh")
+
+[node name="hp_bar" type="ProgressBar" parent="."]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -165.5
+offset_top = -83.0
+offset_right = 165.5
+offset_bottom = -56.0
+grow_horizontal = 2
+grow_vertical = 0
+value = 80.0
+rounded = true
+show_percentage = false
+
+[node name="inventory_panel" type="Panel" parent="."]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -165.0
+offset_top = -51.0
+offset_right = 165.0
+offset_bottom = -5.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="slot_panel_1" type="Panel" parent="inventory_panel"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 2.0
+offset_top = -22.0
+offset_right = 99.0
+offset_bottom = 22.0
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_efmwq")
+
+[node name="slot_panel_2" type="Panel" parent="inventory_panel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -48.5
+offset_top = -22.0
+offset_right = 48.5
+offset_bottom = 22.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_efmwq")
+
+[node name="slot_panel_3" type="Panel" parent="inventory_panel"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -99.0
+offset_top = -22.0
+offset_right = -2.0
+offset_bottom = 22.0
+grow_horizontal = 0
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_efmwq")
