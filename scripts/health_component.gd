@@ -36,8 +36,10 @@ func take_damage(amount: int):
 		health_depleted.emit()
 		
 func reset() -> void:
+	var old_health = self.health
 	self.health = self.max_health
 	self.is_dead = false
+	health_changed.emit(old_health, self.health)
 
 func _process(delta: float) -> void:
 	pass
