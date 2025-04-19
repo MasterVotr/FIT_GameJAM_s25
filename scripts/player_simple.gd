@@ -45,6 +45,7 @@ func die() -> void:
 	var banner = gui_struct.find_child("you_died_banner")
 	banner.visible = true
 	is_dead = true
+	animated_sprite.play("death")
 	await get_tree().create_timer(5).timeout
 	banner.visible = false
 	reset_player_on_death()
