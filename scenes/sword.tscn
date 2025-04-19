@@ -104,7 +104,6 @@ rotation = 0.785398
 sprite_frames = SubResource("SpriteFrames_fnw8x")
 
 [node name="Hitbox" type="Area2D" parent="AnimatedSprite2D"]
-visible = false
 collision_layer = 0
 collision_mask = 12
 monitoring = false
@@ -115,7 +114,6 @@ rotation = 0.785398
 shape = SubResource("CapsuleShape2D_cp3m4")
 
 [node name="PickupArea" type="Area2D" parent="."]
-visible = false
 collision_layer = 2
 collision_mask = 4
 
