@@ -11,7 +11,7 @@ const SPEED = 3000.0
 const JUMP_VELOCITY = -400.0
 const DAMAGE = 10
 const MAX_HEALTH = 40
-const DAMAGE_DELAY = 0.8
+const DAMAGE_DELAY = 0.6
 
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var navigation_agent := $NavigationAgent2D as NavigationAgent2D

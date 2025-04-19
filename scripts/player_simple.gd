@@ -5,9 +5,9 @@ const Dagger = preload("res://scenes/dagger.tscn")
 const AttackDTO = preload("res://scripts/attack_dto.gd")
 const HealthComponent = preload("res://scripts/health_component.gd")
 
-const SPEED = 3000.0
-
-var collected_coins = 0
+var speed := 3000.0
+var attack_slowdown := 0.6
+var collected_coins := 0
 var direction := Vector2(0.0, 0.0)
 var weapon
 
@@ -150,21 +150,23 @@ func _physics_process(delta: float) -> void:
 	
 	# Apply movement
 	if direction.y:
-		velocity.y = direction.y * SPEED * delta
+		velocity.y = direction.y * speed * delta
 	else: 
-		velocity.y = move_toward(velocity.y, 0, SPEED)
+		velocity.y = move_toward(velocity.y, 0, speed)
 	if direction.x:
-		velocity.x = direction.x * SPEED * delta
+		velocity.x = direction.x * speed * delta
 	else:
-		velocity.x = move_toward(velocity.x, 0, SPEED)
+		velocity.x = move_toward(velocity.x, 0, speed)
+
+	if weapon.is_attacking:
+		velocity *= attack_slowdown
 
 	move_and_slide()
 	
 func attack(attack_dir) -> void:
 	animated_sprite.play("attack")
 	weapon_mount.rotation = attack_dir.angle()
-	weapon_mount.position = weapon_mount_defult_pos + (attack_dir * 2.0)
-	print("Attacking in angle", attack_dir.angle())
+	weapon_mount.position = weapon_mount_defult_pos + (attack_dir * 1.0)
 	weapon.attack()
 	
 func incomming_attack(attack_dto: AttackDTO):
