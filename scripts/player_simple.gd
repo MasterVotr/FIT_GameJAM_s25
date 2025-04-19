@@ -11,6 +11,8 @@ var direction := Vector2(0.0, 0.0)
 var weapon
 
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
+@onready var weapon_mount: Node2D = $WeaponMount
+@onready var health_component: Node2D = $HealthComponent
 var gui_struct: CanvasLayer
 
 var is_dead = false
@@ -38,6 +40,7 @@ var prev_score = 0
 func _ready() -> void:
 	load_gui()
 	weapon = SWORD.instantiate()
+	weapon.transform = weapon_mount.transform
 	self.add_child(weapon)
 	pass
 	
@@ -134,11 +137,12 @@ func _physics_process(delta: float) -> void:
 		animated_sprite.flip_h = false
 	elif direction.x < 0:
 		animated_sprite.flip_h = true
-		
-	if direction.is_equal_approx(Vector2(0.0, 0.0)):
-		animated_sprite.play("idle")
-	else:
-		animated_sprite.play("move")
+	
+	if animated_sprite.animation != "attack":
+		if direction.is_equal_approx(Vector2(0.0, 0.0)):
+			animated_sprite.play("idle")
+		else:
+			animated_sprite.play("move")
 	
 	# Apply movement
 	if direction.y:
@@ -153,8 +157,14 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 	
 func attack(attack_dir) -> void:
+	animated_sprite.play("attack")
 	weapon.attack(attack_dir)
 	
 func incomming_attack(attack_dto: AttackDTO):
 	print("I got hit for", attack_dto.damage)
-	pass
+	health_component.take_damage(attack_dto.damage)
+
+
+func _on_animated_sprite_2d_animation_finished() -> void:
+	if animated_sprite.animation == "attack":
+		animated_sprite.play("idle") # Replace with function body.
