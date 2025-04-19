@@ -64,6 +64,7 @@ func _on_detection_range_body_exited(body: Node2D) -> void:
 
 func _on_attack_range_body_entered(body: Node2D) -> void:
 	if body.has_method("incomming_attack"):
+		state = STATE.ATTACKING
 		#print("BDG: player entered attack range")
 		pass
 
