@@ -26,7 +26,7 @@ func attack(attack_dir):
 
 func _on_hitbox_body_entered(body: Node2D) -> void:
 	bodies_in_hitbox.set(body.get_instance_id(),  body)
-	print("Body entered sword area", body.get_instance_id())
+	# print("Body entered sword area", body.get_instance_id())
 	if body.has_method("incomming_attack"):
 		var attack_dto = AttackDTO.new()
 		attack_dto.damage = DAMAGE
@@ -36,7 +36,7 @@ func _on_hitbox_body_entered(body: Node2D) -> void:
 
 func _on_hitbox_body_exited(body: Node2D) -> void:
 	bodies_in_hitbox.erase(body.get_instance_id())
-	print("Body left sword area", body.get_instance_id())
+	# print("Body left sword area", body.get_instance_id())
 
 
 func _on_pickup_area_body_entered(body: Node2D) -> void:
