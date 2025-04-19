@@ -12,6 +12,8 @@ const JUMP_VELOCITY = -400.0
 const DAMAGE = 10
 const MAX_HEALTH = 40
 const DAMAGE_DELAY = 0.6
+const KNOCKBACK_FORCE = 200
+const FRICTION = 0.05
 
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var navigation_agent := $NavigationAgent2D as NavigationAgent2D
@@ -27,6 +29,7 @@ var bodies_in_hitbox := {}
 var on_attack_cooldown := false
 var is_attacking := false
 
+var gui_healthbar : Control
 
 func _ready() -> void:
 	health_component = HealthComponent.new(MAX_HEALTH)
@@ -34,7 +37,19 @@ func _ready() -> void:
 	health_component.connect("health_depleted", _on_health_depleted)
 	health_component.connect("health_changed", _on_health_changed)
 	player_detected = false
+	gui_healthbar = self.find_child("HealthBar")
+	gui_healthbar.update_healthbar(health_component.health, health_component.max_health)
+
+func apply_knockback(direction: Vector2, distance: float = 10.0, duration: float = 0.2):
+	var offset = direction * distance
+	var target_position = global_position + offset
 	
+	var test_pos = global_position + direction * distance
+	var tween = get_tree().create_tween()
+
+	if not test_move(global_transform, direction * distance):
+		tween.tween_property(self, "global_position", target_position, duration).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
+
 
 func _physics_process(delta: float) -> void:
 	match state:
@@ -63,15 +78,24 @@ func _physics_process(delta: float) -> void:
 			pass
 		STATE.DEAD:
 			velocity = Vector2(0.0, 0.0)
+			
 
 func incomming_attack(attack_dto: AttackDTO):
-	print("Skeleton: I got hit for", attack_dto.damage)
+	if health_component.is_dead:
+		return
+	#print("Skeleton: I got hit for", attack_dto.damage)
 	health_component.take_damage(attack_dto.damage)
+	gui_healthbar.update_healthbar(health_component.health, health_component.max_health)
+	self.animated_sprite.modulate = Color(1, 0.1, 0.1)
+	await get_tree().create_timer(0.1).timeout
+	self.animated_sprite.modulate = Color(1.0, 1.0, 1.0)
+	self.apply_knockback(attack_dto.attack_dir)
 
 func attack(player: Player):
 	if not on_attack_cooldown:
 		var attack_dto = AttackDTO.new()
 		attack_dto.damage = DAMAGE
+		attack_dto.attack_dir = (player.global_position - self.global_position).normalized()
 		player.incomming_attack(attack_dto)
 		on_attack_cooldown = true
 		attack_cooldown.start()
@@ -85,6 +109,8 @@ func _on_pathfinding_timer_timeout() -> void:
 func _on_detection_range_body_entered(body: Node2D) -> void:
 	# If player -> start following
 	#print("BDG: player entered detection range")
+	if state == STATE.DEAD:
+		return
 	player_detected = true
 	state = STATE.FOLLOWING
 	target = body
@@ -93,16 +119,22 @@ func _on_detection_range_body_entered(body: Node2D) -> void:
 func _on_detection_range_body_exited(body: Node2D) -> void:
 	# If player and following -> stop following
 	#print("BDG: player exited detection range")
+	if state == STATE.DEAD:
+		return
 	state = STATE.IDLE
 	player_detected = false
 
 
 func _on_hitbox_body_entered(body: Node2D) -> void:
+	if state == STATE.DEAD:
+		return
 	if body.has_method("incomming_attack"):
 		state = STATE.IN_RANGE
 		#print("BDG: player entered attack range")
 
 func _on_hitbox_body_exited(body: Node2D) -> void:
+	if state == STATE.DEAD:
+		return
 	if body.has_method("incomming_attack"):
 		if state == STATE.ATTACKING:
 			return

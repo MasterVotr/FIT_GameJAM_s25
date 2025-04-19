@@ -36,6 +36,7 @@ var stats = {
 var score = 0
 var prev_score = 0
 
+var gui_healthbar : Control
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -45,7 +46,11 @@ func _ready() -> void:
 	weapon_mount.add_child(weapon)
 	weapon.init(true)
 	health_component = HealthComponent.new(100)
+	health_component.connect("health_depleted", _on_health_depleted)
+	health_component.connect("health_changed", _on_health_changed)
 	self.add_child(health_component)
+	gui_healthbar = self.find_child("HealthBar")
+	gui_healthbar.update_healthbar(health_component.health, health_component.max_health)
 
 func die() -> void:
 	var banner = gui_struct.find_child("you_died_banner")
@@ -56,7 +61,16 @@ func die() -> void:
 	banner.visible = false
 	reset_player_on_death()
 	is_dead = false
-	
+
+
+func _on_health_changed(old_value, new_value) -> void:
+	gui_healthbar.update_healthbar(health_component.health, health_component.max_health)
+
+func _on_health_depleted() -> void:
+	print("Skeleton: I died")
+	animated_sprite.play("death")
+	gui_healthbar.update_healthbar(health_component.health, health_component.max_health)
+	die()
 
 func reset_player_on_death() -> void:
 	score = prev_score
@@ -66,7 +80,7 @@ func reset_player_on_death() -> void:
 	scene_root.reload_world()
 
 func sacrifice() -> void:
-	update_healthbar(health_component.max_health)
+	gui_healthbar.update_healthbar(health_component.health, health_component.max_health)
 	update_score(0)
 	var banner = gui_struct.find_child("sacrificed_banner")
 	banner.visible = true
@@ -94,11 +108,6 @@ func update_skills_label() -> void:
 	gui_struct.find_child("skills_label").text += "Vitality: " + str(stats["VITALITY"]) + '\n'
 	gui_struct.find_child("skills_label").text += "Agility: " + str(stats["AGILITY"]) + '\n'
 
-func update_healthbar(delta_value: int) -> void:
-	health_component.take_damage(delta_value)
-	gui_struct.find_child("hp_bar").value = health_component.health
-	if health_component.health <= 0.1 and is_dead == false:
-		die()
 
 func add_item(item_name: String) -> void:
 	if item_name in inventory.keys():
@@ -111,7 +120,7 @@ func add_item(item_name: String) -> void:
 func add_coin() -> void:
 	collected_coins += 1
 	update_score(1)					# TODO: remove, only for testing
-	update_healthbar(10)			# TODO: remove, only for testing
+	health_component.take_damage(10)
 
 func update_stats(name: String, value: float) -> void:
 	if name in stats.keys():
@@ -120,7 +129,7 @@ func update_stats(name: String, value: float) -> void:
 		
 		if name == "VITALITY":
 			health_component.max_health = 100.0 * stats[name]
-			gui_struct.find_child("hp_bar").max_value = health_component.max_health
+			self.find_child("hp_bar").max_value = health_component.max_health
 
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
@@ -131,7 +140,6 @@ func _input(event: InputEvent) -> void:
 func _physics_process(delta: float) -> void:
 	if is_dead:
 		return
-	update_healthbar(0)
 	
 	# Get direction from input
 	direction = Vector2(Input.get_axis("LEFT", "RIGHT"), Input.get_axis("UP", "DOWN")).normalized()
@@ -172,6 +180,9 @@ func attack(attack_dir) -> void:
 func incomming_attack(attack_dto: AttackDTO):
 	print("I got hit for", attack_dto.damage)
 	health_component.take_damage(attack_dto.damage)
+	self.animated_sprite.modulate = Color(1, 0.2, 0.2)
+	await get_tree().create_timer(0.1).timeout
+	self.animated_sprite.modulate = Color(1.0, 1.0, 1.0)
 
 
 func _on_animated_sprite_2d_animation_finished() -> void:

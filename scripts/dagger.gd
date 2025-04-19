@@ -37,6 +37,7 @@ func _on_hitbox_body_entered(body: Node2D) -> void:
 		var attack_dto = AttackDTO.new()
 		attack_dto.damage = self.damage
 		attack_dto.knockback = self.knockback
+		attack_dto.attack_dir = (body.global_position - self.global_position).normalized()
 		body.incomming_attack(attack_dto)
 
 

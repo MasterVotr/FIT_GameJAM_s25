@@ -112,3 +112,5 @@ position = Vector2(137, 216)
 
 [node name="Chest" parent="." instance=ExtResource("5_iywne")]
 position = Vector2(493, 175)
+
+[node name="InstantiatedGUIObjects" type="CanvasLayer" parent="."]
