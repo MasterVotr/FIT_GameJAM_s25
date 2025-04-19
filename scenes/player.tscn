@@ -157,7 +157,7 @@ animations = [{
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_dqkch"]
 radius = 5.0
-height = 16.0
+height = 10.0
 
 [node name="Player" type="CharacterBody2D"]
 collision_layer = 4
@@ -172,7 +172,7 @@ animation = &"move"
 autoplay = "idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, -9)
+position = Vector2(0, -5)
 shape = SubResource("CapsuleShape2D_dqkch")
 
 [node name="WeaponMount" type="Node2D" parent="."]
