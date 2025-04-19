@@ -32,6 +32,10 @@ folder_colors={
 "res://scripts/": "green"
 }
 
+[global_group]
+
+enemies="All enemies it the game"
+
 [input]
 
 UP={
