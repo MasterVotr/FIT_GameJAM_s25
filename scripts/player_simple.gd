@@ -3,6 +3,7 @@ extends CharacterBody2D
 
 const SWORD = preload("res://scenes/sword.tscn")
 const AttackDTO = preload("res://scripts/attack_dto.gd")
+const HealthComponent = preload("res://scripts/health_component.gd")
 
 const SPEED = 3000.0
 
@@ -12,7 +13,8 @@ var weapon
 
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var weapon_mount: Node2D = $WeaponMount
-@onready var health_component: Node2D = $HealthComponent
+var health_component
+
 var gui_struct: CanvasLayer
 
 var is_dead = false
@@ -42,6 +44,8 @@ func _ready() -> void:
 	weapon = SWORD.instantiate()
 	weapon.transform = weapon_mount.transform
 	self.add_child(weapon)
+	health_component = HealthComponent.new(max_health)
+	self.add_child(health_component)
 	pass
 	
 func die() -> void:
