@@ -1,4 +1,4 @@
-extends Node2D
+extends "res://scripts/weapon.gd"
 
 var player_in_area = false
 var player_body : Node2D
@@ -55,12 +55,13 @@ func _input(event: InputEvent) -> void:
 	if Input.is_action_pressed("INTERACT") and player_in_area and not is_picked_up:
 		is_picked_up = true
 		print("[DBG] Interacted with sword. TODO: Add sword to player")
-		hide()
+		self.visible = false
 
 func reset() -> void:
 	player_in_area = false
 	is_picked_up = false
-	show()
+	self.visible = true
+	
 
 func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 	print("Animation ", anim_name, "finished hidding...")
