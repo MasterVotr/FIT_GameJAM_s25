@@ -10,6 +10,7 @@ var range := 80
 var damage := 10
 var knockback := 1
 var flying := true
+var player_item := false
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta: float) -> void:
@@ -22,7 +23,11 @@ func _physics_process(delta: float) -> void:
 		await get_tree().create_timer(1).timeout
 		fadeout()
 	move_and_slide()
-	
+
+func init(_player_item := false) -> void:
+	self.player_item = _player_item
+		
+
 func fadeout():
 	var fadeout_tween = get_tree().create_tween()
 	fadeout_tween.tween_property(self, "modulate", Color("ffffff00"), 1)
@@ -37,7 +42,9 @@ func launch(_direction: Vector2) -> void:
 func _on_hitbox_body_entered(body: Node2D) -> void:
 	if body.has_method("incomming_attack"):
 		var attack_dto = AttackDTO.new()
-		attack_dto.damage = self.damage
+		attack_dto.damage = self.damage 
 		attack_dto.knockback = self.knockback
+		if player_item:
+			attack_dto.damage *= GameState.pl_stat_agility
 		body.incomming_attack(attack_dto)
 	flying = false

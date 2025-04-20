@@ -17,8 +17,9 @@ func _input(event: InputEvent) -> void:
 		self.visible = false
 		player_body.add_item_to_inventory(self)
 
-func init(player_item := false) -> void:
+func init(_player_item := false) -> void:
 	weapon_range = 80
+	self.player_item = _player_item
 
 
 func attack():
@@ -30,6 +31,7 @@ func attack():
 		await get_tree().create_timer(0.2).timeout
 		var arrow = Arrow.instantiate()
 		get_tree().root.add_child(arrow)
+		arrow.init(player_item)
 		var dlobal_direction = Vector2.RIGHT.rotated(self.global_rotation)
 		var origin = self.global_position + dlobal_direction * 20.0
 		arrow.global_position = origin

@@ -17,8 +17,9 @@ var on_cooldown := false
 var bodies_in_hitbox := {}
 
 
-func init(player_item := false) -> void:
+func init(_player_item := false) -> void:
 	weapon_range = 18
+	self.player_item = _player_item
 	if (player_item):
 		hitbox.set_collision_mask_value(3, false)
 	else:
@@ -41,6 +42,8 @@ func _on_hitbox_body_entered(body: Node2D) -> void:
 		attack_dto.damage = self.damage
 		attack_dto.knockback = self.knockback
 		attack_dto.attack_dir = (body.global_position - self.global_position).normalized()
+		if player_item:
+			attack_dto.damage *= GameState.pl_stat_strength
 		body.incomming_attack(attack_dto)
 
 
