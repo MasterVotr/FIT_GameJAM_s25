@@ -1,9 +1,10 @@
 extends Node
 
 
-var pl_stat_vitality := 1.0
-var pl_stat_strength := 1.0
-var pl_stat_agility := 1.0
+var pl_stat_vitality := 10.0
+var pl_stat_strength := 10.0
+var pl_stat_agility := 10.0
+var stat_upgrade_cost := 100
 
 var lvl_collected_shards := 0
 var lvl_shard_count := 10
