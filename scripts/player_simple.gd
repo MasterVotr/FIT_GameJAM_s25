@@ -66,17 +66,12 @@ func reset_player_on_death() -> void:
 	score = prev_score
 	update_score(0)
 	health_component.reset()
-	var scene_root = get_tree().current_scene
-	scene_root._on_level_reset()
 
 func sacrifice() -> void:
 	gui_healthbar.update_healthbar(health_component.health, health_component.max_health)
 	update_score(0)
-	var banner = gui_struct.find_child("sacrificed_banner")
-	banner.visible = true
 	is_dead = true
 	await get_tree().create_timer(1).timeout
-	banner.visible = false
 	reset_player_on_death()
 	is_dead = false
 

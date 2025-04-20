@@ -8,6 +8,7 @@ var hold_timer := 0.0
 var holding := false
 
 var interaction_completed := false
+var ui_closed := false
 var post_interaction_wait_time := 1.0
 
 var progress_bar : TextureProgressBar
@@ -21,9 +22,12 @@ func _ready() -> void:
 	progress_bar.visible = false
 	self.find_child("TextureRect").visible = false
 	self.find_child("Label").visible = false
+	self.find_child("Sacrifice").visible = false
 
 func _process(delta) -> void:
 	if interaction_completed:
+		if self.find_child("Sacrifice").visible:
+			return
 		hold_timer += delta
 		if hold_timer >= post_interaction_wait_time:
 			signal_level_reset() 
@@ -44,6 +48,7 @@ func _process(delta) -> void:
 				hold_timer = 0.0 # reset for wait before destroying world
 				progress_bar.value = hold_timer
 				make_progress_bar_invisible()
+				self.find_child("Sacrifice").visible = true
 	else:
 		holding = false
 		hold_timer = 0.0
@@ -77,7 +82,7 @@ func make_progress_bar_invisible()->void:
 
 func signal_level_reset() -> void:
 	var scene_root = get_tree().current_scene
-	scene_root.reload_world()
+	scene_root._on_level_reset()
 
 func reset() -> void:
 	_ready()

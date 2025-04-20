@@ -17,7 +17,8 @@ var cutscene_started = false
 
 var texts = ["Once upon a time in a far away land, our hero lived in peace.",
 			"Until one day Dark Knight and his army of skeletons raided hero's village. 
-			They killed everyone and because of our heroes bravery the Dark Knight shattered heroes soul into 10 fragments and hid them in his home, his castle.",
+			They killed everyone and because of our heroes bravery the Dark Knight shattered heroes 
+			soul into 10 fragments and hid them in his home, his castle.",
 			"So the hero followed the knight back to his castle. He sneaked inside and met with the knight.",
 			"The fragments of your soul are scattered throughout my castle. Find them, and they are yours. But they won't come for free.
 			My army is guarding these halls and there are many temptations. Everything comes at a price.",
