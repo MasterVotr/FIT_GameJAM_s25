@@ -1,25 +1,52 @@
 extends Node2D
 
+var images = [
+ 	preload("res://assets/sprites/cutscene/cinematic_masterpiece_part1.png"),
+	preload("res://assets/sprites/cutscene/cinematic_masterpiece_part2.png"),
+	preload("res://assets/sprites/cutscene/cinematic_masterpiece_part3.png"),
+	preload("res://assets/sprites/cutscene/cinematic_masterpiece_part4.png")
+]
+var image_count = 4
+var cur_idx = 0
+var duration = 5.0
+var time_sum = 0.0
 
-var images = []
-var triggered = false
+var cutscene_completed = false
+var cutscene_started = false
 
-var texts = []
+var texts = ["Once upon a time in a far away land, our hero lived in peace.",
+			"Until one day dark knight and his army of skeletons raided hero's village.",
+			"So the hero followed the knight back to his castle. He sneaked inside and met with the knight.",
+			"The fragments of your soul are scattered throughout my castle. Find them, and they are yours. But they won't come for free.
+			My army is guarding these halls and there are many temptations. Everything comes at a price.",
+			"I can help you. To save yourself, sacrifice yourself. Only then you become stronger."]
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	images.append(self.find_child("cs_img_01"))
-	images.append(self.find_child("cs_img_02"))
-	images.append(self.find_child("cs_img_03"))
-	
-	for i in images:
-		i.visible = false
-	images[0].visible = true
+	time_sum = 0.0
 
 func run_cutscene() -> void:
-	for idx in range(images.size()):
-		images[idx].visible = true
-		get_tree().create_timer(5).timeout
-		images[idx].visible = false
-	images[-1].visible = true
+	cutscene_started = true
+	time_sum = duration
+	self.visible = true
+
+
+func _physics_process(delta: float) -> void:
+	if cutscene_completed:
+		pass
+	if not cutscene_started:
+		pass
+		
+	time_sum += delta
 	
+	if time_sum >= duration:
+		if cur_idx < image_count:
+			self.find_child("frame-1").texture = images[cur_idx]
+			self.find_child("Label").text = texts[cur_idx]
+		elif cur_idx == image_count:
+			cutscene_completed = true
+			self.visible = false
+		
+		time_sum = 0.0
+		cur_idx += 1

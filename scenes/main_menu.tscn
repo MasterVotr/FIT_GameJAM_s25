@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://b7h6wow1rf5ya"]
+[gd_scene load_steps=5 format=3 uid="uid://b7h6wow1rf5ya"]
 
 [ext_resource type="Script" uid="uid://ccd1ynwdmmi0f" path="res://scripts/start_game.gd" id="1_l6cm7"]
 [ext_resource type="Script" uid="uid://28pj7050gy81" path="res://scripts/exit_btn.gd" id="2_ekxnf"]
+[ext_resource type="PackedScene" uid="uid://cmiw3mpn730nj" path="res://scenes/intro_cutscene.tscn" id="3_bqqt6"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_ekxnf"]
 load_path = "res://.godot/imported/main_menu.png-d54f83b3ad39612f6387db173bd7666c.ctex"
@@ -17,9 +18,10 @@ grow_vertical = 2
 
 [node name="TextureRect" type="TextureRect" parent="."]
 layout_mode = 0
-offset_right = 1920.0
-offset_bottom = 1080.0
+offset_right = 1600.0
+offset_bottom = 900.0
 texture = SubResource("CompressedTexture2D_ekxnf")
+expand_mode = 1
 
 [node name="start_button" type="Button" parent="."]
 layout_mode = 0
@@ -49,6 +51,9 @@ offset_right = 1109.0
 offset_bottom = 575.2
 text = "EXIT"
 script = ExtResource("2_ekxnf")
+
+[node name="IntroCutscene" parent="." instance=ExtResource("3_bqqt6")]
+visible = false
 
 [connection signal="pressed" from="start_button" to="start_button" method="_on_pressed"]
 [connection signal="pressed" from="exit_button" to="exit_button" method="_on_pressed"]

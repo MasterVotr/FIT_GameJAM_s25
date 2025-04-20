@@ -1,26 +1,52 @@
-[gd_scene load_steps=5 format=3 uid="uid://cmiw3mpn730nj"]
+[gd_scene load_steps=6 format=3 uid="uid://cmiw3mpn730nj"]
 
 [ext_resource type="Script" uid="uid://k8et74n5kena" path="res://scenes/cutscene_logic.gd" id="1_wifpd"]
-[ext_resource type="Texture2D" uid="uid://ut7plhotk0go" path="res://assets/sprites/cutscene/intro_image_1.png" id="2_dw6o5"]
-[ext_resource type="Texture2D" uid="uid://d0asekxwu74jm" path="res://assets/sprites/cutscene/intro_image_2.png" id="3_xeku4"]
-[ext_resource type="Texture2D" uid="uid://jgnscldpjuyk" path="res://assets/sprites/cutscene/intro_image_3.png" id="4_jusdg"]
+[ext_resource type="Texture2D" uid="uid://ggn83uukmedw" path="res://assets/sprites/cutscene/cinematic_masterpiece_part1.png" id="2_dw6o5"]
+[ext_resource type="Texture2D" uid="uid://b7mdy4av0j6tk" path="res://assets/sprites/cutscene/cinematic_masterpiece_part2.png" id="3_xeku4"]
+[ext_resource type="Texture2D" uid="uid://4h6u52vhndwy" path="res://assets/sprites/cutscene/cinematic_masterpiece_part3.png" id="4_jusdg"]
+[ext_resource type="Texture2D" uid="uid://cf2olnm1717wa" path="res://assets/sprites/cutscene/cinematic_masterpiece_part4.png" id="5_dcu1r"]
 
 [node name="IntroCutscene" type="Node2D"]
 script = ExtResource("1_wifpd")
 
-[node name="cs_img_01" type="Sprite2D" parent="."]
-position = Vector2(799.5, 453.5)
-scale = Vector2(0.832812, 0.830556)
-texture = ExtResource("2_dw6o5")
-
-[node name="cs_img_02" type="Sprite2D" parent="."]
-position = Vector2(799.5, 453.5)
-scale = Vector2(0.832812, 0.830556)
-texture = ExtResource("3_xeku4")
-
-[node name="cs_img_03" type="Sprite2D" parent="."]
-position = Vector2(799.5, 453.5)
-scale = Vector2(0.832812, 0.830556)
-texture = ExtResource("4_jusdg")
-
 [node name="Timer" type="Timer" parent="."]
+wait_time = 5.0
+autostart = true
+
+[node name="frame-1" type="TextureRect" parent="."]
+offset_right = 1600.0
+offset_bottom = 900.0
+texture = ExtResource("2_dw6o5")
+expand_mode = 1
+
+[node name="frame-2" type="TextureRect" parent="."]
+visible = false
+offset_right = 1600.0
+offset_bottom = 900.0
+texture = ExtResource("3_xeku4")
+expand_mode = 1
+
+[node name="frame-3" type="TextureRect" parent="."]
+visible = false
+offset_right = 1600.0
+offset_bottom = 900.0
+texture = ExtResource("4_jusdg")
+expand_mode = 1
+
+[node name="frame-4" type="TextureRect" parent="."]
+visible = false
+offset_right = 1600.0
+offset_bottom = 900.0
+texture = ExtResource("5_dcu1r")
+expand_mode = 1
+
+[node name="Label" type="Label" parent="."]
+offset_left = 44.0
+offset_top = 795.0
+offset_right = 1575.0
+offset_bottom = 876.0
+theme_override_font_sizes/font_size = 24
+text = "Cinematic masterpiece"
+horizontal_alignment = 1
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
