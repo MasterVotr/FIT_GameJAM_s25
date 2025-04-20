@@ -105,7 +105,7 @@ func add_item(item_name: String) -> void:
 
 func add_coin() -> void:
 	collected_coins += 1
-	update_score(1)					# TODO: remove, only for testing
+	GameState.glob_lvl_score += GameState.score_coin
 	health_component.take_damage(10)
 
 func update_stats() -> void:

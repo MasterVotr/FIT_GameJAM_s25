@@ -6,7 +6,8 @@ func _on_body_entered(body: Node2D) -> void:
 	if disabled:
 		return
 		
-	GameState.glob_lvl_score += GameState.score_coin
+	# done as such to make casting damage to player easy af
+	body.add_coin()
 	
 	disabled = true
 	hide() 
