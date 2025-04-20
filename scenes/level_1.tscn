@@ -505,6 +505,18 @@ position = Vector2(-784, 1664)
 [node name="Coin6" parent="Collectables/Coins" instance=ExtResource("17_1s4pk")]
 position = Vector2(-784, 1648)
 
+[node name="Coin121" parent="Collectables/Coins" instance=ExtResource("17_1s4pk")]
+position = Vector2(168, 1167)
+
+[node name="Coin122" parent="Collectables/Coins" instance=ExtResource("17_1s4pk")]
+position = Vector2(411, 1199)
+
+[node name="Coin123" parent="Collectables/Coins" instance=ExtResource("17_1s4pk")]
+position = Vector2(283, 1017)
+
+[node name="Coin124" parent="Collectables/Coins" instance=ExtResource("17_1s4pk")]
+position = Vector2(301, 1017)
+
 [node name="Fragments" type="Node2D" parent="Collectables"]
 
 [node name="SoulFragment" parent="Collectables/Fragments" instance=ExtResource("15_d5akn")]
