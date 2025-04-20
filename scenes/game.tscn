@@ -28,15 +28,15 @@ zoom = Vector2(5, 5)
 
 [node name="Resetable_objects" type="Node2D" parent="."]
 
+[node name="RangedSkeleton" parent="Resetable_objects" instance=ExtResource("4_trtic")]
+position = Vector2(146, 192)
+
 [node name="MeleecSkeleton" parent="Resetable_objects" instance=ExtResource("4_dinhu")]
 position = Vector2(247, 207)
 weapon_type = 1
 
 [node name="Skelington" parent="Resetable_objects" instance=ExtResource("2_lbhrr")]
 position = Vector2(121, 302)
-
-[node name="Skelington2" parent="Resetable_objects" instance=ExtResource("2_lbhrr")]
-position = Vector2(165, 177)
 
 [node name="Skelington3" parent="Resetable_objects" instance=ExtResource("2_lbhrr")]
 position = Vector2(344, 168)
@@ -121,5 +121,4 @@ position = Vector2(493, 175)
 [node name="InstantiatedGUIObjects" type="CanvasLayer" parent="."]
 
 [node name="Bow" parent="." instance=ExtResource("12_dinhu")]
-visible = true
 position = Vector2(240, 215)

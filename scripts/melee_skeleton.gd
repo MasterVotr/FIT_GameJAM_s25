@@ -19,7 +19,7 @@ const MAX_HEALTH = 40
 @onready var weapon_mount: Node2D = $WeaponMount
 
 @export var state = STATE.IDLE
-@export var weapon_type = Weapon.WEAPON_TYPE.SWORD
+@export var weapon_type = Weapon.MELEE_WEAPON_TYPE.SWORD
 
 # navigation variables
 var target : Node2D
@@ -45,12 +45,10 @@ func _ready() -> void:
 
 func spawn_weapon():
 	match weapon_type:
-		Weapon.WEAPON_TYPE.SWORD:
+		Weapon.MELEE_WEAPON_TYPE.SWORD:
 			weapon = Sword.instantiate()
-		Weapon.WEAPON_TYPE.DAGGER:
+		Weapon.MELEE_WEAPON_TYPE.DAGGER:
 			weapon = Dagger.instantiate()
-		Weapon.WEAPON_TYPE.BOW:
-			weapon = Bow.instantiate()
 	weapon_mount.add_child(weapon)
 	weapon.init(false)
 	weapon_range = weapon.weapon_range
@@ -76,7 +74,7 @@ func _physics_process(delta: float) -> void:
 			var move_dir = to_local(navigation_agent.get_next_path_position()).normalized()
 			
 			# Flip the sprite to face the firection
-			if move_dir.x > 0:
+			if move_dir.x >= 0:
 				animated_sprite.flip_h = false
 			elif move_dir.x < 0:
 				animated_sprite.flip_h = true
@@ -96,8 +94,7 @@ func _physics_process(delta: float) -> void:
 
 func incomming_attack(attack_dto: AttackDTO):
 	if health_component.is_dead:
-		return
-	#print("Skeleton: I got hit for", attack_dto.damage)
+		_on_health_depleted()
 	health_component.take_damage(attack_dto.damage)
 	gui_healthbar.update_healthbar(health_component.health, health_component.max_health)
 	self.animated_sprite.modulate = Color(1, 0.1, 0.1)
@@ -135,24 +132,6 @@ func _on_detection_range_body_exited(body: Node2D) -> void:
 		return
 	state = STATE.IDLE
 	player_detected = false
-
-
-func _on_hitbox_body_entered(body: Node2D) -> void:
-	if state == STATE.DEAD:
-		return
-	if body.has_method("incomming_attack"):
-		state = STATE.IN_RANGE
-		#print("BDG: player entered attack range")
-
-func _on_hitbox_body_exited(body: Node2D) -> void:
-	if state == STATE.DEAD:
-		return
-	if body.has_method("incomming_attack"):
-		if state == STATE.ATTACKING:
-			return
-		state = STATE.FOLLOWING
-	#print("BDG: player exited attack range")
-
 
 func _on_health_changed(old_value, new_value) -> void:
 	# damage taken

@@ -61,7 +61,7 @@ func _physics_process(delta: float) -> void:
 			var move_dir = to_local(navigation_agent.get_next_path_position()).normalized()
 			
 			# Flip the sprite to face the firection
-			if move_dir.x > 0:
+			if move_dir.x >= 0:
 				animated_sprite.flip_h = false
 			elif move_dir.x < 0:
 				animated_sprite.flip_h = true
