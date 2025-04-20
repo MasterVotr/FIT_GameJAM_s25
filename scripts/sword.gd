@@ -44,7 +44,7 @@ func _on_hitbox_body_entered(body: Node2D) -> void:
 		attack_dto.knockback = self.knockback
 		attack_dto.attack_dir = (body.global_position - self.global_position).normalized()
 		if player_item:
-			attack_dto.damage *= GameState.pl_stat_strength
+			attack_dto.damage *= GameState.pl_stat_strength / 10
 		body.incomming_attack(attack_dto)
 
 

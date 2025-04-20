@@ -42,9 +42,9 @@ func launch(_direction: Vector2) -> void:
 func _on_hitbox_body_entered(body: Node2D) -> void:
 	if body.has_method("incomming_attack"):
 		var attack_dto = AttackDTO.new()
-		attack_dto.damage = self.damage 
+		attack_dto.damage = self.damage
 		attack_dto.knockback = self.knockback
 		if player_item:
-			attack_dto.damage *= GameState.pl_stat_agility
+			attack_dto.damage *= GameState.pl_stat_agility / 10
 		body.incomming_attack(attack_dto)
 	flying = false
