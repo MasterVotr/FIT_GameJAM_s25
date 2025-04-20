@@ -6,6 +6,7 @@ var cur_idx = 0
 @onready var main_slot : TextureRect
 @onready var left_slot : TextureRect
 @onready var right_slot : TextureRect
+@onready var cooldown_bar : ProgressBar
 
 var full_color := Color(1.0, 1.0, 1.0, 1.0)
 var opaque_color := Color(1.0, 1.0, 1.0, 0.5)
@@ -17,6 +18,7 @@ func _ready() -> void:
 	main_slot = self.find_child("slot_panel_2").find_child("item_texture")
 	left_slot = self.find_child("slot_panel_1").find_child("item_texture")
 	right_slot = self.find_child("slot_panel_3").find_child("item_texture")
+	cooldown_bar = self.find_child("slot_panel_2").find_child("cooldown_bar")
 
 func update_visual() -> void:
 	if main_slot == null or left_slot == null or right_slot == null:
@@ -49,6 +51,15 @@ func update_visual() -> void:
 	elif weapons.size() >= 3:
 		left_slot.texture = weapons[(cur_idx - 1 + weapons.size()) % weapons.size()].get_icon_texture()
 		right_slot.texture = weapons[(cur_idx + 1) % weapons.size()].get_icon_texture()
+
+
+func _process(delta: float) -> void:
+	if cooldown_bar == null:
+		cooldown_bar = self.find_child("slot_panel_2").find_child("cooldown_bar")
+	
+	cooldown_bar.max_value = weapons[cur_idx].find_child("Cooldown").wait_time
+	cooldown_bar.value = cooldown_bar.max_value - weapons[cur_idx].find_child("Cooldown").time_left
+
 
 func reset_inventory() -> void:
 	cur_idx = 0
