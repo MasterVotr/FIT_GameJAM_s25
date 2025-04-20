@@ -100,6 +100,9 @@ func _physics_process(delta: float) -> void:
 			if position.distance_to(target.position) < weapon_range:
 				state = STATE.IN_RANGE
 		STATE.IN_RANGE:
+			if target.is_dead:
+				state = STATE.IDLE
+				return
 			velocity = Vector2(0.0, 0.0)
 			attack(target)
 			if close_range.get_overlapping_bodies().is_empty():
@@ -121,7 +124,7 @@ func incomming_attack(attack_dto: AttackDTO):
 	self.animated_sprite.modulate = Color(1.0, 1.0, 1.0)
 	self.apply_knockback(attack_dto.attack_dir)
 
-func attack(player: Player):
+func attack(player: Player):	
 	var attack_dir = position.direction_to(player.position)
 	weapon_mount.rotation = attack_dir.angle()
 	weapon_mount.position = weapon_mount_defult_pos + (attack_dir * 1.0)

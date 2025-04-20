@@ -19,6 +19,7 @@ var health_component
 var gui_struct: CanvasLayer
 
 var is_dead = false
+var is_sacrificed = false
 
 var score = 0
 var prev_score = 0
@@ -170,12 +171,18 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 	
 func attack(attack_dir) -> void:
+	if is_dead:
+		return
+		
 	animated_sprite.play("attack")
 	weapon_mount.rotation = attack_dir.angle()
 	weapon_mount.position = weapon_mount_defult_pos + (attack_dir * 1.0)
 	weapon.attack()
 	
 func incomming_attack(attack_dto: AttackDTO):
+	if is_dead:
+		return
+		
 	print("I got hit for", attack_dto.damage)
 	health_component.take_damage(attack_dto.damage)
 	self.animated_sprite.modulate = Color(1, 0.2, 0.2)
@@ -189,6 +196,9 @@ func _on_animated_sprite_2d_animation_finished() -> void:
 
 
 func add_item_to_inventory(item: Node2D) -> void:
+	if is_dead:
+		return
+		
 	var inventory = gui_struct.find_child("Inventory")
 	inventory.add_weapon(item)
 	print("add_item_to_inventory()")

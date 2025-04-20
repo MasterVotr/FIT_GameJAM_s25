@@ -75,7 +75,8 @@ func _physics_process(delta: float) -> void:
 			for body in hitbox.get_overlapping_bodies():
 				attack(body)
 		STATE.ATTACKING:
-			pass
+			if target.is_dead:
+				state = STATE.IDLE
 		STATE.DEAD:
 			velocity = Vector2(0.0, 0.0)
 			
