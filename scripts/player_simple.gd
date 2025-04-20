@@ -96,11 +96,6 @@ func update_score(delta_value: int) -> void:
 		gui_struct.find_child("score_label").text += "   (-" + str(GameState.sacrifice_score_penalty) + ")"
 		
 
-func update_skills_label() -> void:
-	gui_struct.find_child("skills_label").text = "Strength: " + str(GameState.pl_stat_strength) + '\n'
-	gui_struct.find_child("skills_label").text += "Vitality: " + str(GameState.pl_stat_vitality) + '\n'
-	gui_struct.find_child("skills_label").text += "Agility: " + str(GameState.pl_stat_agility) + '\n'
-
 func add_item(item_name: String) -> void:
 	pass
 
@@ -111,7 +106,6 @@ func add_coin() -> void:
 	#health_component.take_damage(10)
 
 func update_stats() -> void:
-	update_skills_label()
 	health_component.max_health = 100.0 * GameState.pl_stat_vitality
 	self.find_child("hp_bar").max_value = health_component.max_health
 
