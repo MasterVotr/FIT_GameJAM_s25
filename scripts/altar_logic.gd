@@ -11,19 +11,17 @@ func _ready() -> void:
 func _on_body_entered(body: Node2D) -> void:
 	player_in_area = true
 	player_object = body
-	#print("[DBG] Player entered altar area")
+	GameState.player_near_altar = true
 
 func _on_body_exited(body: Node2D) -> void:
 	player_in_area = false
-	#print("[DBG] Player left altar area")
+	GameState.player_near_altar = false
 
 
 func update_player_stats() -> void:
 	var update_coef = 0.1 * player_object.get_score_delta()
 	player_object.prev_score = player_object.score
-	player_object.update_stats("STRENGTH", update_coef)
-	player_object.update_stats("AGILITY", update_coef)
-	player_object.update_stats("VITALITY", update_coef)
+	player_object.update_stats()
 	player_object.sacrifice()
 
 

@@ -1,6 +1,7 @@
-[gd_scene load_steps=16 format=3 uid="uid://kpiuogaw1aag"]
+[gd_scene load_steps=25 format=3 uid="uid://kpiuogaw1aag"]
 
 [ext_resource type="PackedScene" uid="uid://ehep5w0lbys5" path="res://scenes/Map/proc_map_room_06.tscn" id="1_2y5yt"]
+[ext_resource type="Script" uid="uid://dl14t3qbytwn6" path="res://scripts/game_logic.gd" id="1_wbtxt"]
 [ext_resource type="PackedScene" uid="uid://b5sb20seho345" path="res://scenes/Map/proc_map_room_05.tscn" id="2_2os1m"]
 [ext_resource type="PackedScene" uid="uid://b66vsa1enh4wb" path="res://scenes/Map/proc_map_room_04.tscn" id="3_go7sj"]
 [ext_resource type="PackedScene" uid="uid://ciu7esdriaytc" path="res://scenes/Map/proc_map_room_03.tscn" id="4_7gny6"]
@@ -14,9 +15,21 @@
 [ext_resource type="PackedScene" uid="uid://cq8ry3butwhlh" path="res://scenes/Map/proc_map_room_07.tscn" id="12_go7sj"]
 [ext_resource type="PackedScene" uid="uid://bbk8xlykmp7x5" path="res://scenes/Map/le_shape.tscn" id="13_7gny6"]
 [ext_resource type="PackedScene" uid="uid://b74f587auj1tb" path="res://scenes/player.tscn" id="14_2aecg"]
+[ext_resource type="PackedScene" uid="uid://d0bh3nvj7rkgy" path="res://scenes/Map/_40x_40_template.tscn" id="14_7nomh"]
 [ext_resource type="PackedScene" uid="uid://0e2qyj6vrjqc" path="res://scenes/gui.tscn" id="15_6dial"]
+[ext_resource type="PackedScene" uid="uid://ceh5dbn303ddk" path="res://scenes/soul_fragment.tscn" id="15_d5akn"]
+[ext_resource type="PackedScene" uid="uid://d1ik73mf1bgj2" path="res://scenes/altar.tscn" id="16_wbtxt"]
+[ext_resource type="PackedScene" uid="uid://cnjtkbf24o6dy" path="res://scenes/Coin.tscn" id="17_1s4pk"]
+[ext_resource type="PackedScene" uid="uid://81umrgsn3ha2" path="res://scenes/bow.tscn" id="17_so66j"]
+[ext_resource type="PackedScene" uid="uid://3tcvk2kojxw6" path="res://scenes/Chest.tscn" id="18_x2xxo"]
+[ext_resource type="PackedScene" uid="uid://dqsnmd0x40tf7" path="res://scenes/sword.tscn" id="20_tr1x6"]
+[ext_resource type="PackedScene" uid="uid://dspe5fo240j64" path="res://scenes/spikes.tscn" id="21_d5akn"]
 
 [node name="Level_1" type="Node2D"]
+z_index = 2
+z_as_relative = false
+script = ExtResource("1_wbtxt")
+player_start_pos = Vector2(245, 378)
 
 [node name="Map" type="Node2D" parent="."]
 
@@ -70,10 +83,239 @@ position = Vector2(-1920, 2560)
 [node name="LeShape" parent="Map" instance=ExtResource("13_7gny6")]
 position = Vector2(640, 2560)
 
+[node name="Background" type="Node2D" parent="Map"]
+
+[node name="_40x40_template2" parent="Map/Background" instance=ExtResource("14_7nomh")]
+position = Vector2(-2560, 2560)
+
+[node name="_40x40_template3" parent="Map/Background" instance=ExtResource("14_7nomh")]
+position = Vector2(-1920, 3200)
+
+[node name="_40x40_template4" parent="Map/Background" instance=ExtResource("14_7nomh")]
+position = Vector2(-640, 3200)
+
+[node name="_40x40_template5" parent="Map/Background" instance=ExtResource("14_7nomh")]
+position = Vector2(1280, 1920)
+
+[node name="_40x40_template6" parent="Map/Background" instance=ExtResource("14_7nomh")]
+position = Vector2(1280, 2560)
+
+[node name="_40x40_template7" parent="Map/Background" instance=ExtResource("14_7nomh")]
+position = Vector2(1280, 1280)
+
+[node name="_40x40_template8" parent="Map/Background" instance=ExtResource("14_7nomh")]
+position = Vector2(640, 640)
+
+[node name="_40x40_template9" parent="Map/Background" instance=ExtResource("14_7nomh")]
+position = Vector2(-640, 640)
+
+[node name="_40x40_template10" parent="Map/Background" instance=ExtResource("14_7nomh")]
+position = Vector2(-1280, 640)
+
+[node name="_40x40_template11" parent="Map/Background" instance=ExtResource("14_7nomh")]
+position = Vector2(-1920, 640)
+
+[node name="_40x40_template12" parent="Map/Background" instance=ExtResource("14_7nomh")]
+position = Vector2(-1920, 1280)
+
+[node name="_40x40_template13" parent="Map/Background" instance=ExtResource("14_7nomh")]
+position = Vector2(640, 0)
+
+[node name="_40x40_template" parent="Map/Background" instance=ExtResource("14_7nomh")]
+position = Vector2(-2560, 1920)
+
+[node name="SoulFragment" parent="Map" instance=ExtResource("15_d5akn")]
+position = Vector2(320, 1511)
+
+[node name="SoulFragment2" parent="Map" instance=ExtResource("15_d5akn")]
+position = Vector2(214, 1599)
+
+[node name="SoulFragment3" parent="Map" instance=ExtResource("15_d5akn")]
+position = Vector2(414, 1600)
+
+[node name="SoulFragment4" parent="Map" instance=ExtResource("15_d5akn")]
+position = Vector2(320, 1671)
+
+[node name="SoulFragment5" parent="Map" instance=ExtResource("15_d5akn")]
+position = Vector2(987, 1603)
+
+[node name="SoulFragment6" parent="Map" instance=ExtResource("15_d5akn")]
+position = Vector2(-1184, 1345)
+
+[node name="Altar" parent="Map" instance=ExtResource("16_wbtxt")]
+position = Vector2(-959, 1429)
+
+[node name="Altar2" parent="Map" instance=ExtResource("16_wbtxt")]
+position = Vector2(994, 1538)
+
+[node name="Altar3" parent="Map" instance=ExtResource("16_wbtxt")]
+position = Vector2(419, 2693)
+
 [node name="Player" parent="." instance=ExtResource("14_2aecg")]
-position = Vector2(248, 392)
+z_index = 5
+z_as_relative = false
+position = Vector2(245, 378)
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
 zoom = Vector2(5, 5)
 
 [node name="Gui" parent="." instance=ExtResource("15_6dial")]
+
+[node name="Bow" parent="." instance=ExtResource("17_so66j")]
+position = Vector2(952, 1744)
+
+[node name="Coins" type="Node2D" parent="."]
+
+[node name="Coin" parent="Coins" instance=ExtResource("17_1s4pk")]
+position = Vector2(-960, 1728)
+
+[node name="Coin7" parent="Coins" instance=ExtResource("17_1s4pk")]
+position = Vector2(-968, 2272)
+
+[node name="Coin8" parent="Coins" instance=ExtResource("17_1s4pk")]
+position = Vector2(-952, 2296)
+
+[node name="Coin9" parent="Coins" instance=ExtResource("17_1s4pk")]
+position = Vector2(-928, 2608)
+
+[node name="Coin10" parent="Coins" instance=ExtResource("17_1s4pk")]
+position = Vector2(-904, 2632)
+
+[node name="Coin11" parent="Coins" instance=ExtResource("17_1s4pk")]
+position = Vector2(-928, 2656)
+
+[node name="Coin12" parent="Coins" instance=ExtResource("17_1s4pk")]
+position = Vector2(-1160, 2728)
+
+[node name="Coin13" parent="Coins" instance=ExtResource("17_1s4pk")]
+position = Vector2(-1056, 3120)
+
+[node name="Coin15" parent="Coins" instance=ExtResource("17_1s4pk")]
+position = Vector2(-1056, 3096)
+
+[node name="Coin16" parent="Coins" instance=ExtResource("17_1s4pk")]
+position = Vector2(-1032, 3096)
+
+[node name="Coin17" parent="Coins" instance=ExtResource("17_1s4pk")]
+position = Vector2(-992, 3120)
+
+[node name="Coin18" parent="Coins" instance=ExtResource("17_1s4pk")]
+position = Vector2(-1024, 3288)
+
+[node name="Coin19" parent="Coins" instance=ExtResource("17_1s4pk")]
+position = Vector2(-960, 3224)
+
+[node name="Coin20" parent="Coins" instance=ExtResource("17_1s4pk")]
+position = Vector2(-960, 3160)
+
+[node name="Coin23" parent="Coins" instance=ExtResource("17_1s4pk")]
+position = Vector2(-968, 3176)
+
+[node name="Coin24" parent="Coins" instance=ExtResource("17_1s4pk")]
+position = Vector2(-952, 3176)
+rotation = -2.4735
+
+[node name="Coin25" parent="Coins" instance=ExtResource("17_1s4pk")]
+position = Vector2(-960, 3192)
+rotation = -2.4735
+
+[node name="Coin26" parent="Coins" instance=ExtResource("17_1s4pk")]
+position = Vector2(-968, 3208)
+rotation = -3.14159
+
+[node name="Coin27" parent="Coins" instance=ExtResource("17_1s4pk")]
+position = Vector2(-952, 3208)
+rotation = -4.71239
+
+[node name="Coin21" parent="Coins" instance=ExtResource("17_1s4pk")]
+position = Vector2(-952, 3144)
+
+[node name="Coin22" parent="Coins" instance=ExtResource("17_1s4pk")]
+position = Vector2(-968, 3144)
+
+[node name="Coin14" parent="Coins" instance=ExtResource("17_1s4pk")]
+position = Vector2(-1184, 2976)
+
+[node name="Coin28" parent="Coins" instance=ExtResource("17_1s4pk")]
+position = Vector2(-1440, 2824)
+
+[node name="Coin29" parent="Coins" instance=ExtResource("17_1s4pk")]
+position = Vector2(-1504, 2728)
+
+[node name="Coin30" parent="Coins" instance=ExtResource("17_1s4pk")]
+position = Vector2(-1512, 2712)
+
+[node name="Coin31" parent="Coins" instance=ExtResource("17_1s4pk")]
+position = Vector2(-1504, 2696)
+
+[node name="Coin32" parent="Coins" instance=ExtResource("17_1s4pk")]
+position = Vector2(-1496, 2712)
+
+[node name="Coin33" parent="Coins" instance=ExtResource("17_1s4pk")]
+position = Vector2(-1680, 2648)
+
+[node name="Coin34" parent="Coins" instance=ExtResource("17_1s4pk")]
+position = Vector2(-1680, 2704)
+
+[node name="Coin2" parent="Coins" instance=ExtResource("17_1s4pk")]
+position = Vector2(-1136, 1672)
+
+[node name="Coin3" parent="Coins" instance=ExtResource("17_1s4pk")]
+position = Vector2(-1136, 1656)
+
+[node name="Coin4" parent="Coins" instance=ExtResource("17_1s4pk")]
+position = Vector2(-1136, 1640)
+
+[node name="Coin5" parent="Coins" instance=ExtResource("17_1s4pk")]
+position = Vector2(-784, 1664)
+
+[node name="Coin6" parent="Coins" instance=ExtResource("17_1s4pk")]
+position = Vector2(-784, 1648)
+
+[node name="Chest" parent="Coins" instance=ExtResource("18_x2xxo")]
+position = Vector2(-1464, 2448)
+
+[node name="Chest2" parent="Coins" instance=ExtResource("18_x2xxo")]
+position = Vector2(-1704, 2448)
+
+[node name="Chest3" parent="Coins" instance=ExtResource("18_x2xxo")]
+position = Vector2(-1056, 2784)
+
+[node name="Chest4" parent="Coins" instance=ExtResource("18_x2xxo")]
+position = Vector2(-856, 3280)
+
+[node name="Chest5" parent="Coins" instance=ExtResource("18_x2xxo")]
+position = Vector2(-408, 2720)
+
+[node name="Chest6" parent="Coins" instance=ExtResource("18_x2xxo")]
+position = Vector2(-136, 2752)
+
+[node name="Chest7" parent="Coins" instance=ExtResource("18_x2xxo")]
+position = Vector2(264, 2408)
+
+[node name="Chest8" parent="Coins" instance=ExtResource("18_x2xxo")]
+position = Vector2(480, 2688)
+
+[node name="Sword" parent="." instance=ExtResource("20_tr1x6")]
+position = Vector2(-488, 2016)
+
+[node name="Spikes" parent="." instance=ExtResource("21_d5akn")]
+position = Vector2(-968, 2208)
+
+[node name="Spikes2" parent="." instance=ExtResource("21_d5akn")]
+position = Vector2(-952, 2208)
+
+[node name="Spikes3" parent="." instance=ExtResource("21_d5akn")]
+position = Vector2(-371, 2704)
+
+[node name="Spikes4" parent="." instance=ExtResource("21_d5akn")]
+position = Vector2(-360, 2704)
+
+[node name="Spikes5" parent="." instance=ExtResource("21_d5akn")]
+position = Vector2(-315, 2704)
+
+[node name="Spikes6" parent="." instance=ExtResource("21_d5akn")]
+position = Vector2(-304, 2704)
+
+[node name="Spikes7" parent="." instance=ExtResource("21_d5akn")]
+position = Vector2(-293, 2704)

@@ -1,7 +1,7 @@
 extends Node2D
 
 
-const player_start_pos = Vector2(229, 272)
+@export var player_start_pos = Vector2(229, 272)
 
 enum ROOT_CHILD_ORDER {
 	LEVEL_BACKGROUND,

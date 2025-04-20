@@ -20,19 +20,6 @@ var gui_struct: CanvasLayer
 
 var is_dead = false
 
-# TODO: move into separate script when too big
-var inventory = {
-	"coin" : 0,
-	"token" : 0,
-	"GENERIC_ITEM" : 1
-}
-
-var stats = {
-	"STRENGTH" : 1.0,
-	"VITALITY" : 1.0,
-	"AGILITY" : 1.0
-}
-
 var score = 0
 var prev_score = 0
 
@@ -103,35 +90,28 @@ func load_gui() -> void:
 	
 func update_score(delta_value: int) -> void:
 	score += delta_value
-	gui_struct.find_child("score_label").text = "score: " + str(prev_score) + " (+" + str(score - prev_score) + ")"
+	gui_struct.find_child("score_label").text = "score: " + str(GameState.glob_score) + " (+" + str(GameState.glob_lvl_score) + ")"
+	if GameState.player_near_altar:
+		gui_struct.find_child("score_label").text += "   (-" + str(GameState.sacrifice_score_penalty) + ")"
+		
 
 func update_skills_label() -> void:
-	gui_struct.find_child("skills_label").text = "Strength: " + str(stats["STRENGTH"]) + '\n'
-	gui_struct.find_child("skills_label").text += "Vitality: " + str(stats["VITALITY"]) + '\n'
-	gui_struct.find_child("skills_label").text += "Agility: " + str(stats["AGILITY"]) + '\n'
-
+	gui_struct.find_child("skills_label").text = "Strength: " + str(GameState.pl_stat_strength) + '\n'
+	gui_struct.find_child("skills_label").text += "Vitality: " + str(GameState.pl_stat_vitality) + '\n'
+	gui_struct.find_child("skills_label").text += "Agility: " + str(GameState.pl_stat_agility) + '\n'
 
 func add_item(item_name: String) -> void:
-	if item_name in inventory.keys():
-		inventory[item_name] += 1
-		#print("Adding item ", item_name)
-	else:
-		#print("Adding invalid item, ", item_name)
-		pass
+	pass
 
 func add_coin() -> void:
 	collected_coins += 1
 	update_score(1)					# TODO: remove, only for testing
 	health_component.take_damage(10)
 
-func update_stats(name: String, value: float) -> void:
-	if name in stats.keys():
-		stats[name] += value
-		update_skills_label()
-		
-		if name == "VITALITY":
-			health_component.max_health = 100.0 * stats[name]
-			self.find_child("hp_bar").max_value = health_component.max_health
+func update_stats() -> void:
+	update_skills_label()
+	health_component.max_health = 100.0 * GameState.pl_stat_vitality
+	self.find_child("hp_bar").max_value = health_component.max_health
 
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
