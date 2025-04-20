@@ -1,0 +1,33 @@
+[gd_resource type="Theme" load_steps=6 format=3 uid="uid://k51evtrkmadh"]
+
+[ext_resource type="Texture2D" uid="uid://buw0w01fc64xp" path="res://assets/kenney_fantasy-ui-borders/PNG/Default/Border/panel-border-030.png" id="1_bptfg"]
+[ext_resource type="Texture2D" uid="uid://c66x16y4pkg1q" path="res://assets/kenney_fantasy-ui-borders/PNG/Default/Transparent center/panel-transparent-center-030.png" id="2_ma6vv"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_5nut6"]
+texture = ExtResource("1_bptfg")
+texture_margin_left = 16.0
+texture_margin_top = 16.0
+texture_margin_right = 16.0
+texture_margin_bottom = 16.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_7qace"]
+texture = ExtResource("2_ma6vv")
+texture_margin_left = 16.0
+texture_margin_top = 16.0
+texture_margin_right = 16.0
+texture_margin_bottom = 16.0
+modulate_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ma6vv"]
+texture = ExtResource("2_ma6vv")
+texture_margin_left = 16.0
+texture_margin_top = 16.0
+texture_margin_right = 16.0
+texture_margin_bottom = 16.0
+modulate_color = Color(0, 0, 0, 1)
+
+[resource]
+Button/styles/hover = SubResource("StyleBoxTexture_5nut6")
+Button/styles/normal = SubResource("StyleBoxTexture_7qace")
+Button/styles/pressed = SubResource("StyleBoxTexture_5nut6")
+Panel/styles/panel = SubResource("StyleBoxTexture_ma6vv")
