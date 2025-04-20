@@ -29,7 +29,6 @@
 z_index = 2
 z_as_relative = false
 script = ExtResource("1_wbtxt")
-player_start_pos = Vector2(245, 378)
 
 [node name="Map" type="Node2D" parent="."]
 

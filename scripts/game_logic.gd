@@ -1,28 +1,14 @@
 extends Node2D
 
-@export var player_start_pos = Vector2(229, 272)
-
-enum ROOT_CHILD_ORDER {
-	LEVEL_BACKGROUND,
-	PLAYER,
-	RESETABLE_OBJECTS
-}
-
-func _ready() -> void:
-	self.get_child(ROOT_CHILD_ORDER.PLAYER).position = player_start_pos
-	pass
+var level_1_scene = preload("res://scenes/level_1.tscn")
+var main_menu_scene = preload("res://scenes/main_menu.tscn")
 
 
-func demo_reset() -> void:
-	var lvl = self.find_child("DemoLevel")
-	lvl.queue_free()
-	lvl = preload("res://scenes/demo_level.tscn").instantiate()
-	self.add_child(lvl)
+func _input(event: InputEvent) -> void:
+	if event.is_action_pressed("RESTART"):
+		print("RESET called")
+		_on_level_reset()
 
-
-func reload_world() -> void:
-	self.get_child(ROOT_CHILD_ORDER.PLAYER).position = player_start_pos
-	for node in self.get_child(ROOT_CHILD_ORDER.RESETABLE_OBJECTS).get_children():
-		if node.has_method("reset"):
-			node.reset()
-	pass
+func _on_level_reset():
+	#start_level()  # Simply restart the level
+	get_tree().change_scene_to_packed(level_1_scene)

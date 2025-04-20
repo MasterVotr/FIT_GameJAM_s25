@@ -1,6 +1,6 @@
 extends Button
 
-var next_scene = preload("res://scenes/game.tscn")
+var next_scene = preload("res://scenes/level_1.tscn")
 
 
 func _on_pressed() -> void:
