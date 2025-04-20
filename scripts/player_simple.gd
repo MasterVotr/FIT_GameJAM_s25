@@ -51,6 +51,7 @@ func _ready() -> void:
 	self.add_child(health_component)
 	gui_healthbar = self.find_child("HealthBar")
 	gui_healthbar.update_healthbar(health_component.health, health_component.max_health)
+	gui_struct.find_child("Inventory").add_weapon(self.weapon)
 
 func die() -> void:
 	var banner = gui_struct.find_child("you_died_banner")
@@ -136,6 +137,14 @@ func _input(event: InputEvent) -> void:
 		var mouse_position = get_global_mouse_position()
 		var attack_dir = (mouse_position - global_position).normalized()
 		attack(attack_dir)
+	
+	var inv = gui_struct.find_child("Inventory")
+	if Input.is_action_just_released("TOGGLE_LEFT"):
+		inv.shift_left()
+		weapon = inv.get_current_weapon()
+	if Input.is_action_just_released("TOGGLE_RIGHT"):
+		inv.shift_right()
+		weapon = inv.get_current_weapon()
 
 func _physics_process(delta: float) -> void:
 	if is_dead:
@@ -188,3 +197,9 @@ func incomming_attack(attack_dto: AttackDTO):
 func _on_animated_sprite_2d_animation_finished() -> void:
 	if animated_sprite.animation == "attack":
 		animated_sprite.play("idle") # Replace with function body.
+
+
+func add_item_to_inventory(item: Node2D) -> void:
+	var inventory = gui_struct.find_child("Inventory")
+	inventory.add_weapon(item)
+	print("add_item_to_inventory()")

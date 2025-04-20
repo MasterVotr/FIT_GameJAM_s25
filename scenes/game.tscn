@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://bx6k3ved30148"]
+[gd_scene load_steps=14 format=3 uid="uid://bx6k3ved30148"]
 
 [ext_resource type="Script" uid="uid://dl14t3qbytwn6" path="res://scripts/game_logic.gd" id="1_p57ef"]
 [ext_resource type="PackedScene" uid="uid://bijylix5t7anv" path="res://scenes/demo_level.tscn" id="1_yqjtg"]
@@ -12,6 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://0e2qyj6vrjqc" path="res://scenes/gui.tscn" id="8_gee14"]
 [ext_resource type="PackedScene" uid="uid://dqsnmd0x40tf7" path="res://scenes/sword.tscn" id="8_kvpfn"]
 [ext_resource type="PackedScene" uid="uid://dspe5fo240j64" path="res://scenes/spikes.tscn" id="10_vtaks"]
+[ext_resource type="PackedScene" uid="uid://81umrgsn3ha2" path="res://scenes/bow.tscn" id="12_dinhu"]
 
 [node name="Game" type="Node2D"]
 script = ExtResource("1_p57ef")
@@ -118,3 +119,7 @@ position = Vector2(137, 216)
 position = Vector2(493, 175)
 
 [node name="InstantiatedGUIObjects" type="CanvasLayer" parent="."]
+
+[node name="Bow" parent="." instance=ExtResource("12_dinhu")]
+visible = true
+position = Vector2(240, 215)

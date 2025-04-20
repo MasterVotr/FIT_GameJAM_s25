@@ -14,8 +14,8 @@ var on_cooldown := false
 func _input(event: InputEvent) -> void:
 	if Input.is_action_pressed("INTERACT") and player_in_area and not is_picked_up:
 		is_picked_up = true
-		print("[DBG] Interacted with sword. TODO: Add sword to player")
 		self.visible = false
+		player_body.add_item_to_inventory(self)
 
 func init(player_item := false) -> void:
 	weapon_range = 80
@@ -48,6 +48,9 @@ func _on_pickup_area_body_exited(body: Node2D) -> void:
 func _on_cooldown_timeout() -> void:
 	on_cooldown = false
 
+func get_icon_texture() -> Texture2D:
+	var frames = self.find_child("AnimatedSprite2D").sprite_frames
+	return frames.get_frame_texture("attack", 0)
 
 func _on_animated_sprite_2d_animation_finished() -> void:
 	if animated_sprite.animation == "attack":

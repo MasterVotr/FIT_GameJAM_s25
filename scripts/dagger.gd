@@ -59,7 +59,7 @@ func _on_pickup_area_body_exited(body: Node2D) -> void:
 func _input(event: InputEvent) -> void:
 	if Input.is_action_pressed("INTERACT") and player_in_area and not is_picked_up:
 		is_picked_up = true
-		print("[DBG] Interacted with sword. TODO: Add sword to player")
+		player_body.add_item_to_inventory(self)
 		self.visible = false
 
 func reset() -> void:
@@ -76,6 +76,9 @@ func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 		bodies_in_hitbox.clear()
 		is_attacking = false
 
+func get_icon_texture() -> Texture2D:
+	var frames = self.find_child("AnimatedSprite2D").sprite_frames
+	return frames.get_frame_texture("default", 0)
 
 func _on_cooldown_timeout() -> void:
 	on_cooldown = false
