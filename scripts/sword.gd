@@ -18,8 +18,11 @@ var bodies_in_hitbox := {}
 
 
 func init(player_item := false) -> void:
+	weapon_range = 18
 	if (player_item):
 		hitbox.set_collision_mask_value(3, false)
+	else:
+		hitbox.set_collision_mask_value(4, false)
 
 func attack():
 	if not on_cooldown:
@@ -71,6 +74,7 @@ func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 		hitbox.monitoring = false
 		bodies_in_hitbox.clear()
 		is_attacking = false
+		animation_player.play("RESET")
 
 
 func _on_cooldown_timeout() -> void:

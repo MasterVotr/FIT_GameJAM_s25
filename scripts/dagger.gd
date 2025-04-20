@@ -18,8 +18,11 @@ var bodies_in_hitbox := {}
 
 
 func init(player_item := false) -> void:
+	weapon_range = 16
 	if (player_item):
 		hitbox.set_collision_mask_value(3, false)
+	else:
+		hitbox.set_collision_mask_value(4, false)
 
 func attack():
 	if not on_cooldown:

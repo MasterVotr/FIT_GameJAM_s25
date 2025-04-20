@@ -18,7 +18,8 @@ func _input(event: InputEvent) -> void:
 		self.visible = false
 
 func init(player_item := false) -> void:
-	pass
+	weapon_range = 80
+
 
 func attack():
 	if not on_cooldown:
