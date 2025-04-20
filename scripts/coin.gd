@@ -6,12 +6,7 @@ func _on_body_entered(body: Node2D) -> void:
 	if disabled:
 		return
 		
-	# Add optional checks on input if needed
-	
-	# Change values in player script
-	body.add_coin()
-	
-	# do some magic with particles and what not here
+	GameState.glob_lvl_score += GameState.score_coin
 	
 	disabled = true
 	hide() 

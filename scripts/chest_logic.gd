@@ -30,7 +30,7 @@ func _on_body_exited(body: Node2D) -> void:
 func _input(event: InputEvent) -> void:
 	if Input.is_action_pressed("INTERACT") and player_in_area and not is_opened:
 		set_opened()
-		player_object.add_item("Random item")
+		GameState.glob_lvl_score += GameState.score_chest
 
 func reset() -> void:
 	_ready()

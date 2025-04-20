@@ -16,3 +16,13 @@ var glob_lvl_score := 0
 
 var player_near_altar := false
 var sacrifice_score_penalty := 10
+
+# REWARDS FOR DEFEATING/PICKING UP ITEMS
+var score_coin = 10
+var score_chest = 50
+var score_basic = 20
+var score_dagger = 25
+var score_sword = 35
+var score_bow = 35
+var score_shard = 100
+var score_boss = 1000
