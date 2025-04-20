@@ -39,7 +39,7 @@ horizontal_alignment = 2
 [node name="you_died_banner" type="Label" parent="."]
 visible = false
 offset_top = 398.0
-offset_right = 1282.0
+offset_right = 1599.0
 offset_bottom = 550.0
 text = "YOU DIED"
 label_settings = SubResource("LabelSettings_efmwq")
@@ -49,7 +49,7 @@ vertical_alignment = 1
 [node name="sacrificed_banner" type="Label" parent="."]
 visible = false
 offset_top = 398.0
-offset_right = 1282.0
+offset_right = 1602.0
 offset_bottom = 550.0
 text = "SACRIFICE"
 label_settings = SubResource("LabelSettings_mfius")

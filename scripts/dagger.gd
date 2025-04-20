@@ -18,6 +18,7 @@ var bodies_in_hitbox := {}
 
 
 func init(_player_item := false) -> void:
+	is_picked_up = true 		# needed to prevent picking up items spawned with
 	weapon_range = 16
 	self.player_item = _player_item
 	if (player_item):

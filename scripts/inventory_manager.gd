@@ -43,6 +43,9 @@ func update_visual() -> void:
 	left_slot.size = side_size
 	right_slot.size = side_size
 	
+	left_slot.texture = null
+	right_slot.texture = null
+	
 	if weapons.size() == 2:
 		if cur_idx == 1:
 			left_slot.texture = weapons[cur_idx - 1].get_icon_texture()

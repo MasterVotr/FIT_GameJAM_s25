@@ -18,6 +18,7 @@ func _input(event: InputEvent) -> void:
 		player_body.add_item_to_inventory(self)
 
 func init(_player_item := false) -> void:
+	is_picked_up = true 		# needed to prevent picking up items spawned with
 	weapon_range = 80
 	self.player_item = _player_item
 
