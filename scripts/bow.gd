@@ -54,5 +54,5 @@ func get_icon_texture() -> Texture2D:
 
 func _on_animated_sprite_2d_animation_finished() -> void:
 	if animated_sprite.animation == "attack":
-		#self.visible = false
+		self.visible = false
 		is_attacking = false

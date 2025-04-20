@@ -142,9 +142,17 @@ func _input(event: InputEvent) -> void:
 	if Input.is_action_just_released("TOGGLE_LEFT"):
 		inv.shift_left()
 		weapon = inv.get_current_weapon()
+		weapon.init(true)
+		weapon.get_parent().remove_child(weapon)
+		weapon_mount.add_child(weapon)
+		weapon.global_position = weapon_mount.global_position
 	if Input.is_action_just_released("TOGGLE_RIGHT"):
 		inv.shift_right()
 		weapon = inv.get_current_weapon()
+		weapon.init(true)
+		weapon.get_parent().remove_child(weapon)
+		weapon_mount.add_child(weapon)
+		weapon.global_position = weapon_mount.global_position
 
 func _physics_process(delta: float) -> void:
 	if is_dead:
