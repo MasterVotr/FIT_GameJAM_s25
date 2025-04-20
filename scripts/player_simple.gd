@@ -66,8 +66,12 @@ func reset_player_on_death() -> void:
 	score = prev_score
 	update_score(0)
 	health_component.reset()
+	if not is_sacrificed:
+		var scene_root = get_tree().current_scene
+		scene_root._on_level_reset()
 
 func sacrifice() -> void:
+	is_sacrificed = true
 	gui_healthbar.update_healthbar(health_component.health, health_component.max_health)
 	update_score(0)
 	is_dead = true
@@ -85,10 +89,7 @@ func load_gui() -> void:
 		return
 	
 func update_score(delta_value: int) -> void:
-	score += delta_value
-	gui_struct.find_child("score_label").text = "score: " + str(GameState.glob_score) + " (+" + str(GameState.glob_lvl_score) + ")"
-	if GameState.player_near_altar:
-		gui_struct.find_child("score_label").text += "   (-" + str(GameState.sacrifice_score_penalty) + ")"
+	pass
 		
 
 func add_item(item_name: String) -> void:
