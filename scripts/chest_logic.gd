@@ -31,6 +31,7 @@ func _input(event: InputEvent) -> void:
 	if Input.is_action_pressed("INTERACT") and player_in_area and not is_opened:
 		set_opened()
 		GameState.glob_lvl_score += GameState.score_chest
+		player_object.update_score(0)
 
 func reset() -> void:
 	_ready()

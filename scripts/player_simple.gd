@@ -67,7 +67,7 @@ func reset_player_on_death() -> void:
 	update_score(0)
 	health_component.reset()
 	var scene_root = get_tree().current_scene
-	scene_root.reload_world()
+	scene_root._on_level_reset()
 
 func sacrifice() -> void:
 	gui_healthbar.update_healthbar(health_component.health, health_component.max_health)
@@ -107,7 +107,8 @@ func add_item(item_name: String) -> void:
 func add_coin() -> void:
 	collected_coins += 1
 	GameState.glob_lvl_score += GameState.score_coin
-	health_component.take_damage(10)
+	update_score(0)
+	#health_component.take_damage(10)
 
 func update_stats() -> void:
 	update_skills_label()

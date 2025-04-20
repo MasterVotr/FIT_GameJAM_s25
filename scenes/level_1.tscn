@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://kpiuogaw1aag"]
+[gd_scene load_steps=28 format=3 uid="uid://kpiuogaw1aag"]
 
 [ext_resource type="PackedScene" uid="uid://ehep5w0lbys5" path="res://scenes/Map/proc_map_room_06.tscn" id="1_2y5yt"]
 [ext_resource type="Script" uid="uid://dl14t3qbytwn6" path="res://scripts/game_logic.gd" id="1_wbtxt"]
@@ -8,7 +8,6 @@
 [ext_resource type="PackedScene" uid="uid://csbdjrc4i23e0" path="res://scenes/Map/proc_map_room_02.tscn" id="5_2aecg"]
 [ext_resource type="PackedScene" uid="uid://x1llhmd161ql" path="res://scenes/Map/proc_map_room_01.tscn" id="6_6dial"]
 [ext_resource type="PackedScene" uid="uid://cfjoe1ihxxs4q" path="res://scenes/Map/church.tscn" id="7_7nomh"]
-[ext_resource type="PackedScene" uid="uid://pafx22u0d6j6" path="res://scenes/Map/straight_hall_vertical.tscn" id="8_1s4pk"]
 [ext_resource type="PackedScene" uid="uid://bl0frxxkm8edm" path="res://scenes/Map/el_shape_hall.tscn" id="9_x2xxo"]
 [ext_resource type="PackedScene" uid="uid://cxjow56pj5umb" path="res://scenes/Map/t_shape_hall.tscn" id="10_2y5yt"]
 [ext_resource type="PackedScene" uid="uid://bb5he7oqdultl" path="res://scenes/Map/barracks.tscn" id="11_2os1m"]
@@ -24,6 +23,10 @@
 [ext_resource type="PackedScene" uid="uid://3tcvk2kojxw6" path="res://scenes/Chest.tscn" id="18_x2xxo"]
 [ext_resource type="PackedScene" uid="uid://dqsnmd0x40tf7" path="res://scenes/sword.tscn" id="20_tr1x6"]
 [ext_resource type="PackedScene" uid="uid://dspe5fo240j64" path="res://scenes/spikes.tscn" id="21_d5akn"]
+[ext_resource type="PackedScene" uid="uid://ra2whys2ygsg" path="res://scenes/flame_thrower.tscn" id="22_mmfjm"]
+[ext_resource type="PackedScene" uid="uid://bg01vcfpfw2ku" path="res://scenes/melee_skeleton.tscn" id="24_s7g0b"]
+[ext_resource type="PackedScene" uid="uid://df6e7oi6yeg07" path="res://scenes/ranged_skeleton.tscn" id="25_mmfjm"]
+[ext_resource type="PackedScene" uid="uid://dy41d187i0bnx" path="res://scenes/basic_skeleton.tscn" id="26_k8ld0"]
 
 [node name="Level_1" type="Node2D"]
 z_index = 2
@@ -42,6 +45,7 @@ position = Vector2(-640, 2560)
 position = Vector2(-1280, 3200)
 
 [node name="ProcMapRoom04" parent="Map" instance=ExtResource("3_go7sj")]
+position = Vector2(0, 648)
 
 [node name="ProcMapRoom11" parent="Map" instance=ExtResource("3_go7sj")]
 position = Vector2(-1920, 1920)
@@ -60,9 +64,6 @@ position = Vector2(0, 1280)
 
 [node name="Church" parent="Map" instance=ExtResource("7_7nomh")]
 position = Vector2(-1280, 1280)
-
-[node name="StraightHallVertical" parent="Map" instance=ExtResource("8_1s4pk")]
-position = Vector2(0, 640)
 
 [node name="LShapeHall" parent="Map" instance=ExtResource("9_x2xxo")]
 position = Vector2(-640, 1280)
@@ -117,204 +118,1055 @@ position = Vector2(-1920, 640)
 [node name="_40x40_template12" parent="Map/Background" instance=ExtResource("14_7nomh")]
 position = Vector2(-1920, 1280)
 
-[node name="_40x40_template13" parent="Map/Background" instance=ExtResource("14_7nomh")]
-position = Vector2(640, 0)
-
 [node name="_40x40_template" parent="Map/Background" instance=ExtResource("14_7nomh")]
 position = Vector2(-2560, 1920)
-
-[node name="SoulFragment" parent="Map" instance=ExtResource("15_d5akn")]
-position = Vector2(320, 1511)
-
-[node name="SoulFragment2" parent="Map" instance=ExtResource("15_d5akn")]
-position = Vector2(214, 1599)
-
-[node name="SoulFragment3" parent="Map" instance=ExtResource("15_d5akn")]
-position = Vector2(414, 1600)
-
-[node name="SoulFragment4" parent="Map" instance=ExtResource("15_d5akn")]
-position = Vector2(320, 1671)
-
-[node name="SoulFragment5" parent="Map" instance=ExtResource("15_d5akn")]
-position = Vector2(987, 1603)
-
-[node name="SoulFragment6" parent="Map" instance=ExtResource("15_d5akn")]
-position = Vector2(-1184, 1345)
-
-[node name="Altar" parent="Map" instance=ExtResource("16_wbtxt")]
-position = Vector2(-959, 1429)
-
-[node name="Altar2" parent="Map" instance=ExtResource("16_wbtxt")]
-position = Vector2(994, 1538)
-
-[node name="Altar3" parent="Map" instance=ExtResource("16_wbtxt")]
-position = Vector2(419, 2693)
 
 [node name="Player" parent="." instance=ExtResource("14_2aecg")]
 z_index = 5
 z_as_relative = false
-position = Vector2(245, 378)
+position = Vector2(210, 1025)
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
 zoom = Vector2(5, 5)
 
 [node name="Gui" parent="." instance=ExtResource("15_6dial")]
 
-[node name="Bow" parent="." instance=ExtResource("17_so66j")]
+[node name="Collectables" type="Node2D" parent="."]
+
+[node name="Bow" parent="Collectables" instance=ExtResource("17_so66j")]
 position = Vector2(952, 1744)
 
-[node name="Coins" type="Node2D" parent="."]
+[node name="Sword" parent="Collectables" instance=ExtResource("20_tr1x6")]
+position = Vector2(-488, 2016)
 
-[node name="Coin" parent="Coins" instance=ExtResource("17_1s4pk")]
+[node name="Coins" type="Node2D" parent="Collectables"]
+
+[node name="Coin" parent="Collectables/Coins" instance=ExtResource("17_1s4pk")]
 position = Vector2(-960, 1728)
 
-[node name="Coin7" parent="Coins" instance=ExtResource("17_1s4pk")]
+[node name="Coin70" parent="Collectables/Coins" instance=ExtResource("17_1s4pk")]
+position = Vector2(368, 2880)
+
+[node name="Coin71" parent="Collectables/Coins" instance=ExtResource("17_1s4pk")]
+position = Vector2(544, 2880)
+
+[node name="Coin72" parent="Collectables/Coins" instance=ExtResource("17_1s4pk")]
+position = Vector2(664, 2880)
+
+[node name="Coin73" parent="Collectables/Coins" instance=ExtResource("17_1s4pk")]
+position = Vector2(768, 2880)
+
+[node name="Coin74" parent="Collectables/Coins" instance=ExtResource("17_1s4pk")]
+position = Vector2(896, 2880)
+
+[node name="Coin75" parent="Collectables/Coins" instance=ExtResource("17_1s4pk")]
+position = Vector2(960, 2880)
+
+[node name="Coin76" parent="Collectables/Coins" instance=ExtResource("17_1s4pk")]
+position = Vector2(960, 2800)
+
+[node name="Coin77" parent="Collectables/Coins" instance=ExtResource("17_1s4pk")]
+position = Vector2(960, 2728)
+
+[node name="Coin78" parent="Collectables/Coins" instance=ExtResource("17_1s4pk")]
+position = Vector2(960, 2672)
+
+[node name="Coin79" parent="Collectables/Coins" instance=ExtResource("17_1s4pk")]
+position = Vector2(960, 2600)
+
+[node name="Coin80" parent="Collectables/Coins" instance=ExtResource("17_1s4pk")]
+position = Vector2(960, 2536)
+
+[node name="Coin81" parent="Collectables/Coins" instance=ExtResource("17_1s4pk")]
+position = Vector2(960, 2480)
+
+[node name="Coin82" parent="Collectables/Coins" instance=ExtResource("17_1s4pk")]
+position = Vector2(120, 2280)
+
+[node name="Coin84" parent="Collectables/Coins" instance=ExtResource("17_1s4pk")]
+position = Vector2(456, 2400)
+
+[node name="Coin85" parent="Collectables/Coins" instance=ExtResource("17_1s4pk")]
+position = Vector2(136, 2048)
+
+[node name="Coin86" parent="Collectables/Coins" instance=ExtResource("17_1s4pk")]
+position = Vector2(-536, 2192)
+
+[node name="Coin87" parent="Collectables/Coins" instance=ExtResource("17_1s4pk")]
+position = Vector2(-488, 2192)
+
+[node name="Coin88" parent="Collectables/Coins" instance=ExtResource("17_1s4pk")]
+position = Vector2(-432, 2192)
+
+[node name="Coin89" parent="Collectables/Coins" instance=ExtResource("17_1s4pk")]
+position = Vector2(-392, 2192)
+
+[node name="Coin90" parent="Collectables/Coins" instance=ExtResource("17_1s4pk")]
+position = Vector2(24, 1896)
+
+[node name="Coin91" parent="Collectables/Coins" instance=ExtResource("17_1s4pk")]
+position = Vector2(24, 1880)
+
+[node name="Coin92" parent="Collectables/Coins" instance=ExtResource("17_1s4pk")]
+position = Vector2(40, 1896)
+
+[node name="Coin93" parent="Collectables/Coins" instance=ExtResource("17_1s4pk")]
+position = Vector2(-32, 1600)
+
+[node name="Coin94" parent="Collectables/Coins" instance=ExtResource("17_1s4pk")]
+position = Vector2(920, 1752)
+
+[node name="Coin95" parent="Collectables/Coins" instance=ExtResource("17_1s4pk")]
+position = Vector2(928, 1744)
+
+[node name="Coin96" parent="Collectables/Coins" instance=ExtResource("17_1s4pk")]
+position = Vector2(912, 1744)
+
+[node name="Coin104" parent="Collectables/Coins" instance=ExtResource("17_1s4pk")]
+position = Vector2(872, 1496)
+
+[node name="Coin105" parent="Collectables/Coins" instance=ExtResource("17_1s4pk")]
+position = Vector2(736, 1496)
+
+[node name="Coin106" parent="Collectables/Coins" instance=ExtResource("17_1s4pk")]
+position = Vector2(744, 1488)
+
+[node name="Coin107" parent="Collectables/Coins" instance=ExtResource("17_1s4pk")]
+position = Vector2(744, 1496)
+
+[node name="Coin108" parent="Collectables/Coins" instance=ExtResource("17_1s4pk")]
+position = Vector2(-232, 2464)
+
+[node name="Coin109" parent="Collectables/Coins" instance=ExtResource("17_1s4pk")]
+position = Vector2(-224, 2464)
+
+[node name="Coin110" parent="Collectables/Coins" instance=ExtResource("17_1s4pk")]
+position = Vector2(-232, 2472)
+
+[node name="Coin111" parent="Collectables/Coins" instance=ExtResource("17_1s4pk")]
+position = Vector2(-224, 2472)
+
+[node name="Coin112" parent="Collectables/Coins" instance=ExtResource("17_1s4pk")]
+position = Vector2(-216, 2472)
+
+[node name="Coin113" parent="Collectables/Coins" instance=ExtResource("17_1s4pk")]
+position = Vector2(-552, 2344)
+
+[node name="Coin114" parent="Collectables/Coins" instance=ExtResource("17_1s4pk")]
+position = Vector2(-544, 2336)
+
+[node name="Coin115" parent="Collectables/Coins" instance=ExtResource("17_1s4pk")]
+position = Vector2(-552, 2328)
+
+[node name="Coin116" parent="Collectables/Coins" instance=ExtResource("17_1s4pk")]
+position = Vector2(-1696, 2280)
+
+[node name="Coin117" parent="Collectables/Coins" instance=ExtResource("17_1s4pk")]
+position = Vector2(-1664, 2280)
+
+[node name="Coin118" parent="Collectables/Coins" instance=ExtResource("17_1s4pk")]
+position = Vector2(-1624, 2280)
+
+[node name="Coin119" parent="Collectables/Coins" instance=ExtResource("17_1s4pk")]
+position = Vector2(-1584, 2280)
+
+[node name="Coin120" parent="Collectables/Coins" instance=ExtResource("17_1s4pk")]
+position = Vector2(-1552, 2288)
+
+[node name="Coin97" parent="Collectables/Coins" instance=ExtResource("17_1s4pk")]
+position = Vector2(304, 1208)
+
+[node name="Coin98" parent="Collectables/Coins" instance=ExtResource("17_1s4pk")]
+position = Vector2(312, 1216)
+
+[node name="Coin99" parent="Collectables/Coins" instance=ExtResource("17_1s4pk")]
+position = Vector2(320, 1208)
+
+[node name="Coin100" parent="Collectables/Coins" instance=ExtResource("17_1s4pk")]
+position = Vector2(312, 1208)
+
+[node name="Coin101" parent="Collectables/Coins" instance=ExtResource("17_1s4pk")]
+position = Vector2(312, 1200)
+
+[node name="Coin102" parent="Collectables/Coins" instance=ExtResource("17_1s4pk")]
+position = Vector2(312, 1192)
+
+[node name="Coin103" parent="Collectables/Coins" instance=ExtResource("17_1s4pk")]
+position = Vector2(312, 1184)
+
+[node name="Coin83" parent="Collectables/Coins" instance=ExtResource("17_1s4pk")]
+position = Vector2(136, 2504)
+
+[node name="Coin7" parent="Collectables/Coins" instance=ExtResource("17_1s4pk")]
 position = Vector2(-968, 2272)
 
-[node name="Coin8" parent="Coins" instance=ExtResource("17_1s4pk")]
+[node name="Coin8" parent="Collectables/Coins" instance=ExtResource("17_1s4pk")]
 position = Vector2(-952, 2296)
 
-[node name="Coin9" parent="Coins" instance=ExtResource("17_1s4pk")]
+[node name="Coin9" parent="Collectables/Coins" instance=ExtResource("17_1s4pk")]
 position = Vector2(-928, 2608)
 
-[node name="Coin10" parent="Coins" instance=ExtResource("17_1s4pk")]
+[node name="Coin10" parent="Collectables/Coins" instance=ExtResource("17_1s4pk")]
 position = Vector2(-904, 2632)
 
-[node name="Coin11" parent="Coins" instance=ExtResource("17_1s4pk")]
+[node name="Coin11" parent="Collectables/Coins" instance=ExtResource("17_1s4pk")]
 position = Vector2(-928, 2656)
 
-[node name="Coin12" parent="Coins" instance=ExtResource("17_1s4pk")]
+[node name="Coin12" parent="Collectables/Coins" instance=ExtResource("17_1s4pk")]
 position = Vector2(-1160, 2728)
 
-[node name="Coin13" parent="Coins" instance=ExtResource("17_1s4pk")]
+[node name="Coin13" parent="Collectables/Coins" instance=ExtResource("17_1s4pk")]
 position = Vector2(-1056, 3120)
 
-[node name="Coin15" parent="Coins" instance=ExtResource("17_1s4pk")]
+[node name="Coin15" parent="Collectables/Coins" instance=ExtResource("17_1s4pk")]
 position = Vector2(-1056, 3096)
 
-[node name="Coin16" parent="Coins" instance=ExtResource("17_1s4pk")]
+[node name="Coin16" parent="Collectables/Coins" instance=ExtResource("17_1s4pk")]
 position = Vector2(-1032, 3096)
 
-[node name="Coin17" parent="Coins" instance=ExtResource("17_1s4pk")]
+[node name="Coin17" parent="Collectables/Coins" instance=ExtResource("17_1s4pk")]
 position = Vector2(-992, 3120)
 
-[node name="Coin18" parent="Coins" instance=ExtResource("17_1s4pk")]
+[node name="Coin18" parent="Collectables/Coins" instance=ExtResource("17_1s4pk")]
 position = Vector2(-1024, 3288)
 
-[node name="Coin19" parent="Coins" instance=ExtResource("17_1s4pk")]
+[node name="Coin19" parent="Collectables/Coins" instance=ExtResource("17_1s4pk")]
 position = Vector2(-960, 3224)
 
-[node name="Coin20" parent="Coins" instance=ExtResource("17_1s4pk")]
+[node name="Coin20" parent="Collectables/Coins" instance=ExtResource("17_1s4pk")]
 position = Vector2(-960, 3160)
 
-[node name="Coin23" parent="Coins" instance=ExtResource("17_1s4pk")]
+[node name="Coin23" parent="Collectables/Coins" instance=ExtResource("17_1s4pk")]
 position = Vector2(-968, 3176)
 
-[node name="Coin24" parent="Coins" instance=ExtResource("17_1s4pk")]
+[node name="Coin24" parent="Collectables/Coins" instance=ExtResource("17_1s4pk")]
 position = Vector2(-952, 3176)
 rotation = -2.4735
 
-[node name="Coin25" parent="Coins" instance=ExtResource("17_1s4pk")]
+[node name="Coin25" parent="Collectables/Coins" instance=ExtResource("17_1s4pk")]
 position = Vector2(-960, 3192)
 rotation = -2.4735
 
-[node name="Coin26" parent="Coins" instance=ExtResource("17_1s4pk")]
+[node name="Coin26" parent="Collectables/Coins" instance=ExtResource("17_1s4pk")]
 position = Vector2(-968, 3208)
 rotation = -3.14159
 
-[node name="Coin27" parent="Coins" instance=ExtResource("17_1s4pk")]
+[node name="Coin27" parent="Collectables/Coins" instance=ExtResource("17_1s4pk")]
 position = Vector2(-952, 3208)
 rotation = -4.71239
 
-[node name="Coin21" parent="Coins" instance=ExtResource("17_1s4pk")]
+[node name="Coin21" parent="Collectables/Coins" instance=ExtResource("17_1s4pk")]
 position = Vector2(-952, 3144)
 
-[node name="Coin22" parent="Coins" instance=ExtResource("17_1s4pk")]
-position = Vector2(-968, 3144)
+[node name="Coin35" parent="Collectables/Coins" instance=ExtResource("17_1s4pk")]
+position = Vector2(-952, 3144)
 
-[node name="Coin14" parent="Coins" instance=ExtResource("17_1s4pk")]
+[node name="Coin22" parent="Collectables/Coins" instance=ExtResource("17_1s4pk")]
+position = Vector2(960, 2024)
+
+[node name="Coin36" parent="Collectables/Coins" instance=ExtResource("17_1s4pk")]
+position = Vector2(952, 2024)
+
+[node name="Coin37" parent="Collectables/Coins" instance=ExtResource("17_1s4pk")]
+position = Vector2(968, 2024)
+
+[node name="Coin38" parent="Collectables/Coins" instance=ExtResource("17_1s4pk")]
+position = Vector2(968, 2032)
+
+[node name="Coin39" parent="Collectables/Coins" instance=ExtResource("17_1s4pk")]
+position = Vector2(960, 2032)
+
+[node name="Coin45" parent="Collectables/Coins" instance=ExtResource("17_1s4pk")]
+position = Vector2(960, 2032)
+
+[node name="Coin46" parent="Collectables/Coins" instance=ExtResource("17_1s4pk")]
+position = Vector2(960, 2032)
+
+[node name="Coin47" parent="Collectables/Coins" instance=ExtResource("17_1s4pk")]
+position = Vector2(960, 2032)
+
+[node name="Coin48" parent="Collectables/Coins" instance=ExtResource("17_1s4pk")]
+position = Vector2(960, 2032)
+
+[node name="Coin49" parent="Collectables/Coins" instance=ExtResource("17_1s4pk")]
+position = Vector2(960, 2032)
+
+[node name="Coin50" parent="Collectables/Coins" instance=ExtResource("17_1s4pk")]
+position = Vector2(960, 2032)
+
+[node name="Coin51" parent="Collectables/Coins" instance=ExtResource("17_1s4pk")]
+position = Vector2(960, 2032)
+
+[node name="Coin52" parent="Collectables/Coins" instance=ExtResource("17_1s4pk")]
+position = Vector2(960, 2032)
+
+[node name="Coin53" parent="Collectables/Coins" instance=ExtResource("17_1s4pk")]
+position = Vector2(960, 2032)
+
+[node name="Coin54" parent="Collectables/Coins" instance=ExtResource("17_1s4pk")]
+position = Vector2(960, 2032)
+
+[node name="Coin55" parent="Collectables/Coins" instance=ExtResource("17_1s4pk")]
+position = Vector2(960, 2032)
+
+[node name="Coin56" parent="Collectables/Coins" instance=ExtResource("17_1s4pk")]
+position = Vector2(960, 2032)
+
+[node name="Coin57" parent="Collectables/Coins" instance=ExtResource("17_1s4pk")]
+position = Vector2(960, 2032)
+
+[node name="Coin58" parent="Collectables/Coins" instance=ExtResource("17_1s4pk")]
+position = Vector2(960, 2032)
+
+[node name="Coin59" parent="Collectables/Coins" instance=ExtResource("17_1s4pk")]
+position = Vector2(960, 2032)
+
+[node name="Coin60" parent="Collectables/Coins" instance=ExtResource("17_1s4pk")]
+position = Vector2(960, 2032)
+
+[node name="Coin61" parent="Collectables/Coins" instance=ExtResource("17_1s4pk")]
+position = Vector2(960, 2032)
+
+[node name="Coin62" parent="Collectables/Coins" instance=ExtResource("17_1s4pk")]
+position = Vector2(960, 2032)
+
+[node name="Coin63" parent="Collectables/Coins" instance=ExtResource("17_1s4pk")]
+position = Vector2(960, 2032)
+
+[node name="Coin64" parent="Collectables/Coins" instance=ExtResource("17_1s4pk")]
+position = Vector2(960, 2032)
+
+[node name="Coin65" parent="Collectables/Coins" instance=ExtResource("17_1s4pk")]
+position = Vector2(960, 2032)
+
+[node name="Coin66" parent="Collectables/Coins" instance=ExtResource("17_1s4pk")]
+position = Vector2(960, 2032)
+
+[node name="Coin67" parent="Collectables/Coins" instance=ExtResource("17_1s4pk")]
+position = Vector2(960, 2032)
+
+[node name="Coin68" parent="Collectables/Coins" instance=ExtResource("17_1s4pk")]
+position = Vector2(960, 2032)
+
+[node name="Coin69" parent="Collectables/Coins" instance=ExtResource("17_1s4pk")]
+position = Vector2(960, 2032)
+
+[node name="Coin40" parent="Collectables/Coins" instance=ExtResource("17_1s4pk")]
+position = Vector2(952, 2032)
+
+[node name="Coin41" parent="Collectables/Coins" instance=ExtResource("17_1s4pk")]
+position = Vector2(952, 2040)
+
+[node name="Coin42" parent="Collectables/Coins" instance=ExtResource("17_1s4pk")]
+position = Vector2(960, 2040)
+
+[node name="Coin43" parent="Collectables/Coins" instance=ExtResource("17_1s4pk")]
+position = Vector2(968, 2040)
+
+[node name="Coin44" parent="Collectables/Coins" instance=ExtResource("17_1s4pk")]
+position = Vector2(968, 2040)
+
+[node name="Coin14" parent="Collectables/Coins" instance=ExtResource("17_1s4pk")]
 position = Vector2(-1184, 2976)
 
-[node name="Coin28" parent="Coins" instance=ExtResource("17_1s4pk")]
+[node name="Coin28" parent="Collectables/Coins" instance=ExtResource("17_1s4pk")]
 position = Vector2(-1440, 2824)
 
-[node name="Coin29" parent="Coins" instance=ExtResource("17_1s4pk")]
+[node name="Coin29" parent="Collectables/Coins" instance=ExtResource("17_1s4pk")]
 position = Vector2(-1504, 2728)
 
-[node name="Coin30" parent="Coins" instance=ExtResource("17_1s4pk")]
+[node name="Coin30" parent="Collectables/Coins" instance=ExtResource("17_1s4pk")]
 position = Vector2(-1512, 2712)
 
-[node name="Coin31" parent="Coins" instance=ExtResource("17_1s4pk")]
+[node name="Coin31" parent="Collectables/Coins" instance=ExtResource("17_1s4pk")]
 position = Vector2(-1504, 2696)
 
-[node name="Coin32" parent="Coins" instance=ExtResource("17_1s4pk")]
+[node name="Coin32" parent="Collectables/Coins" instance=ExtResource("17_1s4pk")]
 position = Vector2(-1496, 2712)
 
-[node name="Coin33" parent="Coins" instance=ExtResource("17_1s4pk")]
+[node name="Coin33" parent="Collectables/Coins" instance=ExtResource("17_1s4pk")]
 position = Vector2(-1680, 2648)
 
-[node name="Coin34" parent="Coins" instance=ExtResource("17_1s4pk")]
+[node name="Coin34" parent="Collectables/Coins" instance=ExtResource("17_1s4pk")]
 position = Vector2(-1680, 2704)
 
-[node name="Coin2" parent="Coins" instance=ExtResource("17_1s4pk")]
+[node name="Coin2" parent="Collectables/Coins" instance=ExtResource("17_1s4pk")]
 position = Vector2(-1136, 1672)
 
-[node name="Coin3" parent="Coins" instance=ExtResource("17_1s4pk")]
+[node name="Coin3" parent="Collectables/Coins" instance=ExtResource("17_1s4pk")]
 position = Vector2(-1136, 1656)
 
-[node name="Coin4" parent="Coins" instance=ExtResource("17_1s4pk")]
+[node name="Coin4" parent="Collectables/Coins" instance=ExtResource("17_1s4pk")]
 position = Vector2(-1136, 1640)
 
-[node name="Coin5" parent="Coins" instance=ExtResource("17_1s4pk")]
+[node name="Coin5" parent="Collectables/Coins" instance=ExtResource("17_1s4pk")]
 position = Vector2(-784, 1664)
 
-[node name="Coin6" parent="Coins" instance=ExtResource("17_1s4pk")]
+[node name="Coin6" parent="Collectables/Coins" instance=ExtResource("17_1s4pk")]
 position = Vector2(-784, 1648)
 
-[node name="Chest" parent="Coins" instance=ExtResource("18_x2xxo")]
-position = Vector2(-1464, 2448)
+[node name="Fragments" type="Node2D" parent="Collectables"]
+visible = false
 
-[node name="Chest2" parent="Coins" instance=ExtResource("18_x2xxo")]
-position = Vector2(-1704, 2448)
+[node name="SoulFragment" parent="Collectables/Fragments" instance=ExtResource("15_d5akn")]
+position = Vector2(320, 1511)
 
-[node name="Chest3" parent="Coins" instance=ExtResource("18_x2xxo")]
-position = Vector2(-1056, 2784)
+[node name="SoulFragment2" parent="Collectables/Fragments" instance=ExtResource("15_d5akn")]
+position = Vector2(214, 1599)
 
-[node name="Chest4" parent="Coins" instance=ExtResource("18_x2xxo")]
-position = Vector2(-856, 3280)
+[node name="SoulFragment3" parent="Collectables/Fragments" instance=ExtResource("15_d5akn")]
+position = Vector2(414, 1600)
 
-[node name="Chest5" parent="Coins" instance=ExtResource("18_x2xxo")]
-position = Vector2(-408, 2720)
+[node name="SoulFragment4" parent="Collectables/Fragments" instance=ExtResource("15_d5akn")]
+position = Vector2(320, 1671)
 
-[node name="Chest6" parent="Coins" instance=ExtResource("18_x2xxo")]
-position = Vector2(-136, 2752)
+[node name="SoulFragment5" parent="Collectables/Fragments" instance=ExtResource("15_d5akn")]
+position = Vector2(987, 1603)
 
-[node name="Chest7" parent="Coins" instance=ExtResource("18_x2xxo")]
-position = Vector2(264, 2408)
+[node name="SoulFragment6" parent="Collectables/Fragments" instance=ExtResource("15_d5akn")]
+position = Vector2(-1184, 1345)
 
-[node name="Chest8" parent="Coins" instance=ExtResource("18_x2xxo")]
-position = Vector2(480, 2688)
+[node name="Enviroment" type="Node2D" parent="."]
 
-[node name="Sword" parent="." instance=ExtResource("20_tr1x6")]
-position = Vector2(-488, 2016)
+[node name="Traps" type="Node2D" parent="Enviroment"]
 
-[node name="Spikes" parent="." instance=ExtResource("21_d5akn")]
+[node name="Spikes" parent="Enviroment/Traps" instance=ExtResource("21_d5akn")]
 position = Vector2(-968, 2208)
 
-[node name="Spikes2" parent="." instance=ExtResource("21_d5akn")]
+[node name="Spikes2" parent="Enviroment/Traps" instance=ExtResource("21_d5akn")]
 position = Vector2(-952, 2208)
 
-[node name="Spikes3" parent="." instance=ExtResource("21_d5akn")]
+[node name="Spikes3" parent="Enviroment/Traps" instance=ExtResource("21_d5akn")]
 position = Vector2(-371, 2704)
 
-[node name="Spikes4" parent="." instance=ExtResource("21_d5akn")]
+[node name="Spikes4" parent="Enviroment/Traps" instance=ExtResource("21_d5akn")]
 position = Vector2(-360, 2704)
 
-[node name="Spikes5" parent="." instance=ExtResource("21_d5akn")]
+[node name="Spikes5" parent="Enviroment/Traps" instance=ExtResource("21_d5akn")]
 position = Vector2(-315, 2704)
 
-[node name="Spikes6" parent="." instance=ExtResource("21_d5akn")]
+[node name="Spikes6" parent="Enviroment/Traps" instance=ExtResource("21_d5akn")]
 position = Vector2(-304, 2704)
 
-[node name="Spikes7" parent="." instance=ExtResource("21_d5akn")]
+[node name="Spikes7" parent="Enviroment/Traps" instance=ExtResource("21_d5akn")]
 position = Vector2(-293, 2704)
+
+[node name="Spikes8" parent="Enviroment/Traps" instance=ExtResource("21_d5akn")]
+position = Vector2(-968, 3144)
+
+[node name="Spikes9" parent="Enviroment/Traps" instance=ExtResource("21_d5akn")]
+position = Vector2(-952, 3144)
+
+[node name="Spikes10" parent="Enviroment/Traps" instance=ExtResource("21_d5akn")]
+position = Vector2(-1000, 2984)
+
+[node name="Spikes11" parent="Enviroment/Traps" instance=ExtResource("21_d5akn")]
+position = Vector2(-1000, 3000)
+
+[node name="Spikes12" parent="Enviroment/Traps" instance=ExtResource("21_d5akn")]
+position = Vector2(-1512, 2856)
+
+[node name="Spikes13" parent="Enviroment/Traps" instance=ExtResource("21_d5akn")]
+position = Vector2(-1608, 2888)
+
+[node name="Spikes14" parent="Enviroment/Traps" instance=ExtResource("21_d5akn")]
+position = Vector2(-1608, 2376)
+
+[node name="Spikes15" parent="Enviroment/Traps" instance=ExtResource("21_d5akn")]
+position = Vector2(-1592, 2376)
+
+[node name="Spikes17" parent="Enviroment/Traps" instance=ExtResource("21_d5akn")]
+position = Vector2(-824, 2248)
+
+[node name="Spikes18" parent="Enviroment/Traps" instance=ExtResource("21_d5akn")]
+position = Vector2(-880, 2232)
+
+[node name="Spikes19" parent="Enviroment/Traps" instance=ExtResource("21_d5akn")]
+position = Vector2(-768, 2232)
+
+[node name="Spikes20" parent="Enviroment/Traps" instance=ExtResource("21_d5akn")]
+position = Vector2(-704, 2248)
+
+[node name="Spikes21" parent="Enviroment/Traps" instance=ExtResource("21_d5akn")]
+position = Vector2(-648, 2232)
+
+[node name="Spikes22" parent="Enviroment/Traps" instance=ExtResource("21_d5akn")]
+position = Vector2(-600, 2200)
+
+[node name="Spikes23" parent="Enviroment/Traps" instance=ExtResource("21_d5akn")]
+position = Vector2(-616, 2144)
+
+[node name="Spikes24" parent="Enviroment/Traps" instance=ExtResource("21_d5akn")]
+position = Vector2(-600, 2088)
+
+[node name="Spikes25" parent="Enviroment/Traps" instance=ExtResource("21_d5akn")]
+position = Vector2(-616, 2024)
+
+[node name="Spikes26" parent="Enviroment/Traps" instance=ExtResource("21_d5akn")]
+position = Vector2(-600, 1976)
+
+[node name="Spikes16" parent="Enviroment/Traps" instance=ExtResource("21_d5akn")]
+position = Vector2(-1576, 2376)
+
+[node name="FlameThrower" parent="Enviroment/Traps" instance=ExtResource("22_mmfjm")]
+position = Vector2(-328, 2016)
+
+[node name="FlameThrower11" parent="Enviroment/Traps" instance=ExtResource("22_mmfjm")]
+position = Vector2(-328, 1880)
+
+[node name="FlameThrower12" parent="Enviroment/Traps" instance=ExtResource("22_mmfjm")]
+position = Vector2(-328, 1824)
+
+[node name="FlameThrower13" parent="Enviroment/Traps" instance=ExtResource("22_mmfjm")]
+position = Vector2(-328, 1736)
+
+[node name="FlameThrower14" parent="Enviroment/Traps" instance=ExtResource("22_mmfjm")]
+position = Vector2(-328, 1640)
+
+[node name="FlameThrower2" parent="Enviroment/Traps" instance=ExtResource("22_mmfjm")]
+position = Vector2(-248, 1960)
+rotation = 3.14159
+
+[node name="FlameThrower15" parent="Enviroment/Traps" instance=ExtResource("22_mmfjm")]
+position = Vector2(-312, 1848)
+rotation = 3.14159
+
+[node name="FlameThrower16" parent="Enviroment/Traps" instance=ExtResource("22_mmfjm")]
+position = Vector2(-312, 1784)
+rotation = 3.14159
+
+[node name="FlameThrower17" parent="Enviroment/Traps" instance=ExtResource("22_mmfjm")]
+position = Vector2(-312, 1696)
+rotation = 3.14159
+
+[node name="FlameThrower4" parent="Enviroment/Traps" instance=ExtResource("22_mmfjm")]
+position = Vector2(-168, 2400)
+rotation = 3.14159
+
+[node name="FlameThrower5" parent="Enviroment/Traps" instance=ExtResource("22_mmfjm")]
+position = Vector2(-184, 2736)
+rotation = 3.14159
+
+[node name="FlameThrower6" parent="Enviroment/Traps" instance=ExtResource("22_mmfjm")]
+position = Vector2(296, 2688)
+rotation = 3.14159
+
+[node name="FlameThrower7" parent="Enviroment/Traps" instance=ExtResource("22_mmfjm")]
+position = Vector2(296, 2792)
+rotation = 3.14159
+
+[node name="FlameThrower8" parent="Enviroment/Traps" instance=ExtResource("22_mmfjm")]
+position = Vector2(296, 2848)
+rotation = 3.14159
+
+[node name="FlameThrower10" parent="Enviroment/Traps" instance=ExtResource("22_mmfjm")]
+position = Vector2(-792, 1336)
+rotation = 3.14159
+
+[node name="FlameThrower9" parent="Enviroment/Traps" instance=ExtResource("22_mmfjm")]
+position = Vector2(536, 2304)
+rotation = 3.14159
+
+[node name="FlameThrower3" parent="Enviroment/Traps" instance=ExtResource("22_mmfjm")]
+position = Vector2(168, 1424)
+
+[node name="Interactible" type="Node2D" parent="Enviroment"]
+
+[node name="Chests" type="Node2D" parent="Enviroment/Interactible"]
+
+[node name="Chest" parent="Enviroment/Interactible/Chests" instance=ExtResource("18_x2xxo")]
+position = Vector2(-1464, 2448)
+
+[node name="Chest2" parent="Enviroment/Interactible/Chests" instance=ExtResource("18_x2xxo")]
+position = Vector2(-1704, 2448)
+
+[node name="Chest3" parent="Enviroment/Interactible/Chests" instance=ExtResource("18_x2xxo")]
+position = Vector2(-1056, 2784)
+
+[node name="Chest4" parent="Enviroment/Interactible/Chests" instance=ExtResource("18_x2xxo")]
+position = Vector2(-856, 3280)
+
+[node name="Chest5" parent="Enviroment/Interactible/Chests" instance=ExtResource("18_x2xxo")]
+position = Vector2(-408, 2720)
+
+[node name="Chest6" parent="Enviroment/Interactible/Chests" instance=ExtResource("18_x2xxo")]
+position = Vector2(-136, 2752)
+
+[node name="Chest7" parent="Enviroment/Interactible/Chests" instance=ExtResource("18_x2xxo")]
+position = Vector2(264, 2408)
+
+[node name="Chest8" parent="Enviroment/Interactible/Chests" instance=ExtResource("18_x2xxo")]
+position = Vector2(480, 2688)
+
+[node name="Chest9" parent="Enviroment/Interactible/Chests" instance=ExtResource("18_x2xxo")]
+position = Vector2(912, 2024)
+
+[node name="Chest10" parent="Enviroment/Interactible/Chests" instance=ExtResource("18_x2xxo")]
+position = Vector2(1008, 2024)
+
+[node name="Chest11" parent="Enviroment/Interactible/Chests" instance=ExtResource("18_x2xxo")]
+position = Vector2(1056, 2040)
+
+[node name="Chest12" parent="Enviroment/Interactible/Chests" instance=ExtResource("18_x2xxo")]
+position = Vector2(864, 2040)
+
+[node name="Chest13" parent="Enviroment/Interactible/Chests" instance=ExtResource("18_x2xxo")]
+position = Vector2(528, 2072)
+
+[node name="Chest14" parent="Enviroment/Interactible/Chests" instance=ExtResource("18_x2xxo")]
+position = Vector2(-744, 3048)
+
+[node name="Chest15" parent="Enviroment/Interactible/Chests" instance=ExtResource("18_x2xxo")]
+position = Vector2(-464, 2416)
+
+[node name="Chest17" parent="Enviroment/Interactible/Chests" instance=ExtResource("18_x2xxo")]
+position = Vector2(944, 1488)
+
+[node name="Chest18" parent="Enviroment/Interactible/Chests" instance=ExtResource("18_x2xxo")]
+position = Vector2(608, 1896)
+
+[node name="Chest19" parent="Enviroment/Interactible/Chests" instance=ExtResource("18_x2xxo")]
+position = Vector2(-552, 2104)
+
+[node name="Chest20" parent="Enviroment/Interactible/Chests" instance=ExtResource("18_x2xxo")]
+position = Vector2(-1192, 1336)
+
+[node name="Chest21" parent="Enviroment/Interactible/Chests" instance=ExtResource("18_x2xxo")]
+position = Vector2(-800, 1336)
+
+[node name="Chest22" parent="Enviroment/Interactible/Chests" instance=ExtResource("18_x2xxo")]
+position = Vector2(-1688, 2728)
+
+[node name="Altars" type="Node2D" parent="Enviroment/Interactible"]
+
+[node name="Altar" parent="Enviroment/Interactible/Altars" instance=ExtResource("16_wbtxt")]
+position = Vector2(-959, 1429)
+
+[node name="Altar2" parent="Enviroment/Interactible/Altars" instance=ExtResource("16_wbtxt")]
+position = Vector2(994, 1538)
+
+[node name="Altar4" parent="Enviroment/Interactible/Altars" instance=ExtResource("16_wbtxt")]
+position = Vector2(528, 1152)
+
+[node name="Altar3" parent="Enviroment/Interactible/Altars" instance=ExtResource("16_wbtxt")]
+position = Vector2(419, 2693)
+
+[node name="Enemies" type="Node2D" parent="."]
+
+[node name="MeleeSkeli" type="Node2D" parent="Enemies"]
+
+[node name="MeleecSkeleton" parent="Enemies/MeleeSkeli" instance=ExtResource("24_s7g0b")]
+position = Vector2(712, 1496)
+weapon_type = 1
+
+[node name="MeleecSkeleton2" parent="Enemies/MeleeSkeli" instance=ExtResource("24_s7g0b")]
+position = Vector2(936, 1752)
+
+[node name="MeleecSkeleton3" parent="Enemies/MeleeSkeli" instance=ExtResource("24_s7g0b")]
+position = Vector2(-392, 2080)
+
+[node name="MeleecSkeleton4" parent="Enemies/MeleeSkeli" instance=ExtResource("24_s7g0b")]
+position = Vector2(-368, 2216)
+weapon_type = 1
+
+[node name="MeleecSkeleton5" parent="Enemies/MeleeSkeli" instance=ExtResource("24_s7g0b")]
+position = Vector2(-440, 2216)
+weapon_type = 1
+
+[node name="MeleecSkeleton6" parent="Enemies/MeleeSkeli" instance=ExtResource("24_s7g0b")]
+position = Vector2(-536, 2344)
+weapon_type = 1
+
+[node name="MeleecSkeleton7" parent="Enemies/MeleeSkeli" instance=ExtResource("24_s7g0b")]
+position = Vector2(-496, 2288)
+weapon_type = 1
+
+[node name="MeleecSkeleton8" parent="Enemies/MeleeSkeli" instance=ExtResource("24_s7g0b")]
+position = Vector2(-368, 2352)
+weapon_type = 1
+
+[node name="MeleecSkeleton9" parent="Enemies/MeleeSkeli" instance=ExtResource("24_s7g0b")]
+position = Vector2(-120, 2456)
+
+[node name="MeleecSkeleton10" parent="Enemies/MeleeSkeli" instance=ExtResource("24_s7g0b")]
+position = Vector2(-384, 2640)
+
+[node name="MeleecSkeleton11" parent="Enemies/MeleeSkeli" instance=ExtResource("24_s7g0b")]
+position = Vector2(-192, 2704)
+
+[node name="MeleecSkeleton12" parent="Enemies/MeleeSkeli" instance=ExtResource("24_s7g0b")]
+position = Vector2(-304, 2728)
+weapon_type = 1
+
+[node name="MeleecSkeleton13" parent="Enemies/MeleeSkeli" instance=ExtResource("24_s7g0b")]
+position = Vector2(296, 2880)
+weapon_type = 1
+
+[node name="MeleecSkeleton14" parent="Enemies/MeleeSkeli" instance=ExtResource("24_s7g0b")]
+position = Vector2(624, 2872)
+weapon_type = 1
+
+[node name="MeleecSkeleton15" parent="Enemies/MeleeSkeli" instance=ExtResource("24_s7g0b")]
+position = Vector2(816, 2872)
+weapon_type = 1
+
+[node name="MeleecSkeleton16" parent="Enemies/MeleeSkeli" instance=ExtResource("24_s7g0b")]
+position = Vector2(960, 2760)
+weapon_type = 1
+
+[node name="MeleecSkeleton17" parent="Enemies/MeleeSkeli" instance=ExtResource("24_s7g0b")]
+position = Vector2(960, 2544)
+weapon_type = 1
+
+[node name="MeleecSkeleton18" parent="Enemies/MeleeSkeli" instance=ExtResource("24_s7g0b")]
+position = Vector2(960, 2072)
+
+[node name="MeleecSkeleton19" parent="Enemies/MeleeSkeli" instance=ExtResource("24_s7g0b")]
+position = Vector2(904, 2152)
+
+[node name="MeleecSkeleton20" parent="Enemies/MeleeSkeli" instance=ExtResource("24_s7g0b")]
+position = Vector2(1024, 2152)
+
+[node name="MeleecSkeleton21" parent="Enemies/MeleeSkeli" instance=ExtResource("24_s7g0b")]
+position = Vector2(1112, 2088)
+
+[node name="MeleecSkeleton22" parent="Enemies/MeleeSkeli" instance=ExtResource("24_s7g0b")]
+position = Vector2(824, 2096)
+
+[node name="MeleecSkeleton23" parent="Enemies/MeleeSkeli" instance=ExtResource("24_s7g0b")]
+position = Vector2(760, 2192)
+
+[node name="MeleecSkeleton24" parent="Enemies/MeleeSkeli" instance=ExtResource("24_s7g0b")]
+position = Vector2(1168, 2200)
+
+[node name="MeleecSkeleton25" parent="Enemies/MeleeSkeli" instance=ExtResource("24_s7g0b")]
+position = Vector2(856, 2288)
+
+[node name="MeleecSkeleton26" parent="Enemies/MeleeSkeli" instance=ExtResource("24_s7g0b")]
+position = Vector2(1064, 2288)
+
+[node name="MeleecSkeleton27" parent="Enemies/MeleeSkeli" instance=ExtResource("24_s7g0b")]
+position = Vector2(896, 2336)
+
+[node name="MeleecSkeleton28" parent="Enemies/MeleeSkeli" instance=ExtResource("24_s7g0b")]
+position = Vector2(1000, 2344)
+
+[node name="MeleecSkeleton29" parent="Enemies/MeleeSkeli" instance=ExtResource("24_s7g0b")]
+position = Vector2(960, 2392)
+
+[node name="MeleecSkeleton30" parent="Enemies/MeleeSkeli" instance=ExtResource("24_s7g0b")]
+position = Vector2(112, 2488)
+weapon_type = 1
+
+[node name="MeleecSkeleton31" parent="Enemies/MeleeSkeli" instance=ExtResource("24_s7g0b")]
+position = Vector2(-1008, 1824)
+weapon_type = 1
+
+[node name="MeleecSkeleton32" parent="Enemies/MeleeSkeli" instance=ExtResource("24_s7g0b")]
+position = Vector2(-920, 1824)
+weapon_type = 1
+
+[node name="MeleecSkeleton41" parent="Enemies/MeleeSkeli" instance=ExtResource("24_s7g0b")]
+position = Vector2(-616, 2072)
+weapon_type = 1
+
+[node name="MeleecSkeleton42" parent="Enemies/MeleeSkeli" instance=ExtResource("24_s7g0b")]
+position = Vector2(-712, 2240)
+weapon_type = 1
+
+[node name="MeleecSkeleton43" parent="Enemies/MeleeSkeli" instance=ExtResource("24_s7g0b")]
+position = Vector2(-960, 2400)
+weapon_type = 1
+
+[node name="MeleecSkeleton33" parent="Enemies/MeleeSkeli" instance=ExtResource("24_s7g0b")]
+position = Vector2(-1064, 1608)
+weapon_type = 1
+
+[node name="MeleecSkeleton34" parent="Enemies/MeleeSkeli" instance=ExtResource("24_s7g0b")]
+position = Vector2(-840, 1608)
+weapon_type = 1
+
+[node name="MeleecSkeleton35" parent="Enemies/MeleeSkeli" instance=ExtResource("24_s7g0b")]
+position = Vector2(-856, 1512)
+weapon_type = 1
+
+[node name="MeleecSkeleton36" parent="Enemies/MeleeSkeli" instance=ExtResource("24_s7g0b")]
+position = Vector2(-1056, 1440)
+
+[node name="MeleecSkeleton37" parent="Enemies/MeleeSkeli" instance=ExtResource("24_s7g0b")]
+position = Vector2(-992, 1368)
+weapon_type = 1
+
+[node name="MeleecSkeleton38" parent="Enemies/MeleeSkeli" instance=ExtResource("24_s7g0b")]
+position = Vector2(-1176, 1328)
+
+[node name="MeleecSkeleton39" parent="Enemies/MeleeSkeli" instance=ExtResource("24_s7g0b")]
+position = Vector2(-1152, 2696)
+
+[node name="MeleecSkeleton44" parent="Enemies/MeleeSkeli" instance=ExtResource("24_s7g0b")]
+position = Vector2(-1160, 2864)
+
+[node name="MeleecSkeleton40" parent="Enemies/MeleeSkeli" instance=ExtResource("24_s7g0b")]
+position = Vector2(-1048, 2720)
+
+[node name="MeleecSkeleton45" parent="Enemies/MeleeSkeli" instance=ExtResource("24_s7g0b")]
+position = Vector2(-992, 2856)
+
+[node name="MeleecSkeleton46" parent="Enemies/MeleeSkeli" instance=ExtResource("24_s7g0b")]
+position = Vector2(-1072, 2992)
+
+[node name="MeleecSkeleton47" parent="Enemies/MeleeSkeli" instance=ExtResource("24_s7g0b")]
+position = Vector2(-968, 3128)
+
+[node name="MeleecSkeleton48" parent="Enemies/MeleeSkeli" instance=ExtResource("24_s7g0b")]
+position = Vector2(-1008, 3120)
+
+[node name="MeleecSkeleton49" parent="Enemies/MeleeSkeli" instance=ExtResource("24_s7g0b")]
+position = Vector2(-1624, 2872)
+
+[node name="MeleecSkeleton50" parent="Enemies/MeleeSkeli" instance=ExtResource("24_s7g0b")]
+position = Vector2(-1712, 2296)
+
+[node name="MeleecSkeleton51" parent="Enemies/MeleeSkeli" instance=ExtResource("24_s7g0b")]
+position = Vector2(-1400, 2456)
+
+[node name="MeleecSkeleton52" parent="Enemies/MeleeSkeli" instance=ExtResource("24_s7g0b")]
+position = Vector2(-1736, 2464)
+
+[node name="MeleecSkeleton53" parent="Enemies/MeleeSkeli" instance=ExtResource("24_s7g0b")]
+position = Vector2(-1664, 2624)
+
+[node name="MeleecSkeleton54" parent="Enemies/MeleeSkeli" instance=ExtResource("24_s7g0b")]
+position = Vector2(-1432, 2704)
+
+[node name="MeleecSkeleton55" parent="Enemies/MeleeSkeli" instance=ExtResource("24_s7g0b")]
+position = Vector2(-1504, 2824)
+
+[node name="MeleecSkeleton56" parent="Enemies/MeleeSkeli" instance=ExtResource("24_s7g0b")]
+position = Vector2(-1568, 2392)
+
+[node name="MeleecSkeleton57" parent="Enemies/MeleeSkeli" instance=ExtResource("24_s7g0b")]
+position = Vector2(-784, 3352)
+
+[node name="MeleecSkeleton58" parent="Enemies/MeleeSkeli" instance=ExtResource("24_s7g0b")]
+position = Vector2(-1032, 3304)
+
+[node name="MeleecSkeleton59" parent="Enemies/MeleeSkeli" instance=ExtResource("24_s7g0b")]
+position = Vector2(-888, 3472)
+
+[node name="RangedSkeli" type="Node2D" parent="Enemies"]
+
+[node name="RangedSkeleton" parent="Enemies/RangedSkeli" instance=ExtResource("25_mmfjm")]
+position = Vector2(976, 1608)
+
+[node name="RangedSkeleton2" parent="Enemies/RangedSkeli" instance=ExtResource("25_mmfjm")]
+position = Vector2(224, 1600)
+
+[node name="RangedSkeleton3" parent="Enemies/RangedSkeli" instance=ExtResource("25_mmfjm")]
+position = Vector2(400, 1600)
+
+[node name="RangedSkeleton4" parent="Enemies/RangedSkeli" instance=ExtResource("25_mmfjm")]
+position = Vector2(192, 2200)
+
+[node name="RangedSkeleton5" parent="Enemies/RangedSkeli" instance=ExtResource("25_mmfjm")]
+position = Vector2(-416, 2088)
+
+[node name="RangedSkeleton6" parent="Enemies/RangedSkeli" instance=ExtResource("25_mmfjm")]
+position = Vector2(512, 2376)
+
+[node name="RangedSkeleton7" parent="Enemies/RangedSkeli" instance=ExtResource("25_mmfjm")]
+position = Vector2(128, 2448)
+
+[node name="RangedSkeleton8" parent="Enemies/RangedSkeli" instance=ExtResource("25_mmfjm")]
+position = Vector2(520, 2704)
+
+[node name="RangedSkeleton9" parent="Enemies/RangedSkeli" instance=ExtResource("25_mmfjm")]
+position = Vector2(248, 2688)
+
+[node name="RangedSkeleton10" parent="Enemies/RangedSkeli" instance=ExtResource("25_mmfjm")]
+position = Vector2(248, 2688)
+
+[node name="RangedSkeleton11" parent="Enemies/RangedSkeli" instance=ExtResource("25_mmfjm")]
+position = Vector2(-240, 2824)
+
+[node name="RangedSkeleton12" parent="Enemies/RangedSkeli" instance=ExtResource("25_mmfjm")]
+position = Vector2(-160, 2768)
+
+[node name="RangedSkeleton13" parent="Enemies/RangedSkeli" instance=ExtResource("25_mmfjm")]
+position = Vector2(-464, 2472)
+
+[node name="RangedSkeleton14" parent="Enemies/RangedSkeli" instance=ExtResource("25_mmfjm")]
+position = Vector2(-208, 2376)
+
+[node name="RangedSkeleton15" parent="Enemies/RangedSkeli" instance=ExtResource("25_mmfjm")]
+position = Vector2(-544, 2224)
+
+[node name="RangedSkeleton16" parent="Enemies/RangedSkeli" instance=ExtResource("25_mmfjm")]
+position = Vector2(-528, 2072)
+
+[node name="RangedSkeleton17" parent="Enemies/RangedSkeli" instance=ExtResource("25_mmfjm")]
+position = Vector2(-272, 2016)
+
+[node name="RangedSkeleton18" parent="Enemies/RangedSkeli" instance=ExtResource("25_mmfjm")]
+position = Vector2(-960, 2240)
+
+[node name="RangedSkeleton19" parent="Enemies/RangedSkeli" instance=ExtResource("25_mmfjm")]
+position = Vector2(-912, 2616)
+
+[node name="RangedSkeleton20" parent="Enemies/RangedSkeli" instance=ExtResource("25_mmfjm")]
+position = Vector2(-1232, 2592)
+
+[node name="RangedSkeleton21" parent="Enemies/RangedSkeli" instance=ExtResource("25_mmfjm")]
+position = Vector2(-768, 3000)
+
+[node name="RangedSkeleton22" parent="Enemies/RangedSkeli" instance=ExtResource("25_mmfjm")]
+position = Vector2(-760, 3088)
+
+[node name="RangedSkeleton23" parent="Enemies/RangedSkeli" instance=ExtResource("25_mmfjm")]
+position = Vector2(-872, 3056)
+
+[node name="RangedSkeleton24" parent="Enemies/RangedSkeli" instance=ExtResource("25_mmfjm")]
+position = Vector2(-944, 3352)
+
+[node name="RangedSkeleton25" parent="Enemies/RangedSkeli" instance=ExtResource("25_mmfjm")]
+position = Vector2(-824, 3448)
+
+[node name="RangedSkeleton26" parent="Enemies/RangedSkeli" instance=ExtResource("25_mmfjm")]
+position = Vector2(-1344, 2880)
+
+[node name="RangedSkeleton27" parent="Enemies/RangedSkeli" instance=ExtResource("25_mmfjm")]
+position = Vector2(-1632, 2736)
+
+[node name="RangedSkeleton28" parent="Enemies/RangedSkeli" instance=ExtResource("25_mmfjm")]
+position = Vector2(-1544, 2272)
+
+[node name="RangedSkeleton29" parent="Enemies/RangedSkeli" instance=ExtResource("25_mmfjm")]
+position = Vector2(-1440, 2368)
+
+[node name="RangedSkeleton30" parent="Enemies/RangedSkeli" instance=ExtResource("25_mmfjm")]
+position = Vector2(-1600, 2520)
+
+[node name="BasicSkeli" type="Node2D" parent="Enemies"]
+
+[node name="BasicSkeleton" parent="Enemies/BasicSkeli" instance=ExtResource("26_k8ld0")]
+position = Vector2(168, 1200)
+
+[node name="BasicSkeleton2" parent="Enemies/BasicSkeli" instance=ExtResource("26_k8ld0")]
+position = Vector2(376, 1024)
+
+[node name="BasicSkeleton3" parent="Enemies/BasicSkeli" instance=ExtResource("26_k8ld0")]
+position = Vector2(528, 1192)
+
+[node name="BasicSkeleton4" parent="Enemies/BasicSkeli" instance=ExtResource("26_k8ld0")]
+position = Vector2(256, 1336)
+
+[node name="BasicSkeleton5" parent="Enemies/BasicSkeli" instance=ExtResource("26_k8ld0")]
+position = Vector2(376, 1336)
+
+[node name="BasicSkeleton6" parent="Enemies/BasicSkeli" instance=ExtResource("26_k8ld0")]
+position = Vector2(88, 1384)
+
+[node name="BasicSkeleton7" parent="Enemies/BasicSkeli" instance=ExtResource("26_k8ld0")]
+position = Vector2(544, 1384)
+
+[node name="BasicSkeleton8" parent="Enemies/BasicSkeli" instance=ExtResource("26_k8ld0")]
+position = Vector2(96, 1824)
+
+[node name="BasicSkeleton9" parent="Enemies/BasicSkeli" instance=ExtResource("26_k8ld0")]
+position = Vector2(536, 1824)
+
+[node name="BasicSkeleton10" parent="Enemies/BasicSkeli" instance=ExtResource("26_k8ld0")]
+position = Vector2(848, 1504)
+
+[node name="BasicSkeleton11" parent="Enemies/BasicSkeli" instance=ExtResource("26_k8ld0")]
+position = Vector2(288, 1832)
+
+[node name="BasicSkeleton12" parent="Enemies/BasicSkeli" instance=ExtResource("26_k8ld0")]
+position = Vector2(320, 1832)
+
+[node name="BasicSkeleton13" parent="Enemies/BasicSkeli" instance=ExtResource("26_k8ld0")]
+position = Vector2(360, 1832)
+
+[node name="BasicSkeleton14" parent="Enemies/BasicSkeli" instance=ExtResource("26_k8ld0")]
+position = Vector2(200, 2072)
+
+[node name="BasicSkeleton15" parent="Enemies/BasicSkeli" instance=ExtResource("26_k8ld0")]
+position = Vector2(200, 2048)
+
+[node name="BasicSkeleton16" parent="Enemies/BasicSkeli" instance=ExtResource("26_k8ld0")]
+position = Vector2(200, 2024)
+
+[node name="BasicSkeleton17" parent="Enemies/BasicSkeli" instance=ExtResource("26_k8ld0")]
+position = Vector2(440, 2176)
+
+[node name="BasicSkeleton18" parent="Enemies/BasicSkeli" instance=ExtResource("26_k8ld0")]
+position = Vector2(440, 2144)
+
+[node name="BasicSkeleton19" parent="Enemies/BasicSkeli" instance=ExtResource("26_k8ld0")]
+position = Vector2(440, 2096)
+
+[node name="BasicSkeleton20" parent="Enemies/BasicSkeli" instance=ExtResource("26_k8ld0")]
+position = Vector2(256, 2240)
+
+[node name="BasicSkeleton21" parent="Enemies/BasicSkeli" instance=ExtResource("26_k8ld0")]
+position = Vector2(352, 2360)
+
+[node name="BasicSkeleton22" parent="Enemies/BasicSkeli" instance=ExtResource("26_k8ld0")]
+position = Vector2(296, 2472)
+
+[node name="BasicSkeleton23" parent="Enemies/BasicSkeli" instance=ExtResource("26_k8ld0")]
+position = Vector2(280, 2624)
+
+[node name="BasicSkeleton24" parent="Enemies/BasicSkeli" instance=ExtResource("26_k8ld0")]
+position = Vector2(312, 2624)
+
+[node name="BasicSkeleton25" parent="Enemies/BasicSkeli" instance=ExtResource("26_k8ld0")]
+position = Vector2(416, 2800)
+
+[node name="BasicSkeleton33" parent="Enemies/BasicSkeli" instance=ExtResource("26_k8ld0")]
+position = Vector2(416, 2800)
+
+[node name="BasicSkeleton26" parent="Enemies/BasicSkeli" instance=ExtResource("26_k8ld0")]
+position = Vector2(776, 2352)
+
+[node name="BasicSkeleton34" parent="Enemies/BasicSkeli" instance=ExtResource("26_k8ld0")]
+position = Vector2(848, 2416)
+
+[node name="BasicSkeleton35" parent="Enemies/BasicSkeli" instance=ExtResource("26_k8ld0")]
+position = Vector2(1040, 2416)
+
+[node name="BasicSkeleton36" parent="Enemies/BasicSkeli" instance=ExtResource("26_k8ld0")]
+position = Vector2(1096, 2360)
+
+[node name="BasicSkeleton37" parent="Enemies/BasicSkeli" instance=ExtResource("26_k8ld0")]
+position = Vector2(1128, 2312)
+
+[node name="BasicSkeleton38" parent="Enemies/BasicSkeli" instance=ExtResource("26_k8ld0")]
+position = Vector2(1168, 2240)
+
+[node name="BasicSkeleton39" parent="Enemies/BasicSkeli" instance=ExtResource("26_k8ld0")]
+position = Vector2(1064, 2072)
+
+[node name="BasicSkeleton40" parent="Enemies/BasicSkeli" instance=ExtResource("26_k8ld0")]
+position = Vector2(848, 2064)
+
+[node name="BasicSkeleton41" parent="Enemies/BasicSkeli" instance=ExtResource("26_k8ld0")]
+position = Vector2(784, 2152)
+
+[node name="BasicSkeleton27" parent="Enemies/BasicSkeli" instance=ExtResource("26_k8ld0")]
+position = Vector2(-264, 1944)
+
+[node name="BasicSkeleton28" parent="Enemies/BasicSkeli" instance=ExtResource("26_k8ld0")]
+position = Vector2(40, 1640)
+
+[node name="BasicSkeleton29" parent="Enemies/BasicSkeli" instance=ExtResource("26_k8ld0")]
+position = Vector2(-136, 1608)
+
+[node name="BasicSkeleton30" parent="Enemies/BasicSkeli" instance=ExtResource("26_k8ld0")]
+position = Vector2(-320, 1648)
+
+[node name="BasicSkeleton31" parent="Enemies/BasicSkeli" instance=ExtResource("26_k8ld0")]
+position = Vector2(-320, 1816)
+
+[node name="BasicSkeleton32" parent="Enemies/BasicSkeli" instance=ExtResource("26_k8ld0")]
+position = Vector2(-488, 1960)
