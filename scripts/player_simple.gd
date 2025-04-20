@@ -45,6 +45,7 @@ func _ready() -> void:
 	weapon = Dagger.instantiate()
 	weapon_mount.add_child(weapon)
 	weapon.init(true)
+	weapon.visible = false
 	health_component = HealthComponent.new(100)
 	health_component.connect("health_depleted", _on_health_depleted)
 	health_component.connect("health_changed", _on_health_changed)

@@ -1,14 +1,13 @@
 extends CharacterBody2D
 
-enum STATE {IDLE, FOLLOWING, IN_RANGE, ATTACKING, DEAD}
+enum STATE {IDLE, FOLLOWING, IN_RANGE, FLEEING, DEAD}
 
 const Player = preload("res://scripts/player_simple.gd")
 const AttackDTO = preload("res://scripts/attack_dto.gd")
 const HealthComponent = preload("res://scripts/health_component.gd")
 
 const Weapon = preload("res://scripts/weapon.gd")
-const Sword = preload("res://scenes/sword.tscn")
-const Dagger = preload("res://scenes/dagger.tscn")
+const Bow = preload("res://scenes/bow.tscn")
 
 const SPEED = 2500.0
 const DAMAGE = 10
@@ -17,9 +16,10 @@ const MAX_HEALTH = 40
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var navigation_agent := $NavigationAgent2D as NavigationAgent2D
 @onready var weapon_mount: Node2D = $WeaponMount
+@onready var close_range: Area2D = $CloseRange
 
 @export var state = STATE.IDLE
-@export var weapon_type = Weapon.WEAPON_TYPE.SWORD
+@export var weapon_type = Weapon.RANGED_WEAPON_TYPE.BOW
 
 # navigation variables
 var target : Node2D
@@ -45,11 +45,7 @@ func _ready() -> void:
 
 func spawn_weapon():
 	match weapon_type:
-		Weapon.WEAPON_TYPE.SWORD:
-			weapon = Sword.instantiate()
-		Weapon.WEAPON_TYPE.DAGGER:
-			weapon = Dagger.instantiate()
-		Weapon.WEAPON_TYPE.BOW:
+		Weapon.RANGED_WEAPON_TYPE.BOW:
 			weapon = Bow.instantiate()
 	weapon_mount.add_child(weapon)
 	weapon.init(false)
@@ -76,7 +72,7 @@ func _physics_process(delta: float) -> void:
 			var move_dir = to_local(navigation_agent.get_next_path_position()).normalized()
 			
 			# Flip the sprite to face the firection
-			if move_dir.x > 0:
+			if move_dir.x >= 0:
 				animated_sprite.flip_h = false
 			elif move_dir.x < 0:
 				animated_sprite.flip_h = true
@@ -87,17 +83,37 @@ func _physics_process(delta: float) -> void:
 			move_and_slide()
 			if position.distance_to(target.position) < weapon_range:
 				state = STATE.IN_RANGE
+		STATE.FLEEING:
+			animated_sprite.play("move")
+			var move_dir = -position.direction_to(target.position)
+			
+			# Flip the sprite to face the firection
+			if move_dir.x >= 0:
+				animated_sprite.flip_h = false
+			elif move_dir.x < 0:
+				animated_sprite.flip_h = true
+				
+			velocity = move_dir * SPEED  * delta
+			if weapon.is_attacking:
+				velocity *= attack_slowdown
+			move_and_slide()
+			if position.distance_to(target.position) < weapon_range:
+				state = STATE.IN_RANGE
 		STATE.IN_RANGE:
+			velocity = Vector2(0.0, 0.0)
 			attack(target)
-			state = STATE.FOLLOWING
+			if close_range.get_overlapping_bodies().is_empty():
+				state = STATE.FOLLOWING
+			else:
+				state = STATE.FLEEING
 		STATE.DEAD:
 			velocity = Vector2(0.0, 0.0)
+			
 			
 
 func incomming_attack(attack_dto: AttackDTO):
 	if health_component.is_dead:
-		return
-	#print("Skeleton: I got hit for", attack_dto.damage)
+		_on_health_depleted()
 	health_component.take_damage(attack_dto.damage)
 	gui_healthbar.update_healthbar(health_component.health, health_component.max_health)
 	self.animated_sprite.modulate = Color(1, 0.1, 0.1)
@@ -107,10 +123,17 @@ func incomming_attack(attack_dto: AttackDTO):
 
 func attack(player: Player):
 	var attack_dir = position.direction_to(player.position)
-	animated_sprite.play("attack")
 	weapon_mount.rotation = attack_dir.angle()
 	weapon_mount.position = weapon_mount_defult_pos + (attack_dir * 1.0)
-	weapon.attack()
+	var ray = RayCast2D.new()
+	ray.position = weapon_mount.position
+	ray.rotation = weapon_mount.rotation
+	ray.collision_mask = 1
+	ray.target_position = target.position
+	if not ray.is_colliding():
+		weapon.attack()
+	else:
+		print("Ranged skeli: cannot see the player")
 
 
 func _on_pathfinding_timer_timeout() -> void:
@@ -119,8 +142,6 @@ func _on_pathfinding_timer_timeout() -> void:
 
 
 func _on_detection_range_body_entered(body: Node2D) -> void:
-	# If player -> start following
-	#print("BDG: player entered detection range")
 	if state == STATE.DEAD:
 		return
 	player_detected = true
@@ -129,29 +150,10 @@ func _on_detection_range_body_entered(body: Node2D) -> void:
 	navigation_agent.target_position = body.global_position
 
 func _on_detection_range_body_exited(body: Node2D) -> void:
-	# If player and following -> stop following
-	#print("BDG: player exited detection range")
 	if state == STATE.DEAD:
 		return
 	state = STATE.IDLE
 	player_detected = false
-
-
-func _on_hitbox_body_entered(body: Node2D) -> void:
-	if state == STATE.DEAD:
-		return
-	if body.has_method("incomming_attack"):
-		state = STATE.IN_RANGE
-		#print("BDG: player entered attack range")
-
-func _on_hitbox_body_exited(body: Node2D) -> void:
-	if state == STATE.DEAD:
-		return
-	if body.has_method("incomming_attack"):
-		if state == STATE.ATTACKING:
-			return
-		state = STATE.FOLLOWING
-	#print("BDG: player exited attack range")
 
 
 func _on_health_changed(old_value, new_value) -> void:
@@ -167,7 +169,14 @@ func _on_health_depleted() -> void:
 
 
 func _on_animated_sprite_2d_animation_finished() -> void:
-	#print("animation finished: ", animated_sprite.animation)
 	match animated_sprite.animation:
 		"death":
 			queue_free()
+
+
+func _on_close_range_body_entered(body: Node2D) -> void:
+	state = STATE.FLEEING
+
+
+func _on_close_range_body_exited(body: Node2D) -> void:
+	state = STATE.IN_RANGE

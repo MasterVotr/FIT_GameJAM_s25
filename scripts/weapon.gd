@@ -1,6 +1,7 @@
 extends Node
 
-enum WEAPON_TYPE {SWORD, DAGGER, BOW}
+enum MELEE_WEAPON_TYPE {SWORD, DAGGER}
+enum RANGED_WEAPON_TYPE {BOW}
 
 var is_attacking := false
 @export var weapon_range := 0
