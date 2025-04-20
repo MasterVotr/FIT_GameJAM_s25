@@ -1,10 +1,12 @@
-[gd_scene load_steps=8 format=3 uid="uid://d1ik73mf1bgj2"]
+[gd_scene load_steps=12 format=3 uid="uid://d1ik73mf1bgj2"]
 
 [ext_resource type="Texture2D" uid="uid://dq0eubmq6t8k0" path="res://assets/sprites/altar/altar_base_1.png" id="1_7ynsc"]
 [ext_resource type="Script" uid="uid://bs6hntcpse148" path="res://scripts/altar_logic.gd" id="1_agrp7"]
 [ext_resource type="Texture2D" uid="uid://vew04iei1w6h" path="res://assets/sprites/altar/altar_base_2.png" id="2_agrp7"]
 [ext_resource type="Texture2D" uid="uid://ck7dl5fadllmr" path="res://assets/sprites/altar/altar_base_3.png" id="3_00bwv"]
 [ext_resource type="Texture2D" uid="uid://b7bh7u5inylsm" path="res://assets/sprites/altar/altar_base_4.png" id="4_uiuje"]
+[ext_resource type="Texture2D" uid="uid://5tglx8rcruok" path="res://assets/sprites/ui/progress-bar-circle.png" id="6_uiuje"]
+[ext_resource type="Texture2D" uid="uid://d0aw0gk3qp6eq" path="res://assets/sprites/ui/progress-bar-frame.png" id="7_n0xjl"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_n0xjl"]
 animations = [{
@@ -29,6 +31,14 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7ynsc"]
 size = Vector2(29, 29)
 
+[sub_resource type="Gradient" id="Gradient_uiuje"]
+colors = PackedColorArray(0.301961, 0.301961, 0.301961, 1, 0.301961, 0.301961, 0.301961, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_n0xjl"]
+gradient = SubResource("Gradient_uiuje")
+width = 71
+height = 70
+
 [node name="Altar" type="Area2D"]
 z_index = 2
 collision_layer = 2
@@ -43,6 +53,46 @@ frame_progress = 0.971752
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-1.5, 1.5)
 shape = SubResource("RectangleShape2D_7ynsc")
+
+[node name="Timer" type="Timer" parent="."]
+
+[node name="TextureRect" type="TextureRect" parent="."]
+z_index = 10
+z_as_relative = false
+offset_left = -4.0
+offset_top = -10.0
+offset_right = 67.0
+offset_bottom = 60.0
+scale = Vector2(0.1, 0.1)
+texture = SubResource("GradientTexture2D_n0xjl")
+
+[node name="Label" type="Label" parent="."]
+z_index = 10
+z_as_relative = false
+offset_left = -7.0
+offset_top = -12.0
+offset_right = 123.0
+offset_bottom = 90.0
+scale = Vector2(0.1, 0.1)
+theme_override_font_sizes/font_size = 52
+text = "F"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="interaction_prog_bar" type="TextureProgressBar" parent="."]
+z_index = 10
+z_as_relative = false
+offset_left = -7.0
+offset_top = -13.0
+offset_right = 121.0
+offset_bottom = 115.0
+scale = Vector2(0.1, 0.1)
+value = 40.0
+fill_mode = 4
+texture_under = ExtResource("6_uiuje")
+texture_over = ExtResource("7_n0xjl")
+texture_progress = ExtResource("6_uiuje")
+tint_under = Color(0.3, 0.3, 0.3, 1)
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="body_exited" from="." to="." method="_on_body_exited"]

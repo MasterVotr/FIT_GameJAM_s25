@@ -1,6 +1,5 @@
 extends Node2D
 
-
 @export var player_start_pos = Vector2(229, 272)
 
 enum ROOT_CHILD_ORDER {
@@ -12,6 +11,13 @@ enum ROOT_CHILD_ORDER {
 func _ready() -> void:
 	self.get_child(ROOT_CHILD_ORDER.PLAYER).position = player_start_pos
 	pass
+
+
+func demo_reset() -> void:
+	var lvl = self.find_child("DemoLevel")
+	lvl.queue_free()
+	lvl = preload("res://scenes/demo_level.tscn").instantiate()
+	self.add_child(lvl)
 
 
 func reload_world() -> void:
