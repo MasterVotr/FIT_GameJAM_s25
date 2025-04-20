@@ -10,7 +10,7 @@ config_version=5
 
 [application]
 
-config/name="MyLittleKoncentracek"
+config/name="Soulless"
 run/main_scene="uid://b7h6wow1rf5ya"
 config/features=PackedStringArray("4.4", "GL Compatibility")
 config/icon="res://icon.svg"
