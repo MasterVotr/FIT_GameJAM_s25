@@ -1,16 +1,14 @@
 [gd_scene load_steps=6 format=3 uid="uid://drmfx8g3gfgl4"]
 
+[ext_resource type="Theme" uid="uid://k51evtrkmadh" path="res://resources/ui_sacrifice_theme.tres" id="1_hj2ta"]
 [ext_resource type="Script" uid="uid://cf5up6dlwskfk" path="res://scripts/inventory_manager.gd" id="1_qw0r6"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gg8by"]
 bg_color = Color(0.6, 0.6, 0.6, 0.745098)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qw0r6"]
-bg_color = Color(0.347817, 0.347817, 0.347817, 1)
-corner_radius_top_left = 3
-corner_radius_top_right = 3
-corner_radius_bottom_right = 3
-corner_radius_bottom_left = 3
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hj2ta"]
 bg_color = Color(0.43134, 0.43134, 0.43134, 1)
@@ -21,6 +19,7 @@ bg_color = Color(0.1064, 0.618387, 0.76, 1)
 [node name="Inventory" type="Control"]
 layout_mode = 3
 anchors_preset = 0
+theme = ExtResource("1_hj2ta")
 script = ExtResource("1_qw0r6")
 
 [node name="background" type="Panel" parent="."]
@@ -30,9 +29,9 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -500.0
+offset_left = -437.0
 offset_top = -200.0
-offset_right = 500.0
+offset_right = 437.0
 grow_horizontal = 2
 grow_vertical = 0
 theme_override_styles/panel = SubResource("StyleBoxFlat_gg8by")
@@ -47,7 +46,6 @@ offset_top = -175.0
 offset_right = -123.0
 offset_bottom = -25.0
 grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_qw0r6")
 
 [node name="item_texture" type="TextureRect" parent="slot_panel_1"]
 layout_mode = 0
@@ -70,7 +68,6 @@ offset_right = 91.0
 offset_bottom = -9.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_qw0r6")
 
 [node name="item_texture" type="TextureRect" parent="slot_panel_2"]
 layout_mode = 0
@@ -112,7 +109,6 @@ offset_right = 276.0
 offset_bottom = -25.0
 grow_horizontal = 0
 grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_qw0r6")
 
 [node name="item_texture" type="TextureRect" parent="slot_panel_3"]
 layout_mode = 0
@@ -128,6 +124,7 @@ offset_left = -424.0
 offset_top = -150.0
 offset_right = -297.0
 offset_bottom = -56.0
+theme_override_font_sizes/font_size = 44
 text = "Q"
 
 [node name="select_right_btn" type="Button" parent="."]
@@ -136,4 +133,5 @@ offset_left = 296.0
 offset_top = -150.0
 offset_right = 423.0
 offset_bottom = -56.0
+theme_override_font_sizes/font_size = 44
 text = "E"
